@@ -22,7 +22,7 @@
             </a>
 
             <nav class="d-flex align-items-center gap-2">
-                <a href="{{ route('') }}"
+                <a href="">
                     ******
                 </a>
 
