@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('funcionarios', function (Blueprint $table) {
             $table->id();
+            $table->integer('usuario_id')->unsigned();
+            $table->string('nome_cargo',30);
+            $table->float('salario',10,2);
+            $table->integer('nivel_permissao',10);
+            $table->string('imagem',200);
+            $table->timestamps();
             $table->timestamps();
         });
     }
