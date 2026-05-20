@@ -18,7 +18,14 @@ class UsuarioFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'nome' => $this->faker->name,
+            'cpf_cnpj' => $this->faker->numerify('###.###.###-##'),
+            'telefone' => $this->faker->phoneNumber(),
+            'email' => $this->faker->unique()->safeEmail(),
+            'endereco' => $this->faker->address(),
+            'categoria_usuario' => $this->faker->randomElement(['cliente', 'funcionario', 'administrador']),
+            'plano_fid' => $this->faker->randomElement(['plano_basico', 'plano_premium', 'plano_vip']),
+            'imagem' => $this->faker->sentence(),
         ];
     }
 }

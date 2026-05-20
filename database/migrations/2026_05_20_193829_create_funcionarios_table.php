@@ -16,9 +16,7 @@ return new class extends Migration
             $table->integer('usuario_id')->unsigned();
             $table->string('nome_cargo',30);
             $table->float('salario',10,2);
-            $table->integer('nivel_permissao',10);
-            $table->string('imagem',200);
-            $table->timestamps();
+            $table->integer('nivel_permissao');
             $table->timestamps();
         });
     }
