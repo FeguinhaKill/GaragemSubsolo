@@ -23,6 +23,18 @@
 
             <nav class="d-flex align-items-center gap-2">
                 <a href="">
+                    Produtos
+                </a>
+                <a href="">
+                    Estoque
+                </a>
+                <a href="">
+                    Serviços
+                </a>
+                <a href="">
+                    Usuário
+                </a>
+                <a href="">
                     ******
                 </a>
 
