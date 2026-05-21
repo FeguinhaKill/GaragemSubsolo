@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nome',100);
             $table->string('cpf_cnpj',30);
-            $table->string('email',30);
+            $table->string('email',100);
             $table->string('telefone',20);
             $table->string('endereco',100);
             $table->string('categoria_usuario',30);
