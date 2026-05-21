@@ -18,17 +18,17 @@ class FormaPagamentoFactory extends Factory
     public function definition(): array
     {
         return [
-            'desconto' => null,
+            'desconto' => 0.00,
         ];
     }
     public function configure()
     {
         return $this->sequence(
-            ['nome' => 'PIX'],
-            ['nome' => 'Cartão de Crédito'],
-            ['nome' => 'Cartão de Débito'],
-            ['nome' => 'Boleto Bancário'],
-            ['nome' => 'Dinheiro'],
+            ['nome' => 'PIX', 'desconto' => 0.8],
+            ['nome' => 'Cartão de Crédito', 'desconto' => 0],
+            ['nome' => 'Cartão de Débito', 'desconto' => 0],
+            ['nome' => 'Boleto Bancário', 'desconto' => 0.9],
+            ['nome' => 'Dinheiro', 'desconto' => 0.8],
         );
     }
 }
