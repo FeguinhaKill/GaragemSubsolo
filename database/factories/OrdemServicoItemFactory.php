@@ -20,9 +20,6 @@ class OrdemServicoitemFactory extends Factory
      */
     public function definition(): array
     {
-            $status = rand(0, 1) ? 'Aberto' : 'Fechado';
-
-
             return [
             'ordem_servico_id' => OrdemServico::all()->random()->id,
             'produto_id' => Produto::all()->random()->id,
