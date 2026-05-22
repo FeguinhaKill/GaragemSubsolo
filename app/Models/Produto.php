@@ -7,6 +7,26 @@ use Illuminate\Database\Eloquent\Model;
 
 class Produto extends Model
 {
-    /** @use HasFactory<\Database\Factories\ProdutoFactory> */
     use HasFactory;
+
+    protected $table = 'produtos';
+
+    protected $fillable = [
+        'nome',
+        'marca',
+        'preco',
+        'imagem',
+    ];
+
+    protected $casts = [
+        'preco' => 'float',
+    ];
+
+
+      //Um produto possui um registro de estoque
+
+    public function estoque()
+    {
+        return $this->hasOne(Estoque::class);
+    }
 }

@@ -10,9 +10,12 @@ class PagamentoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    function index()
     {
-        //
+        $dados = Pagamento::all();
+
+
+        return view('pagamento.list', ['dados' => $dados]);
     }
 
     /**
