@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('ordem_servicos', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('usuario_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('funcionario_id')->constrained()->cascadeOnDelete();
+            $table->data_abertura();
+            $table->data_fechamento();
+            $table->status();
+            $table->valor_total();
             $table->timestamps();
         });
     }
