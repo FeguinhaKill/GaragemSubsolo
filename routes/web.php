@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\FuncionarioController;
 
 Route::get('/', function () {
     return view('index');
@@ -29,3 +31,11 @@ Route::put('/produtos/{id}/atualizar-preco', [ProdutoController::class, 'atualiz
 
 Route::get('/produtos/{id}', [ProdutoController::class, 'show'])->name('produtos.exibir');
 Route::delete('/produtos/{id}', [ProdutoController::class, 'destroy'])->name('produtos.destroy');
+
+//USUÁRIOS
+Route::resource('usuarios', UsuarioController::class);
+Route::post('usuarios/search', [UsuarioController::class, 'search'])->name('usuarios.search');
+
+//FUNCIONÁRIOS
+Route::resource('funcionarios', FuncionarioController::class);
+Route::post('funcionarios/search', [FuncionarioController::class, 'search'])->name('funcionarios.search');

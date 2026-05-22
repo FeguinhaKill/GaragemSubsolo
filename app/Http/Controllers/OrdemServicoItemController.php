@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\OrdemServicoItens;
+use App\Models\OrdemServicoItem;
 use Illuminate\Http\Request;
 
-class OrdemServicoItensController extends Controller
+class OrdemServicoitemController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class OrdemServicoItensController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(OrdemServicoItens $ordemServicoItens)
+    public function show(OrdemServicoitem $ordemServicoitem)
     {
         //
     }
@@ -42,7 +42,7 @@ class OrdemServicoItensController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(OrdemServicoItens $ordemServicoItens)
+    public function edit(OrdemServicoitem $ordemServicoitem)
     {
         //
     }
@@ -50,7 +50,7 @@ class OrdemServicoItensController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, OrdemServicoItens $ordemServicoItens)
+    public function update(Request $request, OrdemServicoitem $ordemServicoitem)
     {
         //
     }
@@ -58,7 +58,7 @@ class OrdemServicoItensController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(OrdemServicoItens $ordemServicoItens)
+    public function destroy(OrdemServicoitem $ordemServicoitem)
     {
         //
     }
