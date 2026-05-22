@@ -36,7 +36,7 @@ class OrdemServico extends Model
 
     public function funcionario()
     {
-        return $this->belongsTo(Funcionario::class);
+        return $this->belongsTo(Funcionario::class, 'funcionario_id');
     }
 
 }

@@ -3,15 +3,15 @@
 namespace Database\Factories;
 
 
-use App\Models\OrdemServicoItens;
-use App\Models\Usuario;
-use App\Models\Funcionario;
+use App\Models\OrdemServicoitem;
+use App\Models\OrdemServico;
+use App\Models\Produto;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<OrdemServicoItens>
+ * @extends Factory<OrdemServicoitem>
  */
-class OrdemServicoItensFactory extends Factory
+class OrdemServicoitemFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -24,11 +24,10 @@ class OrdemServicoItensFactory extends Factory
 
 
             return [
-            'usuario_id' => Usuario::all()->random()->id,
-            'funcionario_id' => Funcionario::all()->random()->id,
-            'data_abertura' => $this->now(),
-            'data_fechamento' => $this->faker->numberBetween(1, 5),
-            'status' => $this->$status,
+            'ordem_servico_id' => OrdemServico::all()->random()->id,
+            'produto_id' => Produto::all()->random()->id,
+            'quantidade' => $this->faker->numberBetween(1, 10),
+            'tipo_servico' => $this->faker->randomElement(['Reparo', 'Manutenção']),
             'valor_total' => $this->faker->numberBetween(1, 5000),
         ];
     }
