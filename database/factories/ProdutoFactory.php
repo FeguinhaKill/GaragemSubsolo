@@ -18,7 +18,30 @@ class ProdutoFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'nome' => fake()->randomElement([
+                'Pneu Aro 29 MTB',
+                'Corrente 12v Index',
+                'Pastilha de Freio Disco',
+                'Câmara de Ar bico fino',
+                'Pedal Clip Shimano',
+                'Selim Ergonômico',
+                'Manopla de Silicone'
+            ]),
+
+            'marca' => fake()->randomElement([
+                'Shimano',
+                'Sram',
+                'KMC',
+                'Pirelli',
+                'Absolute',
+                'TSW'
+            ]),
+
+            'preco' => $this->faker->randomFloat(2, 20, 900),
+            'imagem' => null,
+
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
     }
 }

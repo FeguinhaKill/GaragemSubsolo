@@ -20,9 +20,12 @@ class OrdemServicoitemFactory extends Factory
      */
     public function definition(): array
     {
-            return [
-            'ordem_servico_id' => OrdemServico::all()->random()->id,
-            'produto_id' => Produto::all()->random()->id,
+        $ordemServicoId = OrdemServico::inRandomOrder()->value('id') ?: OrdemServico::factory()->create()->id;
+        $produtoId = Produto::inRandomOrder()->value('id') ?: Produto::factory()->create()->id;
+
+        return [
+            'ordem_servico_id' => $ordemServicoId,
+            'produto_id' => $produtoId,
             'quantidade' => $this->faker->numberBetween(1, 10),
             'tipo_servico' => $this->faker->randomElement(['Reparo', 'Manutenção']),
             'valor_total' => $this->faker->numberBetween(1, 5000),
