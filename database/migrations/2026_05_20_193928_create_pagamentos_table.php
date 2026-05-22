@@ -14,14 +14,14 @@ return new class extends Migration
         Schema::create('pagamentos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('ordem_servico_id')->constrained('ordem_servicos')->cascadeOnDelete();
+            $table->foreignId('ordem_servico_id')->constrained('ordem_servico')->cascadeOnDelete();
             $table->unsignedBigInteger('forma_pagamento_id');
 
             $table->decimal('valor_bruto', 10, 2);
-            $table->decimal('desconto', 8, 2)->default(0); 
+            $table->decimal('desconto', 8, 2)->default(0);
             $table->decimal('valor_total', 10, 2);
 
-            $table->string('status')->default('em_andamento'); 
+            $table->string('status')->default('em_andamento');
             $table->timestamp('data_pago')->nullable();
             $table->date('data_vencimento')->nullable();
 

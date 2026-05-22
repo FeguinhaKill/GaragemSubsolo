@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('ordem_servico_item', function (Blueprint $table) {
             $table->id();
-            $table->ordem_servico_id();
-            $table->produto_id();
-            $table->quantidade();
-            $table->tipo_servico();
+            $table->foreignId('ordem_servico_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('produto_id')->constrained()->cascadeOnDelete();
+            $table->integer('quantidade');
+            $table->string('tipo_servico');
             $table->timestamps();
         });
     }

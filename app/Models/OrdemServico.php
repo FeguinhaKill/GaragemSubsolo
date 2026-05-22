@@ -11,7 +11,7 @@ class OrdemServico extends Model
 {
     use HasFactory;
     /** @use HasFactory<\Database\Factories\OrdemServicoFactory> */
-    protected $table = "ordem_servicos";
+    protected $table = "ordem_servico";
 
     protected $fillable = [
         'usuario_id',

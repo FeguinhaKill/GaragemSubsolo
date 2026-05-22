@@ -21,7 +21,7 @@ class OrdemServicoItensFactory extends Factory
     public function definition(): array
     {
             $status = rand(0, 1) ? 'Aberto' : 'Fechado';
-            $dataabertura = now()
+
 
             return [
             'usuario_id' => Usuario::all()->random()->id,
