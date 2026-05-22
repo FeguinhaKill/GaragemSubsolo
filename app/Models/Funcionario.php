@@ -15,7 +15,6 @@ class Funcionario extends Model
         'usuario_id',
         'nome_cargo',
         'salario',
-        'nivel_permissao',
     ];
 
     //Relacionamento 1:1 entre Funcionario e Usuario
