@@ -11,7 +11,7 @@ class UsuarioController extends Controller
     public function index()
     {
         $usuarios = Usuario::all();
-        return view('usuarios.index', compact('usuarios'));
+        return view('usuarios.list', compact('usuarios'));
     }
 
     public function create()
@@ -56,7 +56,7 @@ class UsuarioController extends Controller
 
         Usuario::create($data);
 
-        return redirect()->route('usuarios.index')->with('success', 'Usuário criado com sucesso!');
+        return redirect()->route('usuarios.list')->with('success', 'Usuário criado com sucesso!');
     }
 
     public function show(Usuario $usuario)
@@ -84,13 +84,13 @@ class UsuarioController extends Controller
         }
 
         $usuario->update($data);
-        return redirect()->route('usuarios.index')->with('success', 'Usuário atualizado com sucesso!');
+        return redirect()->route('usuarios.list')->with('success', 'Usuário atualizado com sucesso!');
     }
 
     public function destroy(Usuario $usuario)
     {
         $usuario->delete();
-        return redirect()->route('usuarios.index')->with('success', 'Usuário deletado com sucesso!');
+        return redirect()->route('usuarios.list')->with('success', 'Usuário deletado com sucesso!');
     }
 
     function search(Request $request)
@@ -100,6 +100,6 @@ class UsuarioController extends Controller
         } else {
             $usuarios = Usuario::all();
         }
-        return view('usuarios.listar_usuarios', ['usuarios' => $usuarios]);
+        return view('usuarios.list', ['usuarios' => $usuarios]);
     }
 }

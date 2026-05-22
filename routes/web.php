@@ -9,8 +9,9 @@ Route::get('/', function () {
 });
 
 //USUÁRIOS
-Route::resource('usuarios', UsuarioController::class);
 Route::post('usuarios/search', [UsuarioController::class, 'search'])->name('usuarios.search');
+Route::resource('usuarios', UsuarioController::class);
+
 
 //FUNCIONÁRIOS
 Route::resource('funcionarios', FuncionarioController::class);
