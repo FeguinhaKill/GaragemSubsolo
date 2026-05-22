@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('pagamentos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('usuario_id')->constrained()->cascadeOnDelete();
             $table->foreignId('ordem_servico_id')->constrained('ordem_servico')->cascadeOnDelete();
             $table->unsignedBigInteger('forma_pagamento_id');
 
