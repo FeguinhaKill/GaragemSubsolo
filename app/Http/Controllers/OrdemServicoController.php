@@ -7,59 +7,92 @@ use Illuminate\Http\Request;
 
 class OrdemServicoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    function index()
     {
-        //
+        $dados = OrdemServico::all(); //select * from ordem_servico
+
+        // dd($dados);
+        //var_dump($dados);
+        //  exit;
+
+        return view('ordem_servico.list', ['dados' => $dados]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    function create()
     {
-        //
+        return view('ordem_servico.form');
+    }
+    function validateRequest(Request $request)
+    {
+        $request->validate([
+            'usuario_id' => 'required|exists:usuarios,id',
+            'funcionario_id' => 'required|exists:funcionarios,id',
+            'data_abertura' => 'required|date',
+            'data_fechamento' => 'nullable|date|after:data_abertura',
+            'status' => 'required|in:aberta,fechada,cancelada',
+            'valor_total' => 'required|numeric|min:0'
+        ], [
+            'usuario_id.required' => "O :attribute é obrigatório",
+            'funcionario_id.required' => "O :attribute é obrigatório",
+            'data_abertura.required' => "O :attribute é obrigatório",
+            'data_fechamento.after' => "O :attribute deve ser posterior à data de abertura",
+            'status.in' => "O :attribute deve ser um dos valores válidos",
+            'valor_total.required' => "O :attribute é obrigatório",
+            'valor_total.numeric' => "O :attribute deve ser um número válido",
+            'valor_total.min' => "O :attribute deve ser um número positivo"
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    function store(Request $request)
     {
-        //
+        $this->validateRequest($request);
+        $data = $request->all();
+
+        OrdemServico::create($data);
+
+        return redirect('ordem_servico')->with('success', 'Registro cadastrado com sucesso!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(OrdemServico $ordemServico)
+    function edit($id)
     {
-        //
+        $dado = OrdemServico::find($id);
+        $categorias = CategoriaAluno::orderBy('nome')->get();
+
+
+        return view('ordem_servico.form', [
+            'dado' => $dado,
+            'categorias' => $categorias
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(OrdemServico $ordemServico)
+    function update(Request $request, $id)
     {
-        //
+        $this->validateRequest($request);
+        $data = $request->all();
+
+        Aluno::find($id)->update($data);
+
+        return redirect('aluno')->with('success', 'Registro atualizado com sucesso!');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, OrdemServico $ordemServico)
+    function destroy($id)
     {
-        //
+        Aluno::destroy($id);
+        return redirect('aluno')->with('success', 'Registro removido com sucesso!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(OrdemServico $ordemServico)
+    function search(Request $request)
     {
-        //
+        if (!empty($request->valor)) {
+            $dados = Aluno::where(
+                $request->tipo,
+                'like',
+                '%' . $request->valor . '%'
+            )->get();
+        } else {
+            $dados = Aluno::all();
+        }
+
+        return view('aluno.list', ['dados' => $dados]);
     }
 }
