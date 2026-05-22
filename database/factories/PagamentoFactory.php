@@ -22,11 +22,10 @@ class PagamentoFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::factory(),
+            'usuario_id' => User::factory(),
             'ordem_servico_id' => OrdemServico::factory(),
             'forma_pagamento_id' => FormaPagamento::factory(),
             'valor_bruto' => $this->faker->randomFloat(2, 50, 2000),
-            'desconto' => 0.00,
             'valor_total' => 0.00,
             'status' => $this->faker->randomElement(['pago', 'em_andamento']),
             'data_pago' => null,
