@@ -20,7 +20,7 @@ class Usuario extends Model
         'categoria_usuario',
         'plano_fid',
         'imagem',
-        'categoria_id',
+        'categoria_usuario',
 
     ];
 
