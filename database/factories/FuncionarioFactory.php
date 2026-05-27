@@ -22,7 +22,6 @@ class FuncionarioFactory extends Factory
             'usuario_id' => (Usuario::all()->random())->id,
             'nome_cargo' => $this->faker->randomElement(['mecânico', 'contador', 'gerente', 'atendente', 'almoxarife']),
             'salario' => $this->faker->randomFloat(2, 1000, 10000),
-            'nivel_permissao' => $this->faker->numberBetween(1, 5),
         ];
     }
 }

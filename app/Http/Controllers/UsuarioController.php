@@ -49,14 +49,14 @@ class UsuarioController extends Controller
         if ($request->hasFile('imagem')) {
             $imagem = $request->file('imagem');
             $nome_imagem = date('YmdiHs') . "." . $imagem->getClientOriginalExtension();
-            $diretorio = "images/imagem_usuario/"; 
+            $diretorio = "imagem_usuario/"; 
             $imagem->storeAs($diretorio, $nome_imagem, 'public');
             $data['imagem'] = $diretorio . $nome_imagem;
         }
 
         Usuario::create($data);
 
-        return redirect()->route('usuarios.list')->with('success', 'Usuário criado com sucesso!');
+        return redirect()->route('usuarios.index')->with('success', 'Usuário criado com sucesso!');
     }
 
     public function show(Usuario $usuario)
@@ -66,7 +66,7 @@ class UsuarioController extends Controller
 
     public function edit(Usuario $usuario)
     {
-        return view('usuarios.edit', compact('usuario'));
+        return view('usuarios.form', compact('usuario'));
     }
 
     public function update(Request $request, Usuario $usuario)
@@ -84,13 +84,14 @@ class UsuarioController extends Controller
         }
 
         $usuario->update($data);
-        return redirect()->route('usuarios.list')->with('success', 'Usuário atualizado com sucesso!');
+        
+        return redirect()->route('usuarios.index')->with('success', 'Usuário atualizado com sucesso!');
     }
 
     public function destroy(Usuario $usuario)
     {
         $usuario->delete();
-        return redirect()->route('usuarios.list')->with('success', 'Usuário deletado com sucesso!');
+        return redirect()->route('usuarios.index')->with('success', 'Usuário deletado com sucesso!');
     }
 
     function search(Request $request)
@@ -99,6 +100,13 @@ class UsuarioController extends Controller
             $usuarios = Usuario::where($request->tipo, 'like', '%' . $request->valor . '%')->get();
         } else {
             $usuarios = Usuario::all();
+        }
+
+        if ($usuarios->isEmpty()) {
+
+        return redirect()
+            ->route('usuarios.index')
+            ->with('error', 'Nenhum usuário encontrado.');
         }
         return view('usuarios.list', ['usuarios' => $usuarios]);
     }

@@ -23,7 +23,7 @@ class UsuarioFactory extends Factory
             'telefone' => $this->faker->phoneNumber(),
             'email' => $this->faker->unique()->safeEmail(),
             'endereco' => $this->faker->address(),
-            'categoria_usuario' => $this->faker->randomElement(['cliente', 'funcionario', 'administrador']),
+            'categoria_usuario' => $this->faker->randomElement(['cliente', 'funcionario', 'empresa']),
             'plano_fid' => $this->faker->randomElement(['plano_basico', 'plano_premium', 'plano_vip']),
             'imagem' => $this->faker->sentence(),
         ];

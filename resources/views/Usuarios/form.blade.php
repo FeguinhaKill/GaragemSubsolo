@@ -85,11 +85,22 @@
                 <label class="form-label">Categoria do Usuário*</label>
                 <select name="categoria_usuario" class="form-select">
                     <option value="">Selecione</option>
-                    <option value="cliente">Cliente</option>
-                    <option value="empresa">Empresa</option>
+                    <option 
+                        value="cliente"
+                        {{ old('categoria_usuario', $usuario->categoria_usuario ?? '') == 'cliente' ? 'selected' : '' }}
+                    >Cliente</option>
+                    <option 
+                        value="empresa"
+                        {{ old('categoria_usuario', $usuario->categoria_usuario ?? '') == 'empresa' ? 'selected' : '' }}
+                    >Empresa</option>
+                    <option 
+                        value="funcionario"
+                        {{ old('categoria_usuario', $usuario->categoria_usuario ?? '') == 'funcionario' ? 'selected' : '' }}
+                    >Funcionário
+                    </option>
                 </select>
-
             </div>
+            
             <div class="mb-4">
                 <label class="form-label">Plano Fidelidade</label>
                 <input
