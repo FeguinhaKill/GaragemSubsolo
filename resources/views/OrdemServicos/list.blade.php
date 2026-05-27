@@ -52,12 +52,11 @@
                 <tbody>
                     @foreach ($dados as $item)
                         <tr>
-                            {{$funcionarionome = $item->funcionario->usuario_id}}
                             <th scope="row">{{ $item->id }}</th>
                             <td>{{ $item->usuario->nome ?? '' }}</td>
                             <td>{{ $item->funcionario->usuario->nome ?? '' }}</td>
-                            <td>{{ $item->data_abertura }}</td>
-                            <td>{{ $item->data_fechamento }}</td>
+                            <td>{{ $item->data_abertura ? $item->data_abertura->format('d/m/Y') : '' }}</td>
+                            <td>{{ $item->data_fechamento ? $item->data_fechamento->format('d/m/Y') : '' }}</td>
                             <td>{{ $item->status }}</td>
                             <td>{{ $item->valor_total }}</td>
                             <td><a href="{{ route('ordem_servico.edit', $item->id) }}" class="btn btn-warning">Editar</a></td>

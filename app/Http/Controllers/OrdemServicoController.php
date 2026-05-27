@@ -18,7 +18,15 @@ class OrdemServicoController extends Controller
 
     function create()
     {
-        return view('OrdemServicos.form');
+        $usuarios = Usuario::all();
+        $funcionarios = Funcionario::all();
+        $dado = new OrdemServico();
+
+        return view('OrdemServicos.form', [
+            'dado' => $dado,
+            'usuarios' => $usuarios,
+            'funcionarios' => $funcionarios
+        ]);
     }
 
     function validateRequest(Request $request)
@@ -29,7 +37,7 @@ class OrdemServicoController extends Controller
             'data_abertura' => 'required|date',
             'data_fechamento' => 'nullable|date|after:data_abertura',
             'status' => 'required|in:aberta,fechada,cancelada',
-            'valor_total' => 'required|numeric|min:0'
+            'valor_total' => 'nullable|numeric|min:0'
         ], [
             'usuario_id.required' => "O :attribute é obrigatório",
             'funcionario_id.required' => "O :attribute é obrigatório",
