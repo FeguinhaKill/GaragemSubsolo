@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\OrdemServico;
+use App\Models\Usuario;
+use App\Models\Funcionario;
 use Illuminate\Http\Request;
 
 class OrdemServicoController extends Controller
@@ -11,17 +13,14 @@ class OrdemServicoController extends Controller
     {
         $dados = OrdemServico::all(); //select * from ordem_servico
 
-        // dd($dados);
-        //var_dump($dados);
-        //  exit;
-
-        return view('ordem_servico.list', ['dados' => $dados]);
+        return view('OrdemServicos.list', ['dados' => $dados]);
     }
 
     function create()
     {
-        return view('ordem_servico.form');
+        return view('OrdemServicos.form');
     }
+
     function validateRequest(Request $request)
     {
         $request->validate([
@@ -56,12 +55,14 @@ class OrdemServicoController extends Controller
     function edit($id)
     {
         $dado = OrdemServico::find($id);
-        $categorias = CategoriaAluno::orderBy('nome')->get();
+        $usuarios = Usuario::all();
+        $funcionarios = Funcionario::all();
 
 
-        return view('ordem_servico.form', [
+        return view('OrdemServicos.form', [
             'dado' => $dado,
-            'categorias' => $categorias
+            'usuarios' => $usuarios,
+            'funcionarios' => $funcionarios
         ]);
     }
 
@@ -70,29 +71,29 @@ class OrdemServicoController extends Controller
         $this->validateRequest($request);
         $data = $request->all();
 
-        Aluno::find($id)->update($data);
+        OrdemServico::find($id)->update($data);
 
-        return redirect('aluno')->with('success', 'Registro atualizado com sucesso!');
+        return redirect('ordem_servico')->with('success', 'Registro atualizado com sucesso!');
     }
 
     function destroy($id)
     {
-        Aluno::destroy($id);
-        return redirect('aluno')->with('success', 'Registro removido com sucesso!');
+        OrdemServico::destroy($id);
+        return redirect('ordem_servico')->with('success', 'Registro removido com sucesso!');
     }
 
     function search(Request $request)
     {
         if (!empty($request->valor)) {
-            $dados = Aluno::where(
+            $dados = OrdemServico::where(
                 $request->tipo,
                 'like',
                 '%' . $request->valor . '%'
             )->get();
         } else {
-            $dados = Aluno::all();
+            $dados = OrdemServico::all();
         }
 
-        return view('aluno.list', ['dados' => $dados]);
+        return view('OrdemServicos.list', ['dados' => $dados]);
     }
 }

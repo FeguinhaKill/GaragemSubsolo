@@ -34,8 +34,8 @@
                 <a href="">
                     Usuário
                 </a>
-                <a href="">
-                    ******
+                <a href="{{ route('ordem_servico.index') }}">
+                    ordem serviços
                 </a>
 
             </nav>
