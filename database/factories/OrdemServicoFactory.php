@@ -6,6 +6,7 @@ use App\Models\OrdemServico;
 use App\Models\Usuario;
 use App\Models\Funcionario;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Carbon;
 
 /**
  * @extends Factory<OrdemServico>
@@ -22,8 +23,8 @@ class OrdemServicoFactory extends Factory
         return [
             'usuario_id' => Usuario::all()->random()->id,
             'funcionario_id' => Funcionario::all()->random()->id,
-            'data_abertura' => now(),
-            'data_fechamento' => now()->addDays($this->faker->numberBetween(1, 5)),
+            'data_abertura' => Carbon::now(),
+            'data_fechamento' => Carbon::now()->addDays($this->faker->numberBetween(1, 5)),
             'status' => $this->faker->randomElement(['Aberto', 'Fechado']),
             'valor_total' => $this->faker->numberBetween(1, 5000),
         ];

@@ -10,59 +10,38 @@ class PagamentoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    function index()
+    public function index()
     {
-        $dados = Pagamento::all();
+        $dados = Pagamento::with(['usuario', 'ordemServico', 'formaPagamento'])->get();
 
-
-        return view('pagamento.list', ['dados' => $dados]);
+        return view('Pagamentos.pagamentosForm', compact('dados'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function search(Request $request)
     {
-        //
-    }
+        if (!empty($request->valor)) {
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+            if ($request->tipo == 'usuario_id') {
+                $dados = Pagamento::with(['usuario', 'ordemServico', 'formaPagamento'])->whereHas('usuario', function ($q) use ($request) {
+                    $q->where('nome', 'like', '%' . $request->valor . '%')
+                      ->orWhere('name', 'like', '%' . $request->valor . '%');
+                })->get();
+            } else if($request->tipo == 'ordem_servico_id') {
+                $dados = Pagamento::with(['usuario', 'ordemServico', 'formaPagamento'])->whereHas('ordemServico', function ($q) use ($request) {
+                    $q->where('id', 'like', '%' . $request->valor . '%');
+                })->get();
+            } else {
+                $dados = Pagamento::with(['usuario', 'ordemServico', 'formaPagamento'])->where(
+                    $request->tipo,
+                    'like',
+                    '%' . $request->valor . '%'
+                )->get();
+            }
+        }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Pagamento $pagamento)
-    {
-        //
-    }
+        else {
+            $dados = Pagamento::with(['usuario', 'ordemServico', 'formaPagamento'])->get();
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Pagamento $pagamento)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Pagamento $pagamento)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Pagamento $pagamento)
-    {
-        //
-    }
+        return view('Pagamentos.pagamentosForm', ['dados' => $dados]);
+}
 }
