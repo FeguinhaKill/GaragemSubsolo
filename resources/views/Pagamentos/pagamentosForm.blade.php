@@ -2,7 +2,6 @@
 @section('titulo', 'Listagem de Pagamentos')
 @section('conteudo')
 
-@include('header')
 
 @if(session('error'))
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -22,7 +21,7 @@
     <div class="col-12">
         <div class="card shadow-sm border-0">
             <div class="card-body">
-                <form action="{{ route('pagamentos.pesquisar') }}" method="post">
+                <form action="{{ route('pagamento.search') }}" method="post">
                     @csrf
                     <div class="row gy-3 gx-3 align-items-end">
                         <div class="col-12 col-md-3">
