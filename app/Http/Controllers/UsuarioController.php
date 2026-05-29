@@ -41,6 +41,7 @@ class UsuarioController extends Controller
             'imagem.mimes' => 'A imagem deve ser do tipo jpeg, png ou jpg.',
         ]);
     }
+    
     public function store(Request $request)
     {
         $this->validateRequest($request);

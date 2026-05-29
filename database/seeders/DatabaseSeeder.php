@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             UsuarioSeeder::class,
-            FuncionarioSeeder::class,
+            // FuncionarioSeeder removido - o Observer cria Funcionários automaticamente
+            // quando um Usuário com categoria "funcionario" é criado
             FormaPagamentoSeeder::class,
             ProdutoSeeder::class,
             OrdemServicoSeeder::class,

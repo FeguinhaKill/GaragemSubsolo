@@ -13,10 +13,15 @@ return new class extends Migration
     {
         Schema::create('funcionarios', function (Blueprint $table) {
             $table->id();
-            $table->integer('usuario_id')->unsigned();
-            $table->string('nome_cargo',30);
-            $table->float('salario',10,2);
+            $table->unsignedBigInteger('usuario_id')->unique();
+            $table->string('nome_cargo',30)->nullable();
+            $table->float('salario',10,2)->nullable();
             $table->timestamps();
+            // Chave estrangeira
+            $table->foreign('usuario_id')
+                ->references('id')
+                ->on('usuarios')
+                ->onDelete('cascade');
         });
     }
 

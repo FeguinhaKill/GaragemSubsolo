@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('endereco',100);
             $table->string('categoria_usuario',30);
             $table->string('plano_fid',30);
-            $table->string('imagem',200);
+            $table->string('imagem',200)->nullable();
             $table->timestamps();
         });
     }

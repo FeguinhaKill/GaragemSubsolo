@@ -32,10 +32,10 @@
                     Serviços
                 </a>
                 <a href="{{ route('usuarios.index') }}">
-                    Usuário
+                    Usuários
                 </a>
                 <a href="{{ route('ordem_servico.index') }}">
-                    ordem serviços
+                    Ordem de Serviços
                 </a>
                 <a href="{{ route('pagamento.index') }}">
                     Pagamentos

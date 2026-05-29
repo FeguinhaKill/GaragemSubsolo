@@ -4,7 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Models\OrdemServico;
+use App\Models\Usuario;
 use App\Observers\OrdemServicoObserver;
+use App\Observers\UsuarioObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,6 +23,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Observer para OrdemServico - Cria Pagamento automaticamente
         OrdemServico::observe(OrdemServicoObserver::class);
+        
+        // Observer para Usuario - Cria Funcionário automaticamente para usuários com categoria "funcionário"
+        Usuario::observe(UsuarioObserver::class);
     }
 }
