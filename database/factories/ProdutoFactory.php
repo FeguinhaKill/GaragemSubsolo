@@ -38,6 +38,7 @@ class ProdutoFactory extends Factory
             ]),
 
             'preco' => $this->faker->randomFloat(2, 20, 900),
+            'descricao' => $this->faker->sentence(),
             'imagem' => null,
 
             'created_at' => now(),

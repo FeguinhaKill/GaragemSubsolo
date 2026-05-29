@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Estoque;
+use App\Models\Produto;
 
 class EstoqueSeeder extends Seeder
 {
@@ -12,6 +13,10 @@ class EstoqueSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $produtos = Produto::all();
+
+        foreach ($produtos as $produto) {
+            Estoque::factory()->forProduto($produto)->create();
+        }
     }
 }
