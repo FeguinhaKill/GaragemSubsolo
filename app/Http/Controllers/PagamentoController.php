@@ -16,6 +16,7 @@ class PagamentoController extends Controller
 
         return view('Pagamentos.list', compact('dados'));
     }
+    
     public function search(Request $request)
     {
         if (!empty($request->valor)) {

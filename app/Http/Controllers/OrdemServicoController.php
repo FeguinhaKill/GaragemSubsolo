@@ -36,7 +36,7 @@ class OrdemServicoController extends Controller
             'funcionario_id' => 'required|exists:funcionarios,id',
             'data_abertura' => 'required|date',
             'data_fechamento' => 'nullable|date|after:data_abertura',
-            'status' => 'required|in:aberta,fechada,cancelada',
+            'status' => 'required|in:aberta,fechada,cancelada,atrasado',
             'valor_total' => 'nullable|numeric|min:0'
         ], [
             'usuario_id.required' => "O :attribute é obrigatório",

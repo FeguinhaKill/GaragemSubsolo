@@ -95,6 +95,26 @@
                 </div>
 
             </div>
+        </div>
+        <div class="row">
+            <input type="hidden" name="id" value="{{ $dado->id ?? '' }}">
+
+            <div class="col">
+                <label for="data_abertura" class="form-label">Data de Abertura</label>
+                <input type="date" class="form-control" name="data_abertura" value="{{ $dataAbertura }}">
+            </div>
+            <div class="col">
+                <label for="data_fechamento" class="form-label">Data de Fechamento</label>
+                <input type="date" class="form-control" name="data_fechamento" value="{{ old('data_fechamento', $dado->data_fechamento ? $dado->data_fechamento->format('Y-m-d') : '') }}">
+            </div>
+            <div class="col">
+                <label class="form-label" for="status">Status</label>
+                <select name="status" class="form-select" value="{{ $abertooufechado }}">
+                    <option value="aberta" {{ old('status', $dado->status ?? '') == 'aberta' ? 'selected' : '' }}>Aberta</option>
+                    <option value="fechada" {{ old('status', $dado->status ?? '') == 'fechada' ? 'selected' : '' }}>Fechada</option>
+                    <option value="atrasado" {{ old('status', $dado->status ?? '') == 'atrasado' ? 'selected' : '' }}>Atrasado</option>
+                </select>
+            </div>
 
             <div class="row">
 
