@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             FuncionarioSeeder::class,
             FormaPagamentoSeeder::class,
             ProdutoSeeder::class,
+            EstoqueSeeder::class,
             OrdemServicoSeeder::class,
             OrdemServicoItemSeeder::class,
             PagamentoSeeder::class,
