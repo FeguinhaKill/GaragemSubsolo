@@ -29,6 +29,18 @@ class OrdemServico extends Model
         'valor_total' => 'float',
     ];
 
+    public function getStatusAttribute($value)
+    {
+        if (!in_array($value, ['fechada', 'cancelada'], true)
+            && $this->data_fechamento
+            && $this->data_fechamento->lt(now()->startOfDay())
+        ) {
+            return 'atrasado';
+        }
+
+        return $value;
+    }
+
     public function usuario()
     {
         return $this->belongsTo(Usuario::class);
