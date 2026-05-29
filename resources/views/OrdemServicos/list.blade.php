@@ -158,18 +158,19 @@
                                     <td>
 
                                         @if($item->status == 'aberta')
-                                            <span class="badge bg-primary">
+                                            <span class="badge bg-success">
                                                 Aberta
                                             </span>
 
-                                        @elseif($item->status == 'em andamento')
-                                            <span class="badge bg-warning text-dark">
-                                                Em Andamento
-                                            </span>
 
                                         @elseif($item->status == 'fechada')
-                                            <span class="badge bg-success">
+                                            <span class="badge bg-warning">
                                                 Fechada
+                                            </span>
+
+                                        @elseif($item->status == 'atrasado')
+                                            <span class="badge bg-danger">
+                                                Atrasado
                                             </span>
 
                                         @else
@@ -184,6 +185,15 @@
                                         <strong>
                                             R$ {{ number_format($item->valor_total, 2, ',', '.') }}
                                         </strong>
+                                    </td>
+
+                                    <td>
+                                        <a
+                                                href="{{ route('pagamento.search', $item->id) }}"
+                                                class="btn btn-warning btn-sm"
+                                            >
+                                                -Pagamento-
+                                        </a>
                                     </td>
 
                                     <td>

@@ -18,6 +18,7 @@ Route::post('usuarios/search', [UsuarioController::class, 'search'])->name('usua
 //FUNCIONÁRIOS
 Route::resource('funcionarios', FuncionarioController::class);
 Route::post('funcionarios/search', [FuncionarioController::class, 'search'])->name('funcionarios.search');
+
 Route::get('/pagamento', [PagamentoController::class, 'index'])->name('pagamento.index');
 Route::get('/pagamento/create', [PagamentoController::class, 'create'])->name('pagamento.create');
 Route::post('/pagamento', [PagamentoController::class, 'store'])->name('pagamento.store');

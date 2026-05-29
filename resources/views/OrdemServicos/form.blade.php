@@ -64,6 +64,7 @@
                 <select name="status" class="form-select" value="{{ $abertooufechado }}">
                     <option value="aberta" {{ old('status', $dado->status ?? '') == 'aberta' ? 'selected' : '' }}>Aberta</option>
                     <option value="fechada" {{ old('status', $dado->status ?? '') == 'fechada' ? 'selected' : '' }}>Fechada</option>
+                    <option value="atrasado" {{ old('status', $dado->status ?? '') == 'atrasado' ? 'selected' : '' }}>Atrasado</option>
                 </select>
             </div>
 
