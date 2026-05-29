@@ -14,7 +14,7 @@ class PagamentoController extends Controller
     {
         $dados = Pagamento::with(['usuario', 'ordemServico', 'formaPagamento'])->get();
 
-        return view('Pagamentos.pagamentosList', compact('dados'));
+        return view('Pagamentos.list', compact('dados'));
     }
     
     public function search(Request $request)
@@ -43,7 +43,7 @@ class PagamentoController extends Controller
             $dados = Pagamento::with(['usuarios', 'ordemServico', 'formaPagamento'])->get();
         }
 
-        return view('Pagamentos.pagamentosList', ['dados' => $dados]);
+        return view('Pagamentos.list', ['dados' => $dados]);
     }
 
     public function create()
@@ -52,7 +52,7 @@ class PagamentoController extends Controller
         $formasPagamento = \App\Models\FormaPagamento::all();
         $ordensServico = \App\Models\OrdemServico::all();
 
-        return view('Pagamentos.PagamentoForm', compact('usuarios', 'formasPagamento', 'ordensServico'));
+        return view('Pagamentos.form', compact('usuarios', 'formasPagamento', 'ordensServico'));
     }
 
     public function store(Request $request)
@@ -79,7 +79,7 @@ class PagamentoController extends Controller
         $formasPagamento = \App\Models\FormaPagamento::all();
         $ordensServico = \App\Models\OrdemServico::all();
 
-        return view('Pagamentos.PagamentoForm', compact('pagamento', 'usuarios', 'formasPagamento', 'ordensServico'));
+        return view('Pagamentos.form', compact('pagamento', 'usuarios', 'formasPagamento', 'ordensServico'));
     }
 
     public function update(Request $request, $id)
