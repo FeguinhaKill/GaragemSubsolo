@@ -14,8 +14,9 @@ class PagamentoController extends Controller
     {
         $dados = Pagamento::with(['usuario', 'ordemServico', 'formaPagamento'])->get();
 
-        return view('Pagamentos.pagamentosList', compact('dados'));
+        return view('Pagamentos.list', compact('dados'));
     }
+
     public function search(Request $request)
     {
         if (!empty($request->valor)) {
@@ -39,10 +40,19 @@ class PagamentoController extends Controller
         }
 
         else {
-            $dados = Pagamento::with(['usuarios', 'ordemServico', 'formaPagamento'])->get();
+            $dados = Pagamento::with(['usuario', 'ordemServico', 'formaPagamento'])->get();
         }
 
-        return view('Pagamentos.pagamentosList', ['dados' => $dados]);
+        return view('Pagamentos.list', ['dados' => $dados]);
+    }
+
+    public function searchByOrdemServico($id)
+    {
+        $dados = Pagamento::with(['usuario', 'ordemServico', 'formaPagamento'])
+            ->where('ordem_servico_id', $id)
+            ->get();
+
+        return view('Pagamentos.list', ['dados' => $dados]);
     }
 
     public function create()
@@ -51,7 +61,7 @@ class PagamentoController extends Controller
         $formasPagamento = \App\Models\FormaPagamento::all();
         $ordensServico = \App\Models\OrdemServico::all();
 
-        return view('Pagamentos.PagamentoForm', compact('usuarios', 'formasPagamento', 'ordensServico'));
+        return view('Pagamentos.form', compact('usuarios', 'formasPagamento', 'ordensServico'));
     }
 
     public function store(Request $request)
@@ -71,14 +81,14 @@ class PagamentoController extends Controller
         return redirect('pagamento')->with('success', 'Pagamento criado com sucesso!');
     }
 
-    public function edit($id)
+    public function view($id)
     {
         $pagamento = Pagamento::find($id);
         $usuarios = \App\Models\Usuario::all();
         $formasPagamento = \App\Models\FormaPagamento::all();
         $ordensServico = \App\Models\OrdemServico::all();
 
-        return view('Pagamentos.PagamentoForm', compact('pagamento', 'usuarios', 'formasPagamento', 'ordensServico'));
+        return view('Pagamentos.form', compact('pagamento', 'usuarios', 'formasPagamento', 'ordensServico'));
     }
 
     public function update(Request $request, $id)
@@ -97,6 +107,39 @@ class PagamentoController extends Controller
         Pagamento::find($id)->update($request->all());
 
         return redirect('pagamento')->with('success', 'Pagamento atualizado com sucesso!');
+    }
+
+    public function show($id)
+    {
+        $pagamento = Pagamento::with(['usuario', 'ordemServico', 'formaPagamento'])->findOrFail($id);
+
+        return view('Pagamentos.show', compact('pagamento'));
+    }
+
+    public function edit($id)
+    {
+        $pagamento = Pagamento::findOrFail($id);
+        $usuarios = \App\Models\Usuario::all();
+        $formasPagamento = \App\Models\FormaPagamento::all();
+        $ordensServico = \App\Models\OrdemServico::all();
+
+        return view('Pagamentos.form', compact('pagamento', 'usuarios', 'formasPagamento', 'ordensServico'));
+    }
+
+    public function pagar($id)
+    {
+        $pagamento = Pagamento::findOrFail($id);
+
+        if ($pagamento->status === 'pago') {
+            return redirect()->back()->with('error', 'Este pagamento já foi registrado como pago!');
+        }
+
+        $pagamento->update([
+            'status' => 'pago',
+            'data_pago' => now(),
+        ]);
+
+        return redirect()->route('pagamento.show', $id)->with('success', 'Pagamento registrado com sucesso!');
     }
 
     public function destroy($id)

@@ -25,8 +25,9 @@ class OrdemServicoFactory extends Factory
             'funcionario_id' => Funcionario::all()->random()->id,
             'data_abertura' => Carbon::now(),
             'data_fechamento' => Carbon::now()->addDays($this->faker->numberBetween(1, 5)),
-            'status' => $this->faker->randomElement(['Aberto', 'Fechado']),
+            'status' => $this->faker->randomElement(['aberta', 'fechada']),
             'valor_total' => $this->faker->numberBetween(1, 5000),
+            'descricao' => $this->faker->sentence(30),
         ];
 
     }

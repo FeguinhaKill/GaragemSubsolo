@@ -7,9 +7,6 @@
 
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h3>Pagamentos</h3>
-            <a href="{{ route('pagamento.create') }}" class="btn btn-primary">
-                Novo Pagamento
-            </a>
         </div>
 
         @if(session('error'))
@@ -156,10 +153,10 @@
                                         <div class="d-flex gap-2">
 
                                             <a
-                                                href="{{ route('pagamentos.editar', $item->id) }}"
-                                                class="btn btn-warning btn-sm"
+                                                href="{{ route('pagamento.show', $item->id) }}"
+                                                class="btn btn-info btn-sm"
                                             >
-                                                Editar
+                                                Visualizar Pagamento
                                             </a>
                                                 @csrf
                                                 @method('DELETE')

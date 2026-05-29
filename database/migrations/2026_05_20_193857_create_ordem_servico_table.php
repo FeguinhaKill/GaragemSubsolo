@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date('data_fechamento');
             $table->string('status');
             $table->decimal('valor_total', 10, 2);
+            $table->text('descricao');
             $table->timestamps();
         });
     }

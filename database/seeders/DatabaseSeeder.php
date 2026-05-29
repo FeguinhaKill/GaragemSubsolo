@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             // quando um Usuário com categoria "funcionario" é criado
             FormaPagamentoSeeder::class,
             ProdutoSeeder::class,
+            EstoqueSeeder::class,
             OrdemServicoSeeder::class,
             OrdemServicoItemSeeder::class,
             PagamentoSeeder::class,

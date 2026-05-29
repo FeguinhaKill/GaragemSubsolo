@@ -13,7 +13,6 @@ class OrdemServicoObserver
      */
     public function created(OrdemServico $ordemServico)
     {
-        // Busca uma forma de pagamento aleatória
         $formaPagamento = FormaPagamento::find(rand(1, 5));
 
         $valorBruto = $ordemServico->valor_total;
@@ -22,7 +21,6 @@ class OrdemServicoObserver
 
         $valorTotal = $valorBruto * (1 - $desconto / 100);
 
-        // Cria pagamento
         Pagamento::create([
             'usuario_id' => $ordemServico->usuario_id,
             'ordem_servico_id' => $ordemServico->id,

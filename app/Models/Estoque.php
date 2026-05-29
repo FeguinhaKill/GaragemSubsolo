@@ -7,6 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Estoque extends Model
 {
-    /** @use HasFactory<\Database\Factories\EstoqueFactory> */
+    /** @use HasFactory<\Database\Factories\UsuarioFactory> */
     use HasFactory;
+    
+    protected $fillable = [
+        'produto_id',
+        'quantidade',
+        'unidade_medida',
+        'localizacao',
+
+
+    ];
+
+    public function produto()
+    {
+        return $this->belongsTo(Produto::class, 'produto_id');
+    }
+
 }

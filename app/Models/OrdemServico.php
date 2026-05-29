@@ -20,6 +20,7 @@ class OrdemServico extends Model
         'data_fechamento',
         'status',
         'valor_total',
+        'descricao',
 
     ];
 
@@ -27,7 +28,20 @@ class OrdemServico extends Model
         'data_abertura' => 'date',
         'data_fechamento' => 'date',
         'valor_total' => 'float',
+        'descricao' => 'string',
     ];
+
+    public function getStatusAttribute($value)
+    {
+        if (!in_array($value, ['fechada', 'cancelada'], true)
+            && $this->data_fechamento
+            && $this->data_fechamento->lt(now()->startOfDay())
+        ) {
+            return 'atrasado';
+        }
+
+        return $value;
+    }
 
     public function usuario()
     {

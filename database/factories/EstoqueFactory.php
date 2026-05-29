@@ -13,12 +13,19 @@ class EstoqueFactory extends Factory
     public function definition(): array
     {
         return [
-            //cria um produto novo toda vez que gerar um estoque
             'produto_id' => Produto::factory(),
-            'quantidade' => $this->faker->numberBetween(0, 100),
-
+            'quantidade' => $this->faker->numberBetween(5, 100),
             'created_at' => now(),
             'updated_at' => now(),
         ];
+    }
+
+    public function forProduto(Produto $produto): self
+    {
+        return $this->state(function () use ($produto) {
+            return [
+                'produto_id' => $produto->id,
+            ];
+        });
     }
 }
