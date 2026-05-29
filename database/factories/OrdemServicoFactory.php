@@ -27,6 +27,7 @@ class OrdemServicoFactory extends Factory
             'data_fechamento' => Carbon::now()->addDays($this->faker->numberBetween(1, 5)),
             'status' => $this->faker->randomElement(['aberta', 'fechada']),
             'valor_total' => $this->faker->numberBetween(1, 5000),
+            'descricao' => $this->faker->sentence(30),
         ];
 
     }

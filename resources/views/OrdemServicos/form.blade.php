@@ -95,7 +95,7 @@
                 </div>
 
             </div>
-        </div>
+
         <div class="row">
             <input type="hidden" name="id" value="{{ $dado->id ?? '' }}">
 
@@ -109,7 +109,7 @@
             </div>
             <div class="col">
                 <label class="form-label" for="status">Status</label>
-                <select name="status" class="form-select" value="{{ $abertooufechado }}">
+                <select name="status" class="form-select" value="{{ $dado->status ?? '' }}">
                     <option value="aberta" {{ old('status', $dado->status ?? '') == 'aberta' ? 'selected' : '' }}>Aberta</option>
                     <option value="fechada" {{ old('status', $dado->status ?? '') == 'fechada' ? 'selected' : '' }}>Fechada</option>
                     <option value="atrasado" {{ old('status', $dado->status ?? '') == 'atrasado' ? 'selected' : '' }}>Atrasado</option>
@@ -183,8 +183,11 @@
                     </select>
 
                 </div>
-
             </div>
+            <div class="md-4 mb-3">
+                    <label class="form-label">Descrição</label>
+                    <textarea class="form-control" name="descricao" style="height: 200px;">{{ old('descricao', $dado->descricao ?? '') }}</textarea>
+                </div>
 
             <div class="mt-3">
 
@@ -201,7 +204,7 @@
                 >
                     Voltar
                 </a>
-
+</div>
             </div>
 
         </form>

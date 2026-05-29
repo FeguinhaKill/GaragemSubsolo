@@ -16,7 +16,7 @@ class PagamentoController extends Controller
 
         return view('Pagamentos.list', compact('dados'));
     }
-    
+
     public function search(Request $request)
     {
         if (!empty($request->valor)) {
@@ -40,8 +40,17 @@ class PagamentoController extends Controller
         }
 
         else {
-            $dados = Pagamento::with(['usuarios', 'ordemServico', 'formaPagamento'])->get();
+            $dados = Pagamento::with(['usuario', 'ordemServico', 'formaPagamento'])->get();
         }
+
+        return view('Pagamentos.list', ['dados' => $dados]);
+    }
+
+    public function searchByOrdemServico($id)
+    {
+        $dados = Pagamento::with(['usuario', 'ordemServico', 'formaPagamento'])
+            ->where('ordem_servico_id', $id)
+            ->get();
 
         return view('Pagamentos.list', ['dados' => $dados]);
     }

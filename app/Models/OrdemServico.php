@@ -20,6 +20,7 @@ class OrdemServico extends Model
         'data_fechamento',
         'status',
         'valor_total',
+        'descricao',
 
     ];
 
@@ -27,6 +28,7 @@ class OrdemServico extends Model
         'data_abertura' => 'date',
         'data_fechamento' => 'date',
         'valor_total' => 'float',
+        'descricao' => 'string',
     ];
 
     public function getStatusAttribute($value)

@@ -26,6 +26,7 @@ Route::get('/pagamento/{id}/edit', [PagamentoController::class, 'edit'])->name('
 Route::put('/pagamento/{id}', [PagamentoController::class, 'update'])->name('pagamento.update');
 Route::delete('/pagamento/{id}', [PagamentoController::class, 'destroy'])->name('pagamentos.deletar');
 Route::post('/pagamento/search', [PagamentoController::class, 'search'])->name('pagamento.search');
+Route::get('/pagamento/ordem_servico/{id}', [PagamentoController::class, 'searchByOrdemServico'])->name('pagamento.by_ordem_servico');
 
 
 
