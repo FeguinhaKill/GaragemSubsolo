@@ -1,133 +1,148 @@
 @extends('main')
-@section('titulo', 'Listagem de Pagamentos')
+@section('titulo', isset($pagamento) ? 'Editar Pagamento' : 'Criar Pagamento')
 @section('conteudo')
-
-
-@if(session('error'))
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        {{ session('error') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-@endif
-
-@if(session('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        {{ session('success') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-@endif
 
 <div class="row mb-4">
     <div class="col-12">
         <div class="card shadow-sm border-0">
-            <div class="card-body">
-                <form action="{{ route('pagamento.search') }}" method="post">
-                    @csrf
-                    <div class="row gy-3 gx-3 align-items-end">
-                        <div class="col-12 col-md-3">
-                            <label class="form-label">Tipo</label>
-                            <select name="tipo" class="form-select">
-                                <option value="ordem_servico_id">Ordem de Serviço</option>
-                                <option value="usuario_id">Usuário</option>
-                                <option value="status">Status</option>
-                                <option value="valor_total">Valor Total</option>
-                            </select>
-                        </div>
-                        <div class="col-12 col-md-5">
-                            <label class="form-label">Valor</label>
-                            <input type="text" class="form-control" name="valor" placeholder="Pesquisar...">
-                        </div>
-                        <div class="col-12 col-md-4 d-flex gap-2">
-                            <button type="submit" class="btn btn-primary w-100">Buscar</button>
-                        </div>
-                    </div>
-                </form>
+            <div class="card-body d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3">
+                <div>
+                    <h2 class="card-title mb-1">{{ isset($pagamento) ? 'Editar Pagamento' : 'Novo Pagamento' }}</h2>
+                    <p class="text-muted mb-0">{{ isset($pagamento) ? 'Atualize os dados do pagamento.' : 'Crie um novo registro de pagamento.' }}</p>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
+@if ($errors->any())
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Erro ao validar!</strong>
+        <ul class="mb-0">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
 <div class="row">
-    <div class="col-12">
+    <div class="col-12 col-lg-8">
         <div class="card shadow-sm border-0">
-            <div class="card-body p-0">
-                <div class="table-responsive">
-                    <table class="table table-hover align-middle mb-0">
-                        <thead class="table-light">
-                            <tr>
-                                <th>#</th>
-                                <th>Ordem de Serviço</th>
-                                <th>Usuário</th>
-                                <th>Valor Bruto</th>
-                                <th>Desconto</th>
-                                <th>Valor Total</th>
-                                <th>Forma de Pagamento</th>
-                                <th>Status</th>
-                                <th>Data de Vencimento</th>
-                                <th>Data de Pagamento</th>
-                                <th class="text-center">Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($dados as $item)
-                                <tr>
-                                    <td>{{ $item->id }}</td>
-                                    <td>
-                                        <a href="{{ route('ordemservicos.show', $item->ordem_servico_id) }}">
-                                            OS #{{ $item->ordemServico->id }}
-                                        </a>
-                                    </td>
-                                    <td>{{ $item->usuario->nome ?? $item->usuario->name }}</td>
-                                    <td>R$ {{ number_format($item->valor_bruto, 2, ',', '.') }}</td>
-                                    <td>
-                                        @if($item->desconto > 0)
-                                            R$ {{ number_format($item->desconto, 2, ',', '.') }}
-                                        @else
-                                            <span class="text-muted">-</span>
-                                        @endif
-                                    </td>
-                                    <td><strong>R$ {{ number_format($item->valor_total, 2, ',', '.') }}</strong></td>
-                                    <td>{{ $item->formaPagamento->nome }}</td>
-                                    <td>
-                                        @if($item->status === 'pago')
-                                            <span class="badge bg-success">Pago</span>
-                                        @elseif($item->status === 'em_andamento')
-                                            <span class="badge bg-warning text-dark">Em Andamento</span>
-                                        @elseif($item->status === 'atrasado')
-                                            <span class="badge bg-danger">Atrasado</span>
-                                        @else
-                                            <span class="badge bg-secondary">{{ ucfirst($item->status) }}</span>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if($item->data_vencimento)
-                                            {{ \Carbon\Carbon::parse($item->data_vencimento)->format('d/m/Y') }}
-                                        @else
-                                            <span class="text-muted">-</span>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if($item->data_pago)
-                                            {{ \Carbon\Carbon::parse($item->data_pago)->format('d/m/Y H:i') }}
-                                        @else
-                                            <span class="text-muted">-</span>
-                                        @endif
-                                    </td>
-                                    <td class="text-center">
-                                        <div class="d-flex justify-content-center gap-2 flex-wrap">
-                                            <a href="{{ route('pagamentos.editar', $item->id) }}" class="btn btn-sm btn-warning">Editar</a>
-                                            <form action="{{ route('pagamentos.deletar', $item->id) }}" method="post" class="m-0">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Deseja remover o registro?')">Deletar</button>
-                                            </form>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+            <div class="card-body">
+                <form action="{{ isset($pagamento) ? route('pagamento.update', $pagamento->id) : route('pagamento.store') }}" method="POST">
+                    @csrf
+                    @if(isset($pagamento))
+                        @method('PUT')
+                    @endif
+
+                    <div class="row mb-3">
+                        <div class="col-12 col-md-6">
+                            <label for="usuario_id" class="form-label">Usuário</label>
+                            <select name="usuario_id" id="usuario_id" class="form-select @error('usuario_id') is-invalid @enderror" required>
+                                <option value="">Selecione um usuário</option>
+                                @foreach ($usuarios as $usuario)
+                                    <option value="{{ $usuario->id }}" @selected(old('usuario_id', $pagamento->usuario_id ?? null) == $usuario->id)>
+                                        {{ $usuario->nome ?? $usuario->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('usuario_id')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <label for="ordem_servico_id" class="form-label">Ordem de Serviço</label>
+                            <select name="ordem_servico_id" id="ordem_servico_id" class="form-select @error('ordem_servico_id') is-invalid @enderror" required>
+                                <option value="">Selecione uma OS</option>
+                                @foreach ($ordensServico as $os)
+                                    <option value="{{ $os->id }}" @selected(old('ordem_servico_id', $pagamento->ordem_servico_id ?? null) == $os->id)>
+                                        OS #{{ $os->id }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('ordem_servico_id')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-12 col-md-6">
+                            <label for="valor_bruto" class="form-label">Valor Bruto</label>
+                            <input type="number" name="valor_bruto" id="valor_bruto" class="form-control @error('valor_bruto') is-invalid @enderror" step="0.01" required value="{{ old('valor_bruto', $pagamento->valor_bruto ?? '') }}">
+                            @error('valor_bruto')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <label for="desconto" class="form-label">Desconto</label>
+                            <input type="number" name="desconto" id="desconto" class="form-control @error('desconto') is-invalid @enderror" step="0.01" value="{{ old('desconto', $pagamento->desconto ?? 0) }}">
+                            @error('desconto')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-12 col-md-6">
+                            <label for="forma_pagamento_id" class="form-label">Forma de Pagamento</label>
+                            <select name="forma_pagamento_id" id="forma_pagamento_id" class="form-select @error('forma_pagamento_id') is-invalid @enderror">
+                                <option value="">Selecione uma forma de pagamento</option>
+                                @foreach ($formasPagamento as $forma)
+                                    <option value="{{ $forma->id }}" @selected(old('forma_pagamento_id', $pagamento->forma_pagamento_id ?? null) == $forma->id)>
+                                        {{ $forma->nome }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('forma_pagamento_id')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <label for="status" class="form-label">Status</label>
+                            <select name="status" id="status" class="form-select @error('status') is-invalid @enderror" required>
+                                <option value="pendente" @selected(old('status', $pagamento->status ?? null) == 'pendente')>Pendente</option>
+                                <option value="em_andamento" @selected(old('status', $pagamento->status ?? null) == 'em_andamento')>Em Andamento</option>
+                                <option value="pago" @selected(old('status', $pagamento->status ?? null) == 'pago')>Pago</option>
+                                <option value="cancelado" @selected(old('status', $pagamento->status ?? null) == 'cancelado')>Cancelado</option>
+                                <option value="atrasado" @selected(old('status', $pagamento->status ?? null) == 'atrasado')>Atrasado</option>
+                            </select>
+                            @error('status')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-12 col-md-6">
+                            <label for="data_vencimento" class="form-label">Data de Vencimento</label>
+                            <input type="date" name="data_vencimento" id="data_vencimento" class="form-control @error('data_vencimento') is-invalid @enderror" value="{{ old('data_vencimento', $pagamento->data_vencimento ?? '') }}">
+                            @error('data_vencimento')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        @if(isset($pagamento))
+                        <div class="col-12 col-md-6">
+                            <label for="data_pago" class="form-label">Data de Pagamento</label>
+                            <input type="datetime-local" name="data_pago" id="data_pago" class="form-control @error('data_pago') is-invalid @enderror" value="{{ old('data_pago', $pagamento->data_pago ?? '') }}">
+                            @error('data_pago')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        @endif
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary">{{ isset($pagamento) ? 'Atualizar' : 'Salvar' }}</button>
+                        <a href="{{ route('pagamento.index') }}" class="btn btn-secondary">Cancelar</a>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

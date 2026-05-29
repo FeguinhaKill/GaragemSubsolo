@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Models\OrdemServico;
+use App\Observers\OrdemServicoObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +21,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        OrdemServico::observe(OrdemServicoObserver::class);
     }
 }

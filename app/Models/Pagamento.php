@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
+use App\Models\Usuario;
 use App\Models\OrdemServico;
 use App\Models\FormaPagamento;
 
@@ -16,7 +16,7 @@ class Pagamento extends Model
     protected $table = 'pagamentos';
 
     protected $fillable = [
-        'user_id',
+        'usuario_id',
         'ordem_servico_id',
         'forma_pagamento_id',
         'valor_bruto',
@@ -35,9 +35,9 @@ class Pagamento extends Model
         'valor_total' => 'float',
     ];
 
-    public function user()
+    public function usuario()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Usuario::class, 'usuario_id');
     }
 
     public function ordemServico()

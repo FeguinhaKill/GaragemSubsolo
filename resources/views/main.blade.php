@@ -31,11 +31,14 @@
                 <a href="">
                     Serviços
                 </a>
-                <a href="">
+                <a href="{{ route('usuarios.index') }}">
                     Usuário
                 </a>
                 <a href="{{ route('ordem_servico.index') }}">
                     ordem serviços
+                </a>
+                <a href="{{ route('pagamento.index') }}">
+                    Pagamentos
                 </a>
 
             </nav>
