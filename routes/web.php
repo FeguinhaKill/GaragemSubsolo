@@ -21,8 +21,10 @@ Route::post('funcionarios/search', [FuncionarioController::class, 'search'])->na
 Route::get('/pagamento', [PagamentoController::class, 'index'])->name('pagamento.index');
 Route::get('/pagamento/create', [PagamentoController::class, 'create'])->name('pagamento.create');
 Route::post('/pagamento', [PagamentoController::class, 'store'])->name('pagamento.store');
+Route::get('/pagamento/{id}/show', [PagamentoController::class, 'show'])->name('pagamento.show');
 Route::get('/pagamento/{id}/edit', [PagamentoController::class, 'edit'])->name('pagamentos.editar');
 Route::put('/pagamento/{id}', [PagamentoController::class, 'update'])->name('pagamento.update');
+Route::post('/pagamento/{id}/pagar', [PagamentoController::class, 'pagar'])->name('pagamento.pagar');
 Route::delete('/pagamento/{id}', [PagamentoController::class, 'destroy'])->name('pagamentos.deletar');
 Route::post('/pagamento/search', [PagamentoController::class, 'search'])->name('pagamento.search');
 
