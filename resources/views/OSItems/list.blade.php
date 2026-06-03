@@ -94,6 +94,7 @@
                                     <th>Produto</th>
                                     <th>Quantidade</th>
                                     <th>Valor Total</th>
+                                    <th>Ações</th>
 
                                 </tr>
                             </thead>
@@ -106,7 +107,7 @@
                                         <td class="py-3">{{ $item->id }}</td>
 
                                         <td>
-                                            {{ $item->oss->nome ?? '-' }}
+                                            {{ $item->ordem_servico_id}}
                                         </td>
 
                                         <td>
@@ -140,13 +141,6 @@
                                                     </button>
                                                 </form>
                                             </div>
-                                        </td>
-
-                                        <td>
-                                            <a  href="{{-- route('produtos.by_ordem_servico', $item->id) --}}"
-                                                class="btn btn-sm butao">
-                                                Produtos
-                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach

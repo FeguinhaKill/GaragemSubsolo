@@ -12,8 +12,10 @@ class OrdemServicoItemController extends Controller
     function index()
     {
         $dados = OrdemServicoItem::all();
+        $produtos = Produto::all();
+        $oss = OrdemServico::all();
 
-        return view('OSItems.list', ['dados' => $dados]);
+        return view('OSItems.list', ['dados' => $dados, 'produtos' => $produtos, 'oss' => $oss]);
     }
 
     function create()
@@ -52,6 +54,11 @@ class OrdemServicoItemController extends Controller
         $this->validateRequest($request);
         $data = $request->all();
 
+        $produto = Produto::find($data['produto_id']);
+        $data['valor_total'] = $produto
+            ? round($produto->preco * $data['quantidade'], 2)
+            : 0;
+
         OrdemServicoItem::create($data);
 
         return redirect('ordem_servico_item')->with('success', 'Registro cadastrado com sucesso!');
@@ -76,6 +83,11 @@ class OrdemServicoItemController extends Controller
         $this->validateRequest($request);
         $data = $request->all();
 
+        $produto = Produto::find($data['produto_id']);
+        $data['valor_total'] = $produto
+            ? round($produto->preco * $data['quantidade'], 2)
+            : 0;
+
         OrdemServicoItem::find($id)->update($data);
 
         return redirect('ordem_servico_item')->with('success', 'Registro atualizado com sucesso!');
@@ -95,10 +107,14 @@ class OrdemServicoItemController extends Controller
                 'like',
                 '%' . $request->valor . '%'
             )->get();
+            $produtos = Produto::all();
+            $oss = OrdemServico::all();
         } else {
             $dados = OrdemServicoItem::all();
+            $produtos = Produto::all();
+            $oss = OrdemServico::all();
         }
 
-        return view('OrdemServicosItems.list', ['dados' => $dados]);
+        return view('OSItems.list', ['dados' => $dados, 'produtos' => $produtos, 'oss' => $oss]);
     }
 }

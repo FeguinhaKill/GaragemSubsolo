@@ -225,10 +225,14 @@
                                         </div>
 
                                         <td>
-                                            <a  href="{{-- route('produtos.by_ordem_servico', $item->id) --}}"
-                                                class="btn btn-sm butao">
-                                                Produtos
-                                            </a>
+                                            <form action="{{route('ordem_servico_item.search')}}" method="POST" style="display:inline;">
+                                                @csrf
+                                                <input type="hidden" name="tipo" value="ordem_servico_id">
+                                                <input type="hidden" name="valor" value="{{$item->id}}">
+                                                <button type="submit" class="btn btn-sm butao">
+                                                    Produtos
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach

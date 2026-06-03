@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\OrdemServico;
+use App\Models\OrdemServicoitem;
 use App\Models\Usuario;
 use App\Models\Funcionario;
+use App\Models\Produto;
 use Illuminate\Http\Request;
 
 class OrdemServicoController extends Controller
@@ -55,7 +57,36 @@ class OrdemServicoController extends Controller
         $this->validateRequest($request);
         $data = $request->all();
 
-        OrdemServico::create($data);
+        // garantir valor_total presente para evitar erro de inserção no banco
+        if (!isset($data['valor_total']) || $data['valor_total'] === '') {
+            $data['valor_total'] = 0;
+        }
+
+        // criar a ordem primeiro
+        $ordem = OrdemServico::create($data);
+
+        // se vierem produtos, criar os itens vinculados
+        $produtos = $request->input('produto_id', []);
+        $quantidades = $request->input('quantidade', []);
+
+        foreach ($produtos as $index => $produtoId) {
+            if (empty($produtoId)) continue;
+
+            $quantidade = isset($quantidades[$index]) ? (int)$quantidades[$index] : 0;
+            if ($quantidade <= 0) continue;
+
+            $produto = Produto::find($produtoId);
+            $valorTotalItem = $produto ? round($produto->preco * $quantidade, 2) : 0;
+
+            OrdemServicoitem::create([
+                'ordem_servico_id' => $ordem->id,
+                'produto_id' => $produtoId,
+                'quantidade' => $quantidade,
+                'valor_total' => $valorTotalItem,
+            ]);
+        }
+
+        $ordem->calcularValorTotal();
 
         return redirect('ordem_servico')->with('success', 'Registro cadastrado com sucesso!');
     }

@@ -17,16 +17,10 @@ class ProdutoFactory extends Factory
      */
     public function definition(): array
     {
+$sentenca = random_int(1, 3);
         return [
-            'nome' => fake()->randomElement([
-                'Pneu Aro 29 MTB',
-                'Corrente 12v Index',
-                'Pastilha de Freio Disco',
-                'Câmara de Ar bico fino',
-                'Pedal Clip Shimano',
-                'Selim Ergonômico',
-                'Manopla de Silicone'
-            ]),
+
+            'nome' => fake()->words($sentenca, true),
 
             'marca' => fake()->randomElement([
                 'Shimano',
