@@ -22,14 +22,11 @@
             </a>
 
             <nav class="d-flex align-items-center gap-2">
-                <a href="">
+                <a href="{{ route('produtos.index') }}">
                     Produtos
                 </a>
-                <a href="">
+                <a href="{{route('estoque.index')}}">
                     Estoque
-                </a>
-                <a href="">
-                    Serviços
                 </a>
                 <a href="{{ route('usuarios.index') }}">
                     Usuários
