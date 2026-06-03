@@ -27,7 +27,6 @@ class OrdemServicoitemFactory extends Factory
             'ordem_servico_id' => $ordemServicoId,
             'produto_id' => $produtoId,
             'quantidade' => $this->faker->numberBetween(1, 10),
-            'tipo_servico' => $this->faker->randomElement(['Reparo', 'Manutenção']),
             'valor_total' => $this->faker->numberBetween(1, 5000),
         ];
     }

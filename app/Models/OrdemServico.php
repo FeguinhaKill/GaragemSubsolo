@@ -53,4 +53,16 @@ class OrdemServico extends Model
         return $this->belongsTo(Funcionario::class, 'funcionario_id');
     }
 
+    public function itens()
+    {
+        return $this->hasMany(OrdemServicoitem::class, 'ordem_servico_id');
+    }
+
+    public function calcularValorTotal()
+    {
+        $total = $this->itens()->sum('valor_total');
+        $this->update(['valor_total' => $total]);
+        return $total;
+    }
+
 }

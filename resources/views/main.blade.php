@@ -37,6 +37,9 @@
                 <a href="{{ route('ordem_servico.index') }}">
                     Ordem de Serviços
                 </a>
+                <a href="{{ route('ordem_servico_item.index') }}">
+                    Items das Ordens de Serviço
+                </a>
                 <a href="{{ route('pagamento.index') }}">
                     Pagamentos
                 </a>

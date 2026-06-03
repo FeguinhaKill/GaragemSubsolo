@@ -17,7 +17,6 @@ class OrdemServicoitem extends Model
         'ordem_servico_id',
         'produto_id',
         'quantidade',
-        'tipo_servico',
         'valor_total',
     ];
 

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('ordem_servico_item', function (Blueprint $table) {
             if (! Schema::hasColumn('ordem_servico_item', 'valor_total')) {
-                $table->decimal('valor_total', 10, 2)->default(0)->after('tipo_servico');
+                $table->decimal('valor_total', 10, 2)->default(0)->after('quantidade');
             }
         });
     }

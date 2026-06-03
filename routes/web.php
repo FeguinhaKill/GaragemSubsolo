@@ -5,7 +5,7 @@ use App\Http\Controllers\PagamentoController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\FuncionarioController;
 use App\Http\Controllers\OrdemServicoController;
-use App\Http\Controllers\OremServicoItemController;
+use App\Http\Controllers\OrdemServicoItemController;
 use App\Http\Controllers\EstoqueController;
 use App\Http\Controllers\ProdutoController;
 
@@ -51,6 +51,16 @@ Route::delete('/ordem_servico/{id}', [OrdemServicoController::class, 'destroy'])
 Route::get('/ordem_servico/edit/{id}', [OrdemServicoController::class, 'edit'])->name('ordem_servico.edit');
 Route::put('/ordem_servico/update/{id}', [OrdemServicoController::class, 'update'])->name('ordem_servico.update');
 Route::post('/ordem_servico/search', [OrdemServicoController::class, 'search'])->name('ordem_servico.search');
+
+Route::get('/ordem_servico_item', [OrdemServicoItemController::class, 'index'])->name('ordem_servico_item.index');
+Route::get('/ordem_servico_item/create', [OrdemServicoItemController::class, 'create'])->name('ordem_servico_item.create');
+Route::post('/ordem_servico_item', [OrdemServicoItemController::class, 'store'])->name('ordem_servico_item.store');
+Route::delete('/ordem_servico_item/{id}', [OrdemServicoItemController::class, 'destroy'])
+    ->name('ordem_servico_item.destroy');
+Route::get('/ordem_servico_item/edit/{id}', [OrdemServicoItemController::class, 'edit'])->name('ordem_servico_item.edit');
+Route::put('/ordem_servico_item/update/{id}', [OrdemServicoItemController::class, 'update'])->name('ordem_servico_item.update');
+Route::post('/ordem_servico_item/search', [OrdemServicoItemController::class, 'search'])->name('ordem_servico_item.search');
+
 
 //ESTOQUE
 Route::get('/estoque', [EstoqueController::class, 'index'])->name('estoque.index');

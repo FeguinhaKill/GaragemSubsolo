@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Models\OrdemServico;
+use App\Models\OrdemServicoitem;
 use App\Models\Usuario;
 use App\Observers\OrdemServicoObserver;
+use App\Observers\OrdemServicoItemObserver;
 use App\Observers\UsuarioObserver;
 
 class AppServiceProvider extends ServiceProvider
@@ -25,7 +27,10 @@ class AppServiceProvider extends ServiceProvider
     {
         // Observer para OrdemServico - Cria Pagamento automaticamente
         OrdemServico::observe(OrdemServicoObserver::class);
-        
+
+        // Observer para OrdemServicoItem - Atualiza valor total da ordem
+        OrdemServicoitem::observe(OrdemServicoItemObserver::class);
+
         // Observer para Usuario - Cria Funcionário automaticamente para usuários com categoria "funcionário"
         Usuario::observe(UsuarioObserver::class);
     }

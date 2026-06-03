@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('ordem_servico_id')->constrained('ordem_servico')->cascadeOnDelete();
             $table->foreignId('produto_id')->constrained()->cascadeOnDelete();
             $table->integer('quantidade');
-            $table->string('tipo_servico');
             $table->timestamps();
         });
     }
