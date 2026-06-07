@@ -13,6 +13,16 @@
             !empty($dado->data_abertura) ? $dado->data_abertura->format('Y-m-d') : $agora->format('Y-m-d'),
         );
 
+        $dataFechamentopad = \Carbon\Carbon::parse($dataAbertura)
+            ->copy()
+            ->addDays(30)
+            ->format('Y-m-d');
+
+        $dataFechamento = old(
+            'data_fechamento',
+            !empty($dado->data_fechamento) ? $dado->data_fechamento->format('Y-m-d') : $dataFechamentopad,
+        );
+
     @endphp
 
     <div class="container mt-5">
@@ -84,7 +94,7 @@
                     <div class="col">
                         <label for="data_fechamento" class="form-label">Data de Fechamento</label>
                         <input type="date" class="form-control" name="data_fechamento"
-                            value="{{ old('data_fechamento', $dado->data_fechamento ? $dado->data_fechamento->format('Y-m-d') : '') }}">
+                            value="{{ $dataFechamento }}">
                     </div>
                     <div class="col">
                         <label class="form-label" for="status">Status</label>
@@ -98,7 +108,7 @@
                         </select>
                     </div>
 
-                
+
         </div>
         <div class="md-4 mb-3">
             <label class="form-label">Descrição</label>

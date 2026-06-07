@@ -8,28 +8,55 @@ use App\Models\FormaPagamento;
 
 class OrdemServicoObserver
 {
-    /**
-     * Chamado quando uma OrdemServico é criada
-     */
-    public function created(OrdemServico $ordemServico)
+    
+    public function saved(OrdemServico $ordemServico)
     {
-        $formaPagamento = FormaPagamento::find(rand(1, 5));
+        if ($ordemServico->valor_total <= 0) {
+            return;
+        }
+
+        $pagamento = Pagamento::where('ordem_servico_id', $ordemServico->id)->first();
+
+        if ($pagamento) {
+            if ($pagamento->status === 'pago') {
+                return;
+            }
+
+            $formaPagamento = $pagamento->formaPagamento ?? FormaPagamento::inRandomOrder()->first();
+            if (! $formaPagamento) {
+                return;
+            }
+
+            $valorBruto = $ordemServico->valor_total;
+            $desconto = $formaPagamento->desconto;
+            $valorTotal = round($valorBruto * (1 - $desconto / 100), 2);
+
+            $pagamento->update([
+                'valor_bruto' => $valorBruto,
+                'desconto' => $desconto,
+                'valor_total' => $valorTotal,
+                'forma_pagamento_id' => $formaPagamento->id,
+            ]);
+
+            return;
+        }
+
+        $formaPagamento = FormaPagamento::inRandomOrder()->first();
+        if (! $formaPagamento) {
+            return;
+        }
 
         $valorBruto = $ordemServico->valor_total;
-
         $desconto = $formaPagamento->desconto;
-
-        $valorTotal = $valorBruto * (1 - $desconto / 100);
+        $valorTotal = round($valorBruto * (1 - $desconto / 100), 2);
 
         Pagamento::create([
             'usuario_id' => $ordemServico->usuario_id,
             'ordem_servico_id' => $ordemServico->id,
             'forma_pagamento_id' => $formaPagamento->id,
-
             'valor_bruto' => $valorBruto,
             'desconto' => $desconto,
-            'valor_total' => number_format($valorTotal, 2, '.', ''),
-
+            'valor_total' => $valorTotal,
             'status' => 'em andamento',
             'data_vencimento' => now()->addDays(30),
         ]);

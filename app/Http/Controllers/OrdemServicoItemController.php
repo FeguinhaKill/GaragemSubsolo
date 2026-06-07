@@ -24,7 +24,7 @@ class OrdemServicoItemController extends Controller
         $oss = OrdemServico::all();
         $dado = new OrdemServicoItem();
 
-        return view('OrdemServicosItem.form', [
+        return view('OSItems.form', [
             'dado' => $dado,
             'oss' => $oss,
             'produtos' => $produtos
@@ -71,7 +71,7 @@ class OrdemServicoItemController extends Controller
         $produtos = Produto::all();
 
 
-        return view('OrdemServicosItem.form', [
+        return view('OSItems.form', [
             'dado' => $dado,
             'oss' => $oss,
             'produtos' => $produtos

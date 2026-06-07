@@ -10,7 +10,7 @@
 
 <div class="container mt-5">
     <div class="card shadow p-4">
-        
+
         <h3 class="mb-4">Cadastro de Produto</h3>
 
         <form action="{{ $action }}" method="POST" enctype="multipart/form-data">
@@ -83,6 +83,45 @@
                     class="form-control @error('descricao') is-invalid @enderror"
                     rows="4"
                     maxlength="1000"
+                >{{ old('descricao', $produto->descricao ?? '') }}</textarea>
+                @error('descricao')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label">Tipo*</label>
+                <select
+                    name="tipo"
+                    class="form-control @error('tipo') is-invalid @enderror"
+                    required
+                >
+                    <option value="">Selecione o tipo</option>
+                    <option value="Peça" {{ old('tipo', $produto->tipo ?? '') == 'Peça' ? 'selected' : '' }}>
+                        Peça
+                    </option>
+                    <option value="Acessório" {{ old('tipo', $produto->tipo ?? '') == 'Acessório' ? 'selected' : '' }}>
+                        Acessório
+                    </option>
+                    <option value="Equipamento de Proteção" {{ old('tipo', $produto->tipo ?? '') == 'Equipamento de Proteção' ? 'selected' : '' }}>
+                        Equipamento de Proteção
+                    </option>
+                    <option value="Bicicleta" {{ old('tipo', $produto->tipo ?? '') == 'Bicicleta' ? 'selected' : '' }}>
+                        Bicicleta
+                    </option>
+                    <option value="Ferramenta" {{ old('tipo', $produto->tipo ?? '') == 'Ferramenta' ? 'selected' : '' }}>
+                        Ferramenta
+                    </option>
+                </select>
+                @error('tipo')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <button type="submit" class="btn btn-primary">Salvar</button>
+
+            <a href="{{ route('produtos.index') }}" class="btn btn-secondary">Voltar</a>
+
                 >{{ old('descricao', $produto->descricao ?? '') }}</textarea>
                 @error('descricao')
                     <div class="invalid-feedback">{{ $message }}</div>

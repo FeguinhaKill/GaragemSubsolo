@@ -187,8 +187,8 @@
                         </div>
                     @endif
 
-                    <a href="{{ route('pagamento.index') }}" class="btn btn-secondary btn-lg">
-                        Cancelar
+                    <a href="javascript:history.back()" class="btn btn-secondary btn-lg">
+                        Voltar
                     </a>
                 </div>
             </div>

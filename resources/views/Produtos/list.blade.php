@@ -22,12 +22,13 @@
                                 <option value="nome">Nome</option>
                                 <option value="marca">Marca</option>
                                 <option value="preco">Preço</option>
+                                <option value="tipo">Tipo</option>
                             </select>
                         </div>
 
                         <div class="col-md-6">
                             <label class="form-label">Pesquisar</label>
-                            <input 
+                            <input
                                 type="text"
                                 name="valor"
                                 class="form-control"
@@ -52,6 +53,7 @@
                             <th>Nome</th>
                             <th>Marca</th>
                             <th>Descrição</th>
+                            <th>Tipo</th>
                             <th>Preço</th>
                             <th width="180">Ações</th>
                         </tr>
@@ -67,7 +69,7 @@
                             <tr>
                                 <td>{{ $produto->id }}</td>
                                 <td>
-                                    <img 
+                                    <img
                                         src="{{ $nome_imagem }}"
                                         class="rounded"
                                         width="70"
@@ -87,7 +89,8 @@
                                     @endif
                                 </td>
                                 <td>R$ {{ number_format($produto->preco, 2, ',', '.') }}</td>
-                                
+
+                                    <td>{{ $produto->tipo }}</td>
                                 <td>
                                     <div class="d-flex gap-2">
                                         <a href="{{ route('produtos.edit', $produto->id) }}" class="btn btn-warning btn-sm">
@@ -103,7 +106,7 @@
                                     </div>
                                 </td>
                             </tr>
-                        @endforeach 
+                        @endforeach
                     </tbody>
                 </table>
             </div>

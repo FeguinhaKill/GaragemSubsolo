@@ -33,6 +33,14 @@ $sentenca = random_int(1, 3);
 
             'preco' => $this->faker->randomFloat(2, 20, 900),
             'descricao' => $this->faker->sentence(),
+
+            'tipo' => fake()->randomElement([
+                'Peça',
+                'Acessório',
+                'Equipamento de Proteção',
+                'Bicicleta',
+                'Ferramenta',
+            ]),
             'imagem' => null,
 
             'created_at' => now(),

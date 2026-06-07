@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('marca');
             $table->float('preco');
             $table->text('descricao')->nullable();
+            $table->string('tipo');
             $table->string('imagem')->nullable();
             $table->timestamps();
         });

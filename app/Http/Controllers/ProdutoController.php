@@ -30,12 +30,14 @@ class ProdutoController extends Controller
             'marca' => 'required|string|max:255',
             'preco' => 'required|numeric|min:0',
             'descricao' => 'nullable|string|max:1000',
+            'tipo' => 'required|string|max:255',
             'imagem' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ], [
             'nome.required' => "O campo :attribute é obrigatório",
             'marca.required' => "O campo :attribute é obrigatório",
             'preco.required' => "O campo :attribute é obrigatório",
             'preco.numeric' => "O campo :attribute deve ser um número válido",
+            'tipo.required' => "O campo :attribute é obrigatório",
             'descricao.max' => "O campo :attribute não pode ter mais de 1000 caracteres",
             'imagem.image' => "O arquivo deve ser uma imagem válida",
             'imagem.mimes' => "A imagem deve ser do tipo jpeg, png, jpg ou gif"

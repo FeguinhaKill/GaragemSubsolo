@@ -167,7 +167,7 @@
                                         </td>
 
                                         <td>
-                                            <a href="{{ route('pagamento.by_ordem_servico', $item->id) }}"
+                                            <a href="{{ route('pagamento.show', $item->id) }}"
                                                 class="btn btn-dark btn-sm">
                                                 Pagamento
                                             </a>

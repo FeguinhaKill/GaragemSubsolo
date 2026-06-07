@@ -58,6 +58,11 @@ class OrdemServico extends Model
         return $this->hasMany(OrdemServicoitem::class, 'ordem_servico_id');
     }
 
+    public function pagamentos()
+    {
+        return $this->hasMany(Pagamento::class, 'ordem_servico_id');
+    }
+
     public function calcularValorTotal()
     {
         $total = $this->itens()->sum('valor_total');
