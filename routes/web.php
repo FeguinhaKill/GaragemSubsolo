@@ -16,6 +16,8 @@ use App\Http\Controllers\ProdutoController;
 // ROTAS DE AUTENTICAÇÃO (SEM MIDDLEWARE)
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
+Route::get('/funcionario/login', [AuthController::class, 'showFuncionarioLogin'])->name('funcionario.login');
+Route::post('/funcionario/login', [AuthController::class, 'loginFuncionario'])->name('funcionario.auth.login');
 Route::get('/registro', [AuthController::class, 'showRegister'])->name('auth.register');
 Route::post('/registro', [AuthController::class, 'register'])->name('auth.register');
 

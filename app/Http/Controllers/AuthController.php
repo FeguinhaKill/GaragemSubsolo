@@ -16,6 +16,15 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
+    public function showFuncionarioLogin()
+    {
+        if (Session::has('usuario_id')) {
+            return redirect()->route('inicio');
+        }
+
+        return view('auth.funcionario-login');
+    }
+
     public function login(Request $request)
     {
         $request->validate([
@@ -33,14 +42,50 @@ class AuthController extends Controller
                           ->first();
 
         if ($usuario) {
+            if (!in_array($usuario->categoria_usuario, ['cliente'], true)) {
+                return redirect()->route('funcionario.login')
+                    ->with('error', 'Funcionários e administradores devem usar o login exclusivo.');
+            }
+
             Session::put('usuario_id', $usuario->id);
             Session::put('usuario_nome', $usuario->nome);
             Session::put('usuario_email', $usuario->email);
-            
+
             return redirect()->route('inicio')->with('success', 'Bem-vindo ' . $usuario->nome . '!');
         }
 
         return back()->with('error', 'Email ou senha inválidos.');
+    }
+
+    public function loginFuncionario(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'senha' => 'required|min:4',
+        ], [
+            'email.required' => 'O campo email é obrigatório.',
+            'email.email' => 'O email deve ser válido.',
+            'senha.required' => 'O campo senha é obrigatório.',
+            'senha.min' => 'A senha deve ter no mínimo 4 dígitos.',
+        ]);
+
+        $usuario = Usuario::where('email', $request->email)
+            ->where('senha', $request->senha)
+            ->first();
+
+        if (!$usuario) {
+            return back()->with('error', 'Email ou senha inválidos.')->withInput();
+        }
+
+        if (!in_array($usuario->categoria_usuario, ['funcionario', 'admin'], true)) {
+            return back()->with('error', 'Acesso restrito para funcionários.')->withInput();
+        }
+
+        Session::put('usuario_id', $usuario->id);
+        Session::put('usuario_nome', $usuario->nome);
+        Session::put('usuario_email', $usuario->email);
+
+        return redirect()->route('inicio')->with('success', 'Bem-vindo ' . $usuario->nome . '!');
     }
 
     public function logout()

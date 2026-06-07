@@ -73,8 +73,6 @@
                         <td>{{ $usuario->id }}</td>
                         <td>
                             <img
-                                src="{{ asset($nome_imagem) }}"
-                            <img
                                 src="{{ asset($caminho_imagem) }}"
                                 class="rounded-circle"
                                 width="70"
@@ -88,8 +86,6 @@
                         <td>{{ $usuario->telefone }}</td>
                         <td>{{ $usuario->endereco }}</td>
                         <td>{{ $usuario->categoria_usuario }}</td>
-                        <td>{{ $usuario->plano_fid }}</td>
-
                         <td>{{ $usuario->senha }}</td>
 
                         <td>

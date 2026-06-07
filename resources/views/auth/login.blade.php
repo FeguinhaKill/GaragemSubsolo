@@ -82,6 +82,10 @@
             ou
         </div>
 
+        <a href="{{ route('funcionario.login') }}" class="btn-login" style="display: inline-block; text-align: center; text-decoration: none; background: #0f766e; margin-bottom: 0.75rem;">
+            Entrar como Funcionário
+        </a>
+
         <a href="{{ route('auth.register') }}" class="btn-login" style="display: inline-block; text-align: center; text-decoration: none; background: #6366f1; margin-bottom: 1rem;">
             Criar Novo Cadastro
         </a>
