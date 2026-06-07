@@ -15,9 +15,12 @@
 
 <body>
     <div class="login-container">
-        <div class="logo-section">
-            <div class="logo"><img src="/storage/images/mainImagems/logo.png"></div>
-            <a class="logo-text" href="{{ route('home') }}">Bici<span class="highlight">cleta</span></a>
+        <div class="conteiner logo-section">
+            <div class="logo">
+                <a href="{{ route('home') }}" style="justify-self:center">
+                    <img src="/storage/images/mainImagems/logo.png" style="width: 100px;">
+                </a>
+            </div>
         </div>
 
         <h1>Login</h1>
@@ -116,12 +119,12 @@
         }
 
         .logo-section {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 2rem;
-        }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 2rem;
+}
 
         .logo {
             width: 48px;
