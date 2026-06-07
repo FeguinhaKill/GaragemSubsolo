@@ -10,7 +10,93 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@100..900&family=Kaushan+Script&family=Limelight&family=Stack+Sans+Headline:wght@200..700&display=swap" rel="stylesheet">
-    <style>
+
+</head>
+
+<body>
+    <div class="login-container">
+        <div class="logo-section">
+            <div class="logo">🚲</div>
+            <a class="logo-text" href="{{ route('home') }}">Bici<span class="highlight">cleta</span></a>
+        </div>
+
+        <h1>Login</h1>
+
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        @endif
+
+        @if (session('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        @endif
+
+        @if ($errors->any())
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                @foreach ($errors->all() as $error)
+                    <div>{{ $error }}</div>
+                @endforeach
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        @endif
+
+        <form action="{{ route('auth.login') }}" method="POST">
+            @csrf
+
+            <div class="mb-3">
+                <label for="email" class="form-label">E-mail</label>
+                <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    name="email"
+                    value="{{ old('email') }}"
+                    required
+                    autofocus
+                >
+            </div>
+
+            <div class="mb-3">
+                <label for="senha" class="form-label">Senha</label>
+                <input
+                    type="password"
+                    class="form-control"
+                    id="senha"
+                    name="senha"
+                    required
+                >
+            </div>
+
+            <button type="submit" class="btn-login">Entrar</button>
+        </form>
+
+        <div class="divider">
+            ou
+        </div>
+
+        <a href="{{ route('auth.register') }}" class="btn-login" style="display: inline-block; text-align: center; text-decoration: none; background: #6366f1; margin-bottom: 1rem;">
+            Criar Novo Cadastro
+        </a>
+
+        <div class="divider">
+            Demonstração com dados do seeder
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>
+
+
+<style>
         body {
             background: linear-gradient(135deg, #1D9E75 0%, #15a368 100%);
             display: flex;
@@ -118,86 +204,3 @@
             margin: 1rem 0;
         }
     </style>
-</head>
-
-<body>
-    <div class="login-container">
-        <div class="logo-section">
-            <div class="logo">🚲</div>
-            <div class="logo-text">Bici<span class="highlight">cleta</span></div>
-        </div>
-
-        <h1>Login</h1>
-
-        @if (session('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            </div>
-        @endif
-
-        @if (session('error'))
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                {{ session('error') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            </div>
-        @endif
-
-        @if ($errors->any())
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                @foreach ($errors->all() as $error)
-                    <div>{{ $error }}</div>
-                @endforeach
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            </div>
-        @endif
-
-        <form action="{{ route('auth.login') }}" method="POST">
-            @csrf
-
-            <div class="mb-3">
-                <label for="email" class="form-label">E-mail</label>
-                <input 
-                    type="email" 
-                    class="form-control" 
-                    id="email" 
-                    name="email" 
-                    value="{{ old('email') }}"
-                    required
-                    autofocus
-                >
-            </div>
-
-            <div class="mb-3">
-                <label for="senha" class="form-label">Senha</label>
-                <input 
-                    type="password" 
-                    class="form-control" 
-                    id="senha" 
-                    name="senha" 
-                    required
-                >
-            </div>
-
-            <button type="submit" class="btn-login">Entrar</button>
-        </form>
-
-        <div class="divider">
-            ou
-        </div>
-
-        <a href="{{ route('auth.register') }}" class="btn-login" style="display: inline-block; text-align: center; text-decoration: none; background: #6366f1; margin-bottom: 1rem;">
-            Criar Novo Cadastro
-        </a>
-
-        <div class="divider">
-            Demonstração com dados do seeder
-        </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
-    </script>
-</body>
-
-</html>

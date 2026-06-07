@@ -10,6 +10,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@100..900&family=Kaushan+Script&family=Limelight&family=Stack+Sans+Headline:wght@200..700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@100..900&family=Kaushan+Script&family=Limelight&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Stack+Sans+Headline:wght@200..700&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -32,8 +34,8 @@
             <a href="{{ route('ordem_servico_item.index') }}" class="nav-link">Itens</a>
             <a href="{{ route('pagamento.index') }}" class="nav-link">Pagamentos</a>
             <span style="color: #d1d5db;">|</span>
-            <a href="{{ route('inicio') }}" class="nav-link" style="font-size: 12px; color: #6b7280; padding: 6px 12px;">{{ Session::get('usuario_nome') }}</span>
                 @if (!empty(Session::get('usuario_nome')))
+                <a href="{{ route('inicio') }}" class="btn nav-link" style="font-size: 16px; color: #465061; padding: 6px 12px;">{{ Session::get('usuario_nome') }}</span>
             <a href="{{ route('auth.logout') }}" class="nav-link" style="color: #ef4444;">Sair</a>
             @endif
             @if (empty(Session::get('usuario_nome')))
@@ -230,8 +232,19 @@
         justify-content: space-between;
         box-shadow: 0px 5px 12px rgba(0, 0, 0, 0);
     }
+    .fontef{
+        font-family: "Stack Sans Headline", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 300;
+        font-style: normal;
+    }
+
 
     body {
+        font-family: "Stack Sans Headline", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 400;
+        font-style: normal;
         background-color: #e6e6e6;
         color: #111;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -373,16 +386,19 @@
         gap: 14px;
         border-radius: 12px;
         padding: 1rem 1.25rem;
+        margin-right: 200px;
+        margin-left: 200px;
     }
     .motivo-card h5 {
-        font-size: 14px;
+        font-size: 20px;
         font-weight: 500;
         margin: 0 0 4px;
     }
     .motivo-card p {
-        font-size: 13px;
+        font-size: 16px;
         margin: 0;
         line-height: 1.5;
+
     }
     .motivo-icon {
         width: 36px;
@@ -414,5 +430,46 @@
         font-weight: 600;
         margin-bottom: 0.5rem;
     }
+
+    ./* fundo preto em todos os estados do accordion */
+.accordion-item {
+    background-color: #000000;
+    border-color: rgb(255, 70, 17) !important;
+}
+
+.accordion-button {
+    background-color: #000000 !important;
+    color: rgb(255, 70, 17) !important;
+    box-shadow: none !important;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: #000000 !important;
+    color: rgb(255, 70, 17) !important;
+}
+
+/* seta do accordion */
+.accordion-button::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23ff6600' stroke-width='2' d='M2 5l6 6 6-6'/%3E%3C/svg%3E");
+}
+
+.accordion-body {
+    background-color: #000000;
+    color: rgb(255, 70, 17);
+}
+
+/* borda laranja entre os itens */
+.accordion-item {
+    border-left: none;
+    border-right: none;
+    border-top: 1px solid rgb(255, 70, 17);
+}
+
+.accordion-item:last-child {
+    border-bottom: 1px solid rgb(255, 70, 17);
+}
+
+
+
 
 </style>
