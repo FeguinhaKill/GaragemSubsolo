@@ -15,7 +15,7 @@
 <body>
 
     <header class="siteheader">
-        <a href="{{ route('inicio') }}" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
+        <a href="{{ route('home') }}" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
             <div
                 style="width: 36px; height: 36px; background: #1D9E75; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 18px;">
                 🚲
@@ -25,7 +25,6 @@
         </a>
 
         <nav style="display: flex; align-items: center; gap: 4px;">
-            <a href="{{ route('inicio') }}" class="nav-link"><strong>Início</strong></a>
             <a href="{{ route('produtos.index') }}" class="nav-link">Produtos</a>
             <a href="{{ route('estoque.index') }}" class="nav-link">Estoque</a>
             <a href="{{ route('usuarios.index') }}" class="nav-link">Usuários</a>
@@ -33,8 +32,13 @@
             <a href="{{ route('ordem_servico_item.index') }}" class="nav-link">Itens</a>
             <a href="{{ route('pagamento.index') }}" class="nav-link">Pagamentos</a>
             <span style="color: #d1d5db;">|</span>
-            <span style="font-size: 12px; color: #6b7280; padding: 6px 12px;">{{ Session::get('usuario_nome') }}</span>
+            <a href="{{ route('inicio') }}" class="nav-link" style="font-size: 12px; color: #6b7280; padding: 6px 12px;">{{ Session::get('usuario_nome') }}</span>
+                @if (!empty(Session::get('usuario_nome')))
             <a href="{{ route('auth.logout') }}" class="nav-link" style="color: #ef4444;">Sair</a>
+            @endif
+            @if (empty(Session::get('usuario_nome')))
+            <a href="{{ route('login') }}" class="nav-link" style="color: #1D9E75;">Entrar</a>
+            @endif
         </nav>
     </header>
 
@@ -78,7 +82,7 @@
                         <div style="font-size: 72px; margin-bottom: 20px;">🚲</div>
                         <h1 style="font-size: 48px; font-weight: 700; margin-bottom: 15px; color: #111;">Bem-vindo ao Sistema Bicicleta</h1>
                         <p style="font-size: 18px; color: #6b7280; margin-bottom: 30px;">Gerenciador de ordens de serviço e estoque</p>
-                        
+
                         <div style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: inline-block;">
                             <p style="font-size: 16px; color: #374151; margin-bottom: 0;">
                                 Usuário logado: <strong style="color: #1D9E75;">{{ Session::get('usuario_nome') }}</strong>
@@ -151,27 +155,6 @@
             </div>
         </div>
 
-        <style>
-            .card {
-                border: none;
-                overflow: hidden;
-            }
-
-            .card:hover {
-                transform: translateY(-4px);
-                box-shadow: 0 8px 16px rgba(29, 158, 117, 0.15) !important;
-            }
-
-            .card-body {
-                background: white;
-            }
-
-            .card-title {
-                color: #111;
-                font-weight: 600;
-                margin-bottom: 0.5rem;
-            }
-        </style>
     @endif
 </main>
 
@@ -218,6 +201,26 @@
 
 
 <style>
+
+    .card {
+                border: none;
+                overflow: hidden;
+            }
+
+            .card:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 8px 16px rgba(29, 158, 117, 0.15) !important;
+            }
+
+            .card-body {
+                background: white;
+            }
+
+            .card-title {
+                color: #111;
+                font-weight: 600;
+                margin-bottom: 0.5rem;
+            }
     .siteheader {
         background: white;
         border-bottom: 1px solid #e5e7eb;
@@ -362,6 +365,54 @@
         align-items: center;
         height: 200px;
         border-radius: 12px;
+    }
+
+    .motivo-card {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        border-radius: 12px;
+        padding: 1rem 1.25rem;
+    }
+    .motivo-card h5 {
+        font-size: 14px;
+        font-weight: 500;
+        margin: 0 0 4px;
+    }
+    .motivo-card p {
+        font-size: 13px;
+        margin: 0;
+        line-height: 1.5;
+    }
+    .motivo-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        flex-shrink: 0;
+    }
+
+    .card {
+        border: none;
+        overflow: hidden;
+    }
+
+    .card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 16px rgba(29, 158, 117, 0.15) !important;
+    }
+
+    .card-body {
+        background: white;
+    }
+
+    .card-title {
+        color: #111;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
     }
 
 </style>

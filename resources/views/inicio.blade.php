@@ -9,7 +9,7 @@
                 <div style="font-size: 72px; margin-bottom: 20px;">🚲</div>
                 <h1 style="font-size: 48px; font-weight: 700; margin-bottom: 15px; color: #111;">Bem-vindo ao Sistema Bicicleta</h1>
                 <p style="font-size: 18px; color: #6b7280; margin-bottom: 30px;">Gerenciador de ordens de serviço e estoque</p>
-                
+
                 <div style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: inline-block;">
                     <p style="font-size: 16px; color: #374151; margin-bottom: 0;">
                         Usuário logado: <strong style="color: #1D9E75;">{{ Session::get('usuario_nome') }}</strong>
@@ -82,26 +82,6 @@
     </div>
 </div>
 
-<style>
-    .card {
-        border: none;
-        overflow: hidden;
-    }
-
-    .card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 8px 16px rgba(29, 158, 117, 0.15) !important;
-    }
-
-    .card-body {
-        background: white;
-    }
-
-    .card-title {
-        color: #111;
-        font-weight: 600;
-        margin-bottom: 0.5rem;
-    }
-</style>
+-
 
 @endsection

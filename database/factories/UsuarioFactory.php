@@ -25,7 +25,6 @@ class UsuarioFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'endereco' => $this->faker->address(),
             'categoria_usuario' => $this->faker->randomElement(['cliente', 'funcionario', 'empresa']),
-            'plano_fid' => $this->faker->randomElement(['plano_basico', 'plano_premium', 'plano_vip']),
             'imagem' => null,
             'senha' => (string) $this->faker->numberBetween(1000, 999999),
         ];

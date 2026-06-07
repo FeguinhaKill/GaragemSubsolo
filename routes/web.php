@@ -26,7 +26,7 @@ Route::get('/', function () {
                     ->take(5)
                     ->get();
     return view('index', compact('produtos'));
-});
+})->name('home');
 
 // TODAS AS ROTAS PROTEGIDAS COM MIDDLEWARE DE VERIFICAÇÃO DE LOGIN
 Route::middleware(['verify_login', 'restrict_client'])->group(function () {

@@ -30,19 +30,45 @@
             </div>
         @endforeach
     </div>
-</section>
-    <hr class="container custom-line2">
 
-<section class="display: grid;">
-    <div class="row ">
-        <div class="col-6 container row12">
-            <h3>Porque comprar com a<br>Garage Subsolo?</h3>
+ <hr class="container custom-line2">
+
+<section style="margin: 2rem 60px;">
+    <div class="row align-items-center g-4">
+
+        <div class="col-5 d-flex align-items-center">
+            <h3 style="font-size: 28px; font-weight: 500; line-height: 1.3; margin: 0;">
+                Por que alugar com a<br>
+                <span style="color: #1D9E75;">Garage Subsolo?</span>
+            </h3>
         </div>
-        <div class="col-3 container row22">
-            card com cor pastel e motivo 1
-        </div>
-        <div class="col-3 container row22">
- card com outra cor pastel e motivo 2
+
+        <div class="col-7 d-flex flex-column gap-3">
+
+            <div class="motivo-card" style="background: #E1F5EE; border: 1px solid #9FE1CB;">
+                <div class="motivo-icon" style="background: #9FE1CB;">🚲</div>
+                <div>
+                    <h5 style="color: #085041;">Bikes sempre revisadas</h5>
+                    <p style="color: #0F6E56;">Todas as bicicletas passam por manutenção antes de cada aluguel. Você pedala com segurança e sem surpresas.</p>
+                </div>
+            </div>
+
+            <div class="motivo-card" style="background: #EEEDFE; border: 1px solid #AFA9EC;">
+                <div class="motivo-icon" style="background: #AFA9EC;">⚡</div>
+                <div>
+                    <h5 style="color: #26215C;">Retirada rápida</h5>
+                    <p style="color: #3C3489;">Processo simples e sem burocracia. Em poucos minutos você já está pedalando pela cidade.</p>
+                </div>
+            </div>
+
+            <div class="motivo-card" style="background: #FAEEDA; border: 1px solid #FAC775;">
+                <div class="motivo-icon" style="background: #FAC775;">📍</div>
+                <div>
+                    <h5 style="color: #412402;">Localização central</h5>
+                    <p style="color: #633806;">Estamos no coração de Chapecó, fácil de chegar e com estacionamento disponível.</p>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>
