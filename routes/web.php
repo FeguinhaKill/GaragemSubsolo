@@ -21,7 +21,11 @@ Route::post('/registro', [AuthController::class, 'register'])->name('auth.regist
 
 // ROTA INICIAL
 Route::get('/', function () {
-    return redirect()->route('login');
+    $produtos = \App\Models\Produto::where('tipo', 'Bicicleta')
+                    ->inRandomOrder()
+                    ->take(5)
+                    ->get();
+    return view('index', compact('produtos'));
 });
 
 // TODAS AS ROTAS PROTEGIDAS COM MIDDLEWARE DE VERIFICAÇÃO DE LOGIN
