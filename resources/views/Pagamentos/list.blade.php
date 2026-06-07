@@ -2,6 +2,11 @@
 @section('titulo', 'Listagem de Pagamentos')
 @section('conteudo')
 
+@php
+    use Illuminate\Support\Facades\Session;
+    $usuarioLogado = \App\Models\Usuario::find(Session::get('usuario_id'));
+@endphp
+
 <div class="container mt-5">
     <div class="card shadow p-4">
 
@@ -23,48 +28,60 @@
             </div>
         @endif
 
+        @if($usuarioLogado && $usuarioLogado->categoria_usuario === 'cliente')
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                Exibindo pagamentos de <strong>{{ $usuarioLogado->nome }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        @else
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+
+                    <form action="{{ route('pagamento.search') }}" method="POST">
+                        @csrf
+
+                        <div class="row align-items-end">
+                            <div class="col-md-3">
+                                <label class="form-label">Tipo de Pesquisa</label>
+
+                                <select name="tipo" class="form-select">
+                                    <option value="ordem_servico_id">Ordem de Serviço</option>
+                                    <option value="usuario_id">Usuário</option>
+                                    <option value="status">Status</option>
+                                    <option value="valor_total">Valor Total</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-5">
+                                <label class="form-label">Pesquisar</label>
+
+                                <input
+                                    type="text"
+                                    name="valor"
+                                    class="form-control"
+                                    placeholder="Digite..."
+                                >
+                            </div>
+
+                            <div class="col-md-2 d-grid">
+                                <button type="submit" class="btn btn-primary">
+                                    Buscar
+                                </button>
+                            </div>
+
+                            <div class="col-md-2 d-grid">
+                                <a href="{{ route('pagamento.index') }}" class="btn btn-secondary">
+                                    Limpar
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        @endif
+
         <div class="card shadow-sm mb-4">
             <div class="card-body">
-
-                <form action="{{ route('pagamento.search') }}" method="POST">
-                    @csrf
-
-                    <div class="row align-items-end">
-                        <div class="col-md-3">
-                            <label class="form-label">Tipo de Pesquisa</label>
-
-                            <select name="tipo" class="form-select">
-                                <option value="ordem_servico_id">Ordem de Serviço</option>
-                                <option value="usuario_id">Usuário</option>
-                                <option value="status">Status</option>
-                                <option value="valor_total">Valor Total</option>
-                            </select>
-                        </div>
-
-                        <div class="col-md-5">
-                            <label class="form-label">Pesquisar</label>
-
-                            <input
-                                type="text"
-                                name="valor"
-                                class="form-control"
-                                placeholder="Digite..."
-                            >
-                        </div>
-
-                        <div class="col-md-2 d-grid">
-                            <button type="submit" class="btn btn-primary">
-                                Buscar
-                            </button>
-                        </div>
-
-                        <div class="col-md-2 d-grid">
-                            <a href="{{ route('pagamento.index') }}" class="btn btn-secondary">
-                                Limpar
-                            </a>
-                        </div>
-                    </div>
-                </form>
 
                 <div class="table-responsive mt-4">
                     <table class="table table-hover align-middle">

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pagamento;
+use App\Models\Usuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class PagamentoController extends Controller
 {
@@ -12,9 +14,18 @@ class PagamentoController extends Controller
      */
     public function index()
     {
-        $dados = Pagamento::with(['usuario', 'ordemServico', 'formaPagamento'])->get();
+        $usuarioLogado = Usuario::find(Session::get('usuario_id'));
+        
+        // Se é cliente, mostra apenas seus pagamentos
+        if ($usuarioLogado && $usuarioLogado->categoria_usuario === 'cliente') {
+            $dados = Pagamento::with(['usuario', 'ordemServico', 'formaPagamento'])
+                ->where('usuario_id', $usuarioLogado->id)
+                ->get();
+        } else {
+            $dados = Pagamento::with(['usuario', 'ordemServico', 'formaPagamento'])->get();
+        }
 
-        return view('Pagamentos.list', compact('dados'));
+        return view('Pagamentos.list', compact('dados', 'usuarioLogado'));
     }
 
     public function search(Request $request)
@@ -112,6 +123,12 @@ class PagamentoController extends Controller
     public function show($id)
     {
         $pagamento = Pagamento::with(['usuario', 'ordemServico', 'formaPagamento'])->findOrFail($id);
+        
+        // Verifica se usuário é cliente e se é seu próprio pagamento
+        $usuarioLogado = Usuario::find(Session::get('usuario_id'));
+        if ($usuarioLogado && $usuarioLogado->categoria_usuario === 'cliente' && $pagamento->usuario_id !== $usuarioLogado->id) {
+            return redirect()->back()->with('error', 'Você não tem permissão para visualizar este pagamento.');
+        }
 
         return view('Pagamentos.show', compact('pagamento'));
     }
@@ -129,6 +146,12 @@ class PagamentoController extends Controller
     public function pagar($id)
     {
         $pagamento = Pagamento::findOrFail($id);
+        
+        // Verifica se usuário é cliente e se é seu próprio pagamento
+        $usuarioLogado = Usuario::find(Session::get('usuario_id'));
+        if ($usuarioLogado && $usuarioLogado->categoria_usuario === 'cliente' && $pagamento->usuario_id !== $usuarioLogado->id) {
+            return redirect()->back()->with('error', 'Você não tem permissão para pagar este pagamento.');
+        }
 
         if ($pagamento->status === 'pago') {
             return redirect()->back()->with('error', 'Este pagamento já foi registrado como pago!');

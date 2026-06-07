@@ -17,6 +17,7 @@ class UsuarioFactory extends Factory
      */
     public function definition(): array
     {
+
         return [
             'nome' => $this->faker->name,
             'cpf_cnpj' => $this->faker->numerify('###.###.###-##'),
@@ -26,6 +27,8 @@ class UsuarioFactory extends Factory
             'categoria_usuario' => $this->faker->randomElement(['cliente', 'funcionario', 'empresa']),
             'plano_fid' => $this->faker->randomElement(['plano_basico', 'plano_premium', 'plano_vip']),
             'imagem' => null,
+            'senha' => (string) $this->faker->numberBetween(1000, 999999),
         ];
+
     }
 }

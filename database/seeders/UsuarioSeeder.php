@@ -24,5 +24,27 @@ class UsuarioSeeder extends Seeder
         Usuario::factory()->count(3)->create([
             'categoria_usuario' => 'funcionario'
         ]);
+        Usuario::create([
+            'nome' => 'testeadmin',
+            'cpf_cnpj' => '000.000.000-00',
+            'email' => 'testeadm@gmail.com',
+            'telefone' => '(00) 00000-0000',
+            'endereco' => 'Rua Teste, 123',
+            'categoria_usuario' => 'admin',
+            'imagem' => 'imagem_usuario/20260607174504.png',
+            'senha' => '123456',
+
+        ]);
+        Usuario::create([
+            'nome' => 'testecliente',
+            'cpf_cnpj' => '000.000.000-00',
+            'email' => 'testecliente@gmail.com',
+            'telefone' => '(00) 00000-0000',
+            'endereco' => 'Rua Teste, 123',
+            'categoria_usuario' => 'cliente',
+            'imagem' => 'imagem_usuario/20260607361709.jpg',
+            'senha' => '123456',
+
+        ]);
     }
 }

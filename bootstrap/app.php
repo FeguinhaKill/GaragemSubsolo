@@ -11,7 +11,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        $middleware->alias([
+            'verify_login' => \App\Http\Middleware\VerifyLogin::class,
+            'restrict_client' => \App\Http\Middleware\RestrictClientAccess::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

@@ -7,7 +7,7 @@
 
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h3>Detalhes do Pagamento #{{ $pagamento->id }}</h3>
-            <a href="{{ route('pagamento.index') }}" class="btn btn-secondary">
+            <a href="#" onclick="history.back(); return false;" class="btn btn-secondary">
                 Voltar
             </a>
         </div>

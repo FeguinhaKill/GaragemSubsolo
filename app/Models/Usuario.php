@@ -18,10 +18,8 @@ class Usuario extends Model
         'telefone',
         'endereco', 
         'categoria_usuario',
-        'plano_fid',
         'imagem',
-        'categoria_usuario',
-
+        'senha',
     ];
 
     //Relacionamento 1:1 entre Usuário e Funcionario
