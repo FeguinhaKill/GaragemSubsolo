@@ -32,7 +32,7 @@ class UsuarioSeeder extends Seeder
             'endereco' => 'Rua Teste, 123',
             'categoria_usuario' => 'admin',
             'imagem' => null,
-            'senha' => '123qwe',
+            'senha' => '123456',
 
         ]);
         Usuario::create([
@@ -43,7 +43,7 @@ class UsuarioSeeder extends Seeder
             'endereco' => 'Rua Teste, 123',
             'categoria_usuario' => 'cliente',
             'imagem' => null,
-            'senha' => '123qwe',
+            'senha' => '123456',
 
         ]);
     }
