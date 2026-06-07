@@ -29,7 +29,7 @@
 
                 <div class="col-md-6">
                     <label class="form-label">Pesquisar</label>
-                    <input 
+                    <input
                         type="text"
                         name="valor"
                         class="form-control"
@@ -65,14 +65,14 @@
             <tbody>
                 @foreach($usuarios as $usuario)
                     @php
-                        $nome_imagem = !empty($usuario->imagem)
-                            ? asset('storage/' . $usuario->imagem)
-                            : asset('images/sem_imagem.jpg');
-                    @endphp
+                                $nome_imagem = !empty($usuario->imagem)
+                                    ? asset('storage/' . $usuario->imagem)
+                                    : asset('storage/images/sem_imagem.jpg');
+                            @endphp
                     <tr>
                         <td>{{ $usuario->id }}</td>
                         <td>
-                            <img 
+                            <img
                                 src="{{ asset($nome_imagem) }}"
                                 class="rounded-circle"
                                 width="70"
@@ -87,7 +87,7 @@
                         <td>{{ $usuario->endereco }}</td>
                         <td>{{ $usuario->categoria_usuario }}</td>
                         <td>{{ $usuario->plano_fid }}</td>
-                        
+
                         <td>
                             <div class="d-flex gap-2">
                                 <a href="{{ route('usuarios.edit', $usuario->id) }}"class="btn btn-warning btn-sm">
@@ -103,7 +103,7 @@
                             </div>
                         </td>
                     </tr>
-                @endforeach 
+                @endforeach
             </tbody>
         </table>
     </div>

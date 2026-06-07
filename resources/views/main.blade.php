@@ -102,13 +102,10 @@
                 </div>
             </div>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
-        </script>
     </footer>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    </script>
 </body>
-
 </html>
 
 
@@ -127,7 +124,7 @@
         background-color: #e6e6e6;
         color: #111;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
+        overflow-x: hidden;
     }
 
     .nav-link {
@@ -149,11 +146,6 @@
         object-fit: cover;
     }
 
-    .hero {
-        height: calc(100vh - 60px);
-
-    }
-
     .hero-img {
         width: 1900px;
         height: 540px;
@@ -168,6 +160,8 @@
          font-style: normal;
     }
 
+
+
     .custom-line {
         justify-content: center;
         border: none;
@@ -177,6 +171,89 @@
         margin-left: 500px;
         margin-right: 500px;
     }
+    .custom-line2 {
+        justify-content: center;
+        border-radius: 4px;
+        height: 6px;
+        background-color: #333333;
+        width: 1800px;
 
+    }
+
+    .bike-card {
+        background: rgb(218, 218, 218);
+        border: 1px solid #858585;
+        border-radius: 12px;
+        overflow: hidden;
+        transition: transform 0.15s, border-color 0.15s;
+    }
+    .bike-card:hover {
+        transform: translateY(-3px);
+        border-color: #1D9E75;
+    }
+    .bike-img-wrap {
+        background: #ffffff;
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .bike-img-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        padding: 12px;
+    }
+    .bike-body {
+        padding: 12px;
+        border-top: 1px solid #e5e7eb;
+    }
+    .bike-badge {
+        display: inline-block;
+        font-size: 11px;
+        background: #E1F5EE;
+        color: #0F6E56;
+        border-radius: 4px;
+        padding: 2px 8px;
+        margin-bottom: 6px;
+        font-weight: 500;
+    }
+    .bike-name {
+        font-size: 13px;
+        font-weight: 500;
+        margin: 0 0 2px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .bike-marca {
+        font-size: 12px;
+        color: #6b7280;
+        margin: 0 0 8px;
+    }
+    .bike-preco {
+        font-size: 15px;
+        font-weight: 500;
+        color: #0F6E56;
+        margin: 0;
+    }
+    .bike-preco-label {
+        font-size: 11px;
+        color: #6b7280;
+        font-weight: 400;
+    }
+
+    .row12 {
+        justify-content: center;
+        align-items: center;
+        height: 200px;
+        border-radius: 12px;
+    }
+    .row22 {
+        justify-content: center;
+        align-items: center;
+        height: 200px;
+        border-radius: 12px;
+    }
 
 </style>

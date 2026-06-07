@@ -11,7 +11,11 @@ use App\Http\Controllers\ProdutoController;
 
 
 Route::get('/', function () {
-    return view('index');
+    $produtos = \App\Models\Produto::where('tipo', 'Bicicleta')
+                    ->inRandomOrder()
+                    ->take(5)
+                    ->get();
+    return view('index', compact('produtos'));
 });
 
 //USUÁRIOS
@@ -70,3 +74,7 @@ Route::delete('/estoque/{id}', [EstoqueController::class, 'destroy'])->name('est
 Route::get('/estoque/edit/{id}', [EstoqueController::class, 'edit'])->name('estoque.edit');
 Route::put('/estoque/update/{id}', [EstoqueController::class, 'update'])->name('estoque.update');
 Route::post('/estoque/search', [EstoqueController::class, 'search'])->name('estoque.search');
+
+Route::get('/sexo', function () {
+    return view('sexo');
+})->name('sexo');

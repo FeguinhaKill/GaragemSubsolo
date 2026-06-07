@@ -38,7 +38,7 @@ $sentenca = random_int(1, 3);
                 'Peça',
                 'Acessório',
                 'Equipamento de Proteção',
-                'Bicicleta',
+                /*'Bicicleta',*/
                 'Ferramenta',
             ]),
             'imagem' => null,

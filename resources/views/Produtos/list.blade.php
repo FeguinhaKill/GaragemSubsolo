@@ -64,7 +64,7 @@
                             @php
                                 $nome_imagem = !empty($produto->imagem)
                                     ? asset('storage/' . $produto->imagem)
-                                    : asset('images/sem_imagem.jpg');
+                                    : asset('storage/images/sem_imagem.jpg');
                             @endphp
                             <tr>
                                 <td>{{ $produto->id }}</td>

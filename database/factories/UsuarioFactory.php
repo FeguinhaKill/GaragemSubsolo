@@ -25,7 +25,7 @@ class UsuarioFactory extends Factory
             'endereco' => $this->faker->address(),
             'categoria_usuario' => $this->faker->randomElement(['cliente', 'funcionario', 'empresa']),
             'plano_fid' => $this->faker->randomElement(['plano_basico', 'plano_premium', 'plano_vip']),
-            'imagem' => $this->faker->sentence(),
+            'imagem' => null,
         ];
     }
 }
