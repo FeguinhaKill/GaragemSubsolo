@@ -18,25 +18,25 @@
 
     <header class="siteheader">
         <a href="{{ route('home') }}" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
-            <div
-                style="width: 36px; height: 36px; background: #1D9E75; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 18px;">
-                🚲
-            </div>
-            <span style="font-size: 17px; font-weight: 500; color: #111;">Bici<span
-                    style="color: #1D9E75;">cleta</span></span>
+            <img src="/storage/images/mainImagems/logo.png" style="width: 30%">
         </a>
 
         <nav style="display: flex; align-items: center; gap: 4px;">
             <a href="{{ route('produtos.index') }}" class="nav-link">Produtos</a>
-            <a href="{{ route('estoque.index') }}" class="nav-link">Estoque</a>
-            <a href="{{ route('usuarios.index') }}" class="nav-link">Usuários</a>
-            <a href="{{ route('ordem_servico.index') }}" class="nav-link">Ordens de Serviço</a>
-            <a href="{{ route('ordem_servico_item.index') }}" class="nav-link">Itens</a>
+
+            @if (!empty(Session::get('usuario_nome') && Session::get('usuario_admin') == 1))
+                <a href="{{ route('estoque.index') }}" class="nav-link">Estoque</a>
+                <a href="{{ route('usuarios.index') }}" class="nav-link">Usuários</a>
+                <a href="{{ route('ordem_servico.index') }}" class="nav-link">Ordens de Serviço</a>
+                <a href="{{ route('ordem_servico_item.index') }}" class="nav-link">Itens</a>
+            @endif
+
             <a href="{{ route('pagamento.index') }}" class="nav-link">Pagamentos</a>
-            <span style="color: #d1d5db;">|</span>
-                @if (!empty(Session::get('usuario_nome')))
+
+            @if (!empty(Session::get('usuario_nome')))
+                <span style="color: #d1d5db;">|</span>
                 <a href="{{ route('inicio') }}" class="btn nav-link" style="font-size: 16px; color: #465061; padding: 6px 12px;">{{ Session::get('usuario_nome') }}</span>
-            <a href="{{ route('auth.logout') }}" class="nav-link" style="color: #ef4444;">Sair</a>
+                <a href="{{ route('auth.logout') }}" class="nav-link" style="color: #ef4444;">Sair</a>
             @endif
             @if (empty(Session::get('usuario_nome')))
             <a href="{{ route('login') }}" class="nav-link" style="color: #1D9E75;">Entrar</a>

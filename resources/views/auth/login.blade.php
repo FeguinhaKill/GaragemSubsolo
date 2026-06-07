@@ -16,7 +16,7 @@
 <body>
     <div class="login-container">
         <div class="logo-section">
-            <div class="logo">🚲</div>
+            <div class="logo"><img src="/storage/images/mainImagems/logo.png"></div>
             <a class="logo-text" href="{{ route('home') }}">Bici<span class="highlight">cleta</span></a>
         </div>
 

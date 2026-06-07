@@ -78,7 +78,7 @@
             </div>
         </section>
 
-        <section class="" style="background-color: #000000; padding: 50rem 60px; width: 100vw; margin-left: calc(-50vw + 50%); color:rgb(255, 70, 17)">
+        <section class="" style="background-color: #000000; padding: 30rem 60px; width: 100vw; margin-left: calc(-50vw + 50%); color:rgb(255, 70, 17)">
             <div class="row align-items-center g-4">
                 <div class="col-5 d-flex align-items-center">
                     <h3 class="fontef"
@@ -138,10 +138,40 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc4s9bIOgUxi8T/jl52Oi6of51oIs5rUU9sZc6UstBo" crossorigin="anonymous"></script>
 
-    @endsection
 
-    <style>
-        .p {
-            color:
-        }
-    </style>
+<script>
+function criarBarata() {
+    const barata = document.createElement('div');
+    barata.innerHTML = '🪳';
+    barata.style.cssText = `
+        position: fixed;
+        font-size: ${20 + Math.random() * 20}px;
+        left: ${Math.random() * 100}vw;
+        bottom: -50px;
+        z-index: 9999;
+        pointer-events: none;
+        animation: subirBarata ${3 + Math.random() * 3}s linear forwards;
+    `;
+    document.body.appendChild(barata);
+    setTimeout(() => barata.remove(), 6000);
+}
+
+function invasaoDeBaratas() {
+    const quantidade = 5 + Math.floor(Math.random() * 6);
+    for (let i = 0; i < quantidade; i++) {
+        setTimeout(criarBarata, i * 300);
+    }
+}
+
+setInterval(invasaoDeBaratas, 50000);
+</script>
+
+<style>
+@keyframes subirBarata {
+    0%   { bottom: -50px; opacity: 1; }
+    90%  { opacity: 1; }
+    100% { bottom: 110vh; opacity: 0; }
+}
+</style>
+
+@endsection
