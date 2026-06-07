@@ -44,22 +44,26 @@ class UsuarioController extends Controller
     }
     
     public function store(Request $request)
-    {
-        $this->validateRequest($request);
-        $data = $request->except('imagem');
+{
+    $this->validateRequest($request);
 
-        if ($request->hasFile('imagem')) {
-            $imagem = $request->file('imagem');
-            $nome_imagem = date('YmdiHs') . "." . $imagem->getClientOriginalExtension();
-            $diretorio = "imagem_usuario/"; 
-            $imagem->storeAs($diretorio, $nome_imagem, 'public');
-            $data['imagem'] = $diretorio . $nome_imagem;
-        }
+    $data = $request->except('imagem');
 
-        Usuario::create($data);
+    if ($request->hasFile('imagem')) {
+        $imagem = $request->file('imagem');
+        $nomeImagem = date('YmdHis') . '.' . $imagem->getClientOriginalExtension();
 
-        return redirect()->route('usuarios.index')->with('success', 'Usuário criado com sucesso!');
+        $imagem->storeAs('imagem_usuario', $nomeImagem, 'public');
+
+        $data['imagem'] = 'imagem_usuario/' . $nomeImagem;
     }
+
+    Usuario::create($data);
+
+    return redirect()
+        ->route('usuarios.index')
+        ->with('success', 'Usuário criado com sucesso!');
+}
 
     public function show(Usuario $usuario)
     {
@@ -72,23 +76,26 @@ class UsuarioController extends Controller
     }
 
     public function update(Request $request, Usuario $usuario)
-    {
-        $this->validateRequest($request);
-        $data = $request->except('imagem');
+{
+    $this->validateRequest($request);
 
-        if ($request->hasFile('imagem')) {
-            $imagem = $request->file('imagem');
-            $nome_imagem = date('YmdiHs') . "." . $imagem->getClientOriginalExtension();
-            $diretorio = "images/imagem_clientes/";
-            $imagem->storeAs($diretorio, $nome_imagem, 'public');
+    $data = $request->except('imagem');
 
-            $data['imagem'] = $diretorio . $nome_imagem;
-        }
+    if ($request->hasFile('imagem')) {
+        $imagem = $request->file('imagem');
+        $nomeImagem = date('YmdHis') . '.' . $imagem->getClientOriginalExtension();
 
-        $usuario->update($data);
-        
-        return redirect()->route('usuarios.index')->with('success', 'Usuário atualizado com sucesso!');
+        $imagem->storeAs('imagem_usuario', $nomeImagem, 'public');
+
+        $data['imagem'] = 'imagem_usuario/' . $nomeImagem;
     }
+
+    $usuario->update($data);
+
+    return redirect()
+        ->route('usuarios.index')
+        ->with('success', 'Usuário atualizado com sucesso!');
+}
 
     public function destroy(Usuario $usuario)
     {
