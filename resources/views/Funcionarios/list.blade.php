@@ -56,7 +56,7 @@
                 @foreach($funcionarios as $funcionario)
                     @php
                         $usuario = $funcionario->usuario;
-                        $nome_imagem = $usuario->imagem ? 'storage/' . $usuario->imagem : 'images/default.png';
+                        $nome_imagem = $usuario->imagem ? 'storage/' . $usuario->imagem : 'images/sem_imagem.svg';
                     @endphp
 
                     <tr>

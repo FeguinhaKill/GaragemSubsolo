@@ -160,7 +160,7 @@
                 Salvar
             </button>
 
-            <a href="{{ route('ordem_servico.index') }}" class="btn btn-secondary">
+            <a href="#" onclick="history.back(); return false;" class="btn btn-secondary">
                 Voltar
             </a>
         </div>

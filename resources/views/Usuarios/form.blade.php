@@ -3,6 +3,7 @@
 @section('conteudo')
 
 @php
+    use Illuminate\Support\Facades\Session;
     $action = !empty($usuario->id)
         ? route('usuarios.update', $usuario->id)
         : route('usuarios.store');
@@ -22,11 +23,11 @@
             <div class="mb-3">
                 <label for="imagem" class="form-label">Imagem</label>
                     @php
-                        $nome_imagem = !empty($usuario->imagem)
-                            ? asset('storage/' . $usuario->imagem)
-                            : asset('images/sem_imagem.jpg');
+                        $caminho_imagem = !empty($usuario->imagem ?? null)
+                            ? 'storage/' . $usuario->imagem
+                            : 'images/sem_imagem.jpg';
                     @endphp
-                    <img src="{{ asset('storage/' . $nome_imagem) }}" class="rounded-circle" width="150px" height="150px" alt="imagem">
+                    <img src="{{ asset($caminho_imagem) }}" class="rounded-circle" width="150px" height="150px" alt="imagem">
                     <input type="file" name="imagem" class="form-control" value="{{ old('imagem', $usuario->imagem ?? '')}}">
             </div>
 
@@ -81,6 +82,12 @@
                 >
             </div>
 
+            @php
+                // Buscar o usuário logado na sessão
+                $usuarioLogado = \App\Models\Usuario::find(Session::get('usuario_id'));
+            @endphp
+
+            @if(!empty($usuarioLogado) && $usuarioLogado->categoria_usuario === 'funcionario')
             <div class="mb-3">
                 <label class="form-label">Categoria do Usuário*</label>
                 <select name="categoria_usuario" class="form-select">
@@ -100,20 +107,24 @@
                     </option>
                 </select>
             </div>
-            
+            @else
+                <input type="hidden" name="categoria_usuario" value="cliente">
+            @endif
+
             <div class="mb-4">
-                <label class="form-label">Plano Fidelidade</label>
+                <label class="form-label">Senha (4-20 dígitos)*</label>
                 <input
-                    type="text"
-                    name="plano_fid"
+                    type="password"
+                    name="senha"
                     class="form-control"
-                    value="{{ old('plano_fid', $usuario->plano_fid ?? '') }}"
+                    value="{{ old('senha', $usuario->senha ?? '') }}"
+                    required
                 >
             </div>
 
             <button type="submit" class="btn btn-primary">Salvar</button>
 
-            <a href="{{ route('usuarios.index') }}" class="btn btn-secondary">Voltar</a>
+            <a href="#" onclick="history.back(); return false;" class="btn btn-secondary">Voltar</a>
 
         </form>
 

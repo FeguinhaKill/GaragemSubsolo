@@ -27,7 +27,7 @@ class UsuarioController extends Controller
             'telefone' => 'required',
             'endereco' => 'required',
             'categoria_usuario' => 'required',
-            'plano_fid' => 'required',
+            'senha' => 'required|digits_between:4,20',
             'imagem' => 'nullable|file|image|mimes:jpeg,png,jpg',
         ], [
             'nome.required' => 'O campo nome é obrigatório.',
@@ -36,7 +36,8 @@ class UsuarioController extends Controller
             'telefone.required' => 'O campo telefone é obrigatório.',
             'endereco.required' => 'O campo endereço é obrigatório.',
             'categoria_usuario.required' => 'O campo categoria de usuário é obrigatório.',
-            'plano_fid.required' => 'O campo é obrigatório.',
+            'senha.required' => 'O campo senha é obrigatório.',
+            'senha.digits_between' => 'A senha deve ter entre 4 e 20 dígitos.',
             'imagem.image' => 'O arquivo deve ser uma imagem.',
             'imagem.mimes' => 'A imagem deve ser do tipo jpeg, png ou jpg.',
         ]);

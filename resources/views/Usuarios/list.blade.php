@@ -57,7 +57,7 @@
                     <th>Telefone</th>
                     <th>Endereço</th>
                     <th>Categoria</th>
-                    <th>Plano Fidelidade</th>
+                    <th>Senha</th>
                     <th width="180">Ações</th>
                 </tr>
             </thead>
@@ -65,15 +65,15 @@
             <tbody>
                 @foreach($usuarios as $usuario)
                     @php
-                        $nome_imagem = !empty($usuario->imagem)
-                            ? asset('storage/' . $usuario->imagem)
-                            : asset('images/sem_imagem.jpg');
+                        $caminho_imagem = !empty($usuario->imagem)
+                            ? 'storage/' . $usuario->imagem
+                            : 'images/sem_imagem.jpg';
                     @endphp
                     <tr>
                         <td>{{ $usuario->id }}</td>
                         <td>
                             <img 
-                                src="{{ asset($nome_imagem) }}"
+                                src="{{ asset($caminho_imagem) }}"
                                 class="rounded-circle"
                                 width="70"
                                 height="70"
@@ -86,7 +86,7 @@
                         <td>{{ $usuario->telefone }}</td>
                         <td>{{ $usuario->endereco }}</td>
                         <td>{{ $usuario->categoria_usuario }}</td>
-                        <td>{{ $usuario->plano_fid }}</td>
+                        <td>{{ $usuario->senha }}</td>
                         
                         <td>
                             <div class="d-flex gap-2">

@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('telefone',20);
             $table->string('endereco',100);
             $table->string('categoria_usuario',30);
-            $table->string('plano_fid',30);
             $table->string('imagem',200)->nullable();
             $table->timestamps();
         });
