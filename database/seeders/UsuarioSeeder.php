@@ -31,7 +31,7 @@ class UsuarioSeeder extends Seeder
             'telefone' => '(00) 00000-0000',
             'endereco' => 'Rua Teste, 123',
             'categoria_usuario' => 'admin',
-            'imagem' => null,
+            'imagem' => 'imagem_usuario/20260607174504.png',
             'senha' => '123456',
 
         ]);
@@ -42,7 +42,7 @@ class UsuarioSeeder extends Seeder
             'telefone' => '(00) 00000-0000',
             'endereco' => 'Rua Teste, 123',
             'categoria_usuario' => 'cliente',
-            'imagem' => null,
+            'imagem' => 'imagem_usuario/20260607361709.jpg',
             'senha' => '123456',
 
         ]);
