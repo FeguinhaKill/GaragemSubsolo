@@ -76,6 +76,12 @@ Route::middleware(['verify_login', 'restrict_client'])->group(function () {
     Route::put('/produtos/update/{id}', [ProdutoController::class, 'update'])->name('produtos.update');
     Route::post('/produtos/search', [ProdutoController::class, 'search'])->name('produtos.search');
 
+    //PRODUTOS DOS CLIENTES
+    Route::get('/produtos/clientes', [ProdutoController::class, 'indexclientes'])->name('produtos.indexclientes');
+    Route::post('/produtos/clientes/', [ProdutoController::class, 'searchclientes'])->name('produtos.searchclientes');
+    Route::get('/produtos/clientes/{id}', [ProdutoController::class, 'showcliente'])->name('produtos.showcliente');
+
+
     // ORDENS DE SERVIÇO
     Route::get('/ordem_servico', [OrdemServicoController::class, 'index'])->name('ordem_servico.index');
     Route::get('/ordem_servico/create', [OrdemServicoController::class, 'create'])->name('ordem_servico.create');

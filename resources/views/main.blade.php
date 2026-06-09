@@ -6,12 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('titulo')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@100..900&family=Kaushan+Script&family=Limelight&family=Stack+Sans+Headline:wght@200..700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Commissioner:wght@100..900&family=Kaushan+Script&family=Limelight&family=Stack+Sans+Headline:wght@200..700&display=swap"
+        rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@100..900&family=Kaushan+Script&family=Limelight&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Stack+Sans+Headline:wght@200..700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Commissioner:wght@100..900&family=Kaushan+Script&family=Limelight&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Stack+Sans+Headline:wght@200..700&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
@@ -24,138 +28,144 @@
         </a>
 
         <nav style="display: flex; align-items: center; gap: 4px;">
-            <a href="{{ route('produtos.index') }}" class="nav-link">Produtos</a>
-            <a href="{{ route('estoque.index') }}" class="nav-link">Estoque</a>
-            <a href="{{ route('usuarios.index') }}" class="nav-link">Usuários</a>
+            <a href="{{ route('produtos.indexclientes') }}" class="nav-link">Produtos</a>
             <a href="{{ route('ordem_servico.index') }}" class="nav-link">Ordens de Serviço</a>
-            <a href="{{ route('ordem_servico_item.index') }}" class="nav-link">Itens</a>
-            <a href="{{ route('pagamento.index') }}" class="nav-link">Pagamentos</a>
             <span style="color: #d1d5db;">|</span>
-                @if (!empty(Session::get('usuario_nome')))
-                <a href="{{ route('inicio') }}" class="btn nav-link" style="font-size: 16px; color: #465061; padding: 6px 12px;">{{ Session::get('usuario_nome') }}</span>
-            <a href="{{ route('auth.logout') }}" class="nav-link" style="color: #ef4444;">Sair</a>
+            @if (!empty(Session::get('usuario_nome')))
+                <a href="{{ route('inicio') }}" class="btn nav-link"
+                    style="font-size: 16px; color: #465061; padding: 6px 12px;">{{ Session::get('usuario_nome') }}</span>
+                    <a href="{{ route('auth.logout') }}" class="nav-link" style="color: #ef4444;">Sair</a>
             @endif
             @if (empty(Session::get('usuario_nome')))
-            <a href="{{ route('login') }}" class="nav-link" style="color: #1D9E75;">Entrar</a>
+                <a href="{{ route('login') }}" class="nav-link" style="color: #1D9E75;">Entrar</a>
             @endif
         </nav>
     </header>
 
     <main>
-    <div class="container ">
-        <div class="row">
-            {{-- alertas de session --}}
-            @if (session('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    {{ session('success') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                </div>
-            @endif
-            @if (session('error'))
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    {{ session('error') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                </div>
-            @endif
-            @if ($errors->any())
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <b>Por favor, verifique os erros abaixo</b>
-                    <ul class="mb-0 mt-1">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+        <div class="container ">
+            <div class="row">
+                {{-- alertas de session --}}
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                @endif
+                @if (session('error'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ session('error') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                @endif
+                @if ($errors->any())
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <b>Por favor, verifique os erros abaixo</b>
+                        <ul class="mb-0 mt-1">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+            </div>
         </div>
-    </div>
 
-    @hasSection('conteudo')
-        @yield('conteudo')
-    @else
-        <!-- Dashboard Padrão -->
-        <div class="container mt-5">
-            <div class="row mb-5">
-                <div class="col-12">
-                    <div style="text-align: center; padding: 3rem 2rem;">
-                        <div style="font-size: 72px; margin-bottom: 20px;">🚲</div>
-                        <h1 style="font-size: 48px; font-weight: 700; margin-bottom: 15px; color: #111;">Bem-vindo ao Sistema Bicicleta</h1>
-                        <p style="font-size: 18px; color: #6b7280; margin-bottom: 30px;">Gerenciador de ordens de serviço e estoque</p>
+        @hasSection('conteudo')
+            @yield('conteudo')
+        @else
+            <!-- Dashboard Padrão -->
+            <div class="container mt-5">
+                <div class="row mb-5">
+                    <div class="col-12">
+                        <div style="text-align: center; padding: 3rem 2rem;">
+                            <div style="font-size: 72px; margin-bottom: 20px;">🚲</div>
+                            <h1 style="font-size: 48px; font-weight: 700; margin-bottom: 15px; color: #111;">Bem-vindo
+                                ao Sistema Bicicleta</h1>
+                            <p style="font-size: 18px; color: #6b7280; margin-bottom: 30px;">Gerenciador de ordens de
+                                serviço e estoque</p>
 
-                        <div style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: inline-block;">
-                            <p style="font-size: 16px; color: #374151; margin-bottom: 0;">
-                                Usuário logado: <strong style="color: #1D9E75;">{{ Session::get('usuario_nome') }}</strong>
-                            </p>
+                            <div
+                                style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: inline-block;">
+                                <p style="font-size: 16px; color: #374151; margin-bottom: 0;">
+                                    Usuário logado: <strong
+                                        style="color: #1D9E75;">{{ Session::get('usuario_nome') }}</strong>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-md-3 mb-4">
+                        <a href="{{ route('produtos.index') }}" class="card shadow-sm"
+                            style="text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
+                            <div class="card-body text-center" style="padding: 2rem;">
+                                <div style="font-size: 48px; margin-bottom: 1rem;">📦</div>
+                                <h5 class="card-title">Produtos</h5>
+                                <p class="card-text" style="color: #6b7280; font-size: 14px;">Gerenciar produtos</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-3 mb-4">
+                        <a href="{{ route('estoque.index') }}" class="card shadow-sm"
+                            style="text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
+                            <div class="card-body text-center" style="padding: 2rem;">
+                                <div style="font-size: 48px; margin-bottom: 1rem;">📊</div>
+                                <h5 class="card-title">Estoque</h5>
+                                <p class="card-text" style="color: #6b7280; font-size: 14px;">Controlar estoque</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-3 mb-4">
+                        <a href="{{ route('usuarios.index') }}" class="card shadow-sm"
+                            style="text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
+                            <div class="card-body text-center" style="padding: 2rem;">
+                                <div style="font-size: 48px; margin-bottom: 1rem;">👥</div>
+                                <h5 class="card-title">Usuários</h5>
+                                <p class="card-text" style="color: #6b7280; font-size: 14px;">Gerenciar usuários</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-3 mb-4">
+                        <a href="{{ route('ordem_servico.index') }}" class="card shadow-sm"
+                            style="text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
+                            <div class="card-body text-center" style="padding: 2rem;">
+                                <div style="font-size: 48px; margin-bottom: 1rem;">🔧</div>
+                                <h5 class="card-title">Ordens de Serviço</h5>
+                                <p class="card-text" style="color: #6b7280; font-size: 14px;">Gerenciar ordens</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-3 mb-4">
+                        <a href="{{ route('pagamento.index') }}" class="card shadow-sm"
+                            style="text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
+                            <div class="card-body text-center" style="padding: 2rem;">
+                                <div style="font-size: 48px; margin-bottom: 1rem;">💳</div>
+                                <h5 class="card-title">Pagamentos</h5>
+                                <p class="card-text" style="color: #6b7280; font-size: 14px;">Gerenciar pagamentos</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-3 mb-4">
+                        <a href="{{ route('ordem_servico_item.index') }}" class="card shadow-sm"
+                            style="text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
+                            <div class="card-body text-center" style="padding: 2rem;">
+                                <div style="font-size: 48px; margin-bottom: 1rem;">📝</div>
+                                <h5 class="card-title">Itens</h5>
+                                <p class="card-text" style="color: #6b7280; font-size: 14px;">Gerenciar itens</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
             </div>
-
-            <div class="row">
-                <div class="col-md-3 mb-4">
-                    <a href="{{ route('produtos.index') }}" class="card shadow-sm" style="text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
-                        <div class="card-body text-center" style="padding: 2rem;">
-                            <div style="font-size: 48px; margin-bottom: 1rem;">📦</div>
-                            <h5 class="card-title">Produtos</h5>
-                            <p class="card-text" style="color: #6b7280; font-size: 14px;">Gerenciar produtos</p>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-md-3 mb-4">
-                    <a href="{{ route('estoque.index') }}" class="card shadow-sm" style="text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
-                        <div class="card-body text-center" style="padding: 2rem;">
-                            <div style="font-size: 48px; margin-bottom: 1rem;">📊</div>
-                            <h5 class="card-title">Estoque</h5>
-                            <p class="card-text" style="color: #6b7280; font-size: 14px;">Controlar estoque</p>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-md-3 mb-4">
-                    <a href="{{ route('usuarios.index') }}" class="card shadow-sm" style="text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
-                        <div class="card-body text-center" style="padding: 2rem;">
-                            <div style="font-size: 48px; margin-bottom: 1rem;">👥</div>
-                            <h5 class="card-title">Usuários</h5>
-                            <p class="card-text" style="color: #6b7280; font-size: 14px;">Gerenciar usuários</p>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-md-3 mb-4">
-                    <a href="{{ route('ordem_servico.index') }}" class="card shadow-sm" style="text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
-                        <div class="card-body text-center" style="padding: 2rem;">
-                            <div style="font-size: 48px; margin-bottom: 1rem;">🔧</div>
-                            <h5 class="card-title">Ordens de Serviço</h5>
-                            <p class="card-text" style="color: #6b7280; font-size: 14px;">Gerenciar ordens</p>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-md-3 mb-4">
-                    <a href="{{ route('pagamento.index') }}" class="card shadow-sm" style="text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
-                        <div class="card-body text-center" style="padding: 2rem;">
-                            <div style="font-size: 48px; margin-bottom: 1rem;">💳</div>
-                            <h5 class="card-title">Pagamentos</h5>
-                            <p class="card-text" style="color: #6b7280; font-size: 14px;">Gerenciar pagamentos</p>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-md-3 mb-4">
-                    <a href="{{ route('ordem_servico_item.index') }}" class="card shadow-sm" style="text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
-                        <div class="card-body text-center" style="padding: 2rem;">
-                            <div style="font-size: 48px; margin-bottom: 1rem;">📝</div>
-                            <h5 class="card-title">Itens</h5>
-                            <p class="card-text" style="color: #6b7280; font-size: 14px;">Gerenciar itens</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-    @endif
-</main>
+        @endif
+    </main>
 
 
     <footer style="background: white; border-top: 1px solid #e5e7eb; padding: 2rem 1.5rem 1.25rem; margin-top: 3rem;">
@@ -193,33 +203,167 @@
             </div>
         </div>
     </footer>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     </script>
 </body>
+
 </html>
 
 
 <style>
+    <style>
+    .mp-card {
+        background: white;
+        border: 3px solid #aaaaaa;
+        border-radius: 30px;
+        overflow: hidden;
+        transition: transform 0.15s, border-color 0.15s;
+    }
+
+    .mp-card:hover {
+        transform: translateY(-2px);
+        border-color: #1D9E75;
+    }
+
+    .mp-card-img {
+        border-top-left-radius: 30px;
+        border-top-right-radius: 30px;
+        height: 220px;
+        background: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    .mp-badge {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        font-size: 11px;
+        font-weight: 500;
+        padding: 3px 8px;
+        border-radius: 4px;
+    }
+
+    .badge-disp {
+        background: #E1F5EE;
+        color: #0F6E56;
+    }
+
+    .badge-ind {
+        background: #FEE2E2;
+        color: #991B1B;
+    }
+
+    .mp-card-body {
+        padding: 12px;
+        background: #FFF8DA;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        
+    }
+
+    .mp-card-tipo {
+        font-size: 11px;
+        color: #9ca3af;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        margin: 0 0 4px;
+    }
+
+    .mp-card-nome {
+        font-size: 14px;
+        font-weight: 500;
+        margin: 0 0 2px;
+    }
+
+    .mp-card-marca {
+        font-size: 12px;
+        color: #6b7280;
+        margin: 0 0 8px;
+    }
+
+    .mp-card-desc {
+        font-size: 12px;
+        color: #6b7280;
+        margin: 0 0 10px;
+        line-height: 1.5;
+    }
+
+    .mp-card-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 10px;
+        border-top: 1px solid #e5e7eb;
+    }
+
+    .mp-preco {
+        font-size: 16px;
+        font-weight: 600;
+        color: #0F6E56;
+        margin: 0;
+    }
+
+    .mp-preco span {
+        font-size: 11px;
+        color: #9ca3af;
+        font-weight: 400;
+    }
+
+    .mp-btn {
+        font-size: 12px;
+        background: #1D9E75;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        padding: 6px 14px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .filter-chip {
+        font-size: 13px;
+        padding: 5px 14px;
+        border-radius: 20px;
+        border: 1px solid #e5e7eb;
+        background: white;
+        color: #6b7280;
+        cursor: pointer;
+        transition: all 0.15s;
+    }
+
+    .filter-chip:hover {
+        background: #f3f4f6;
+    }
+
+    .filter-chip.active {
+        background: #1D9E75;
+        color: white;
+        border-color: #1D9E75;
+    }
 
     .card {
-                border: none;
-                overflow: hidden;
-            }
+        border: none;
+        overflow: hidden;
+    }
 
-            .card:hover {
-                transform: translateY(-4px);
-                box-shadow: 0 8px 16px rgba(29, 158, 117, 0.15) !important;
-            }
+    .card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 16px rgba(29, 158, 117, 0.15) !important;
+    }
 
-            .card-body {
-                background: white;
-            }
+    .card-body {
+        background: white;
+    }
 
-            .card-title {
-                color: #111;
-                font-weight: 600;
-                margin-bottom: 0.5rem;
-            }
+    .card-title {
+        color: #111;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
     .siteheader {
         background: white;
         border-bottom: 1px solid #e5e7eb;
@@ -229,7 +373,8 @@
         justify-content: space-between;
         box-shadow: 0px 5px 12px rgba(0, 0, 0, 0);
     }
-    .fontef{
+
+    .fontef {
         font-family: "Stack Sans Headline", sans-serif;
         font-optical-sizing: auto;
         font-weight: 300;
@@ -278,7 +423,7 @@
         font-family: "Stack Sans Headline", sans-serif;
         font-optical-sizing: auto;
         font-weight: <weight>;
-         font-style: normal;
+        font-style: normal;
     }
 
 
@@ -292,6 +437,7 @@
         margin-left: 500px;
         margin-right: 500px;
     }
+
     .custom-line2 {
         justify-content: center;
         border-radius: 4px;
@@ -308,10 +454,12 @@
         overflow: hidden;
         transition: transform 0.15s, border-color 0.15s;
     }
+
     .bike-card:hover {
         transform: translateY(-3px);
         border-color: #1D9E75;
     }
+
     .bike-img-wrap {
         background: #ffffff;
         height: 200px;
@@ -319,16 +467,19 @@
         align-items: center;
         justify-content: center;
     }
+
     .bike-img-wrap img {
         width: 100%;
         height: 100%;
         object-fit: contain;
         padding: 12px;
     }
+
     .bike-body {
         padding: 12px;
         border-top: 1px solid #e5e7eb;
     }
+
     .bike-badge {
         display: inline-block;
         font-size: 11px;
@@ -339,6 +490,7 @@
         margin-bottom: 6px;
         font-weight: 500;
     }
+
     .bike-name {
         font-size: 13px;
         font-weight: 500;
@@ -347,17 +499,20 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
+
     .bike-marca {
         font-size: 12px;
         color: #6b7280;
         margin: 0 0 8px;
     }
+
     .bike-preco {
         font-size: 15px;
         font-weight: 500;
         color: #0F6E56;
         margin: 0;
     }
+
     .bike-preco-label {
         font-size: 11px;
         color: #6b7280;
@@ -370,6 +525,7 @@
         height: 200px;
         border-radius: 12px;
     }
+
     .row22 {
         justify-content: center;
         align-items: center;
@@ -386,17 +542,20 @@
         margin-right: 200px;
         margin-left: 200px;
     }
+
     .motivo-card h5 {
         font-size: 20px;
         font-weight: 500;
         margin: 0 0 4px;
     }
+
     .motivo-card p {
         font-size: 16px;
         margin: 0;
         line-height: 1.5;
 
     }
+
     .motivo-icon {
         width: 36px;
         height: 36px;
@@ -428,49 +587,48 @@
         margin-bottom: 0.5rem;
     }
 
-    ./* fundo preto em todos os estados do accordion */
-.accordion-item {
-    background-color: #000000;
-    border-color: rgb(255, 70, 17) !important;
-}
+    .
 
-.accordion-button {
-    background-color: #000000 !important;
-    color: rgb(255, 70, 17) !important;
-    box-shadow: none !important;
-}
+    /* fundo preto em todos os estados do accordion */
+    .accordion-item {
+        background-color: #000000;
+        border-color: rgb(255, 70, 17) !important;
+    }
 
-.accordion-button:not(.collapsed) {
-    background-color: #000000 !important;
-    color: rgb(255, 70, 17) !important;
-}
+    .accordion-button {
+        background-color: #000000 !important;
+        color: rgb(255, 70, 17) !important;
+        box-shadow: none !important;
+    }
 
-/* seta do accordion */
-.accordion-button::after {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23ff6600' stroke-width='2' d='M2 5l6 6 6-6'/%3E%3C/svg%3E");
-}
+    .accordion-button:not(.collapsed) {
+        background-color: #000000 !important;
+        color: rgb(255, 70, 17) !important;
+    }
 
-.accordion-body {
-    background-color: #000000;
-    color: rgb(255, 70, 17);
-}
+    /* seta do accordion */
+    .accordion-button::after {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23ff6600' stroke-width='2' d='M2 5l6 6 6-6'/%3E%3C/svg%3E");
+    }
 
-/* borda laranja entre os itens */
-.accordion-item {
-    border-left: none;
-    border-right: none;
-    border-top: 1px solid rgb(255, 70, 17);
-}
+    .accordion-body {
+        background-color: #000000;
+        color: rgb(255, 70, 17);
+    }
 
-.accordion-item:last-child {
-    border-bottom: 1px solid rgb(255, 70, 17);
-}
+    /* borda laranja entre os itens */
+    .accordion-item {
+        border-left: none;
+        border-right: none;
+        border-top: 1px solid rgb(255, 70, 17);
+    }
 
-.cubo{
-    padding-top: 100px;
-    padding-bottom: 100px;
-}
+    .accordion-item:last-child {
+        border-bottom: 1px solid rgb(255, 70, 17);
+    }
 
-
-
+    .cubo {
+        padding-top: 100px;
+        padding-bottom: 100px;
+    }
 </style>

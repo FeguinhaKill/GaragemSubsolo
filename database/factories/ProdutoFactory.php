@@ -41,7 +41,7 @@ $sentenca = random_int(1, 3);
                 /*'Bicicleta',*/
                 'Ferramenta',
             ]),
-            'imagem' => null,
+            'imagem' => "images/produtos/semimagem.jpeg",
 
             'created_at' => now(),
             'updated_at' => now(),

@@ -14,6 +14,13 @@ class ProdutoController extends Controller
         return view('Produtos.list', ['produtos' => $produtos]);
     }
 
+     function indexclientes()
+    {
+        $produtos = Produto::all();
+
+        return view('Produtos.listclientes', ['produtos' => $produtos]);
+    }
+
     function create()
     {
         $produto = new Produto();
@@ -56,6 +63,9 @@ class ProdutoController extends Controller
             $imagem->storeAs($diretorio, $nome_imagem, 'public');
             $data['imagem'] = $diretorio . $nome_imagem;
         }
+        else {
+            $data['imagem'] = "images/produtos/semimagem.jpeg";
+        }
 
         Produto::create($data);
 
@@ -97,18 +107,41 @@ class ProdutoController extends Controller
         return redirect('produtos')->with('success', 'Produto removido com sucesso!');
     }
 
-    function search(Request $request)
-    {
-        if (!empty($request->valor)) {
-            $produtos = Produto::where(
-                $request->tipo,
-                'like',
-                '%' . $request->valor . '%'
-            )->get();
-        } else {
-            $produtos = Produto::all();
+        function search(Request $request)
+        {
+            if (!empty($request->valor)) {
+                $produtos = Produto::where(
+                    $request->tipo,
+                    'like',
+                    '%' . $request->valor . '%'
+                )->get();
+            } else {
+                $produtos = Produto::all();
+            }
+
+            return view('Produtos.list', ['produtos' => $produtos]);
         }
 
-        return view('Produtos.list', ['produtos' => $produtos]);
+        function searchclientes(Request $request)
+        {
+            if (!empty($request->valor)) {
+                $produtos = Produto::where(
+                    $request->tipo,
+                    'like',
+                    '%' . $request->valor . '%'
+                )->get();
+            } else {
+                $produtos = Produto::all();
+            }
+
+            return view('Produtos.listclientes', ['produtos' => $produtos]);
+        }
+
+        function showcliente($id)
+        {
+            $produto = Produto::find($id);
+
+            return view('Produtos.showcliente', ['produto' => $produto]);
+        }
+
     }
-}

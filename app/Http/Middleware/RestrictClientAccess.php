@@ -12,7 +12,7 @@ class RestrictClientAccess
     public function handle(Request $request, Closure $next)
     {
         $usuarioId = Session::get('usuario_id');
-        
+
         if (!$usuarioId) {
             return redirect()->route('login');
         }
@@ -21,7 +21,7 @@ class RestrictClientAccess
 
         if ($usuario && $usuario->categoria_usuario === 'cliente') {
             $rotaAtual = $request->route()->getName();
-            
+
             $rotasPermitidas = [
                 'inicio',
                 'ordem_servico.create',
@@ -30,6 +30,9 @@ class RestrictClientAccess
                 'pagamento.show',
                 'pagamento.pagar',
                 'auth.logout',
+                'produtos.indexclientes',
+                'produtos.searchclientes',
+                'produtos.showcliente',
             ];
 
             if (!in_array($rotaAtual, $rotasPermitidas)) {

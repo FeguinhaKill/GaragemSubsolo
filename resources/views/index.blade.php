@@ -13,6 +13,7 @@
         <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px;">
             @foreach ($produtos as $produto)
                 <div class="bike-card">
+                    <a href="{{ route('produtos.showcliente', $produto->id) }}" style="text-decoration: none; color: inherit;">
                     <div class="bike-img-wrap">
                         <img src="/storage/{{ $produto->imagem }}" alt="{{ $produto->nome }}">
                     </div>
@@ -26,6 +27,7 @@
                             <span class="bike-preco-label">/dia</span>
                         </p>
                     </div>
+                    </a>
                 </div>
             @endforeach
         </div>
