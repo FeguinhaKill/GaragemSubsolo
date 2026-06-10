@@ -30,8 +30,17 @@
         </a>
 
         <nav style="display: flex; align-items: center; gap: 4px;">
-            <a href="{{ route('produtos.indexclientes') }}" class="nav-link">Produtos</a>
-            <a href="#" class="nav-link">Serviços</a>
+            <a href="{{route('produtos.indexclientes') }}" class="nav-link">Produtos</a>
+
+            <div class="dropdown show">
+                <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Serviços
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink2">
+                    <a class="dropdown-item nav-link" href="{{ route('ordem_servico.formclientes') }}">Solicitar Serviço</a>
+                    <a class="dropdown-item nav-link" href="{{ route('atualizacao_servico.listclientes') }}">Acompanhar Serviço</a>
+                </div>
+            </div>
 
             <div class="dropdown show">
                 <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -87,7 +96,7 @@
         @hasSection('conteudo')
             @yield('conteudo')
         @else
-            <!-- Dashboard Padrão -->
+
             <div class="container mt-2">
                 <div class="row mb-3">
                     <div class="col-12">
@@ -109,7 +118,7 @@
                         <a href="{{ route('produtos.index') }}" class="card shadow-sm"
                             style="text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
                             <div class="card-body text-center" style="padding: 2rem;">
-                                <div style="font-size: 48px; margin-bottom: 1rem;">📦</div>
+                                <div style="font-size: 48px; margin-bottom: 1rem;"></div>
                                 <h5 class="card-title">Produtos</h5>
                                 <p class="card-text" style="color: #6b7280; font-size: 14px;">Gerenciar produtos</p>
                             </div>
@@ -120,7 +129,7 @@
                         <a href="{{ route('estoque.index') }}" class="card shadow-sm"
                             style="text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
                             <div class="card-body text-center" style="padding: 2rem;">
-                                <div style="font-size: 48px; margin-bottom: 1rem;">📊</div>
+                                <div style="font-size: 48px; margin-bottom: 1rem;"></div>
                                 <h5 class="card-title">Estoque</h5>
                                 <p class="card-text" style="color: #6b7280; font-size: 14px;">Controlar estoque</p>
                             </div>
@@ -131,7 +140,7 @@
                         <a href="{{ route('usuarios.index') }}" class="card shadow-sm"
                             style="text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
                             <div class="card-body text-center" style="padding: 2rem;">
-                                <div style="font-size: 48px; margin-bottom: 1rem;">👥</div>
+                                <div style="font-size: 48px; margin-bottom: 1rem;"></div>
                                 <h5 class="card-title">Usuários</h5>
                                 <p class="card-text" style="color: #6b7280; font-size: 14px;">Gerenciar usuários</p>
                             </div>
@@ -142,7 +151,7 @@
                         <a href="{{ route('ordem_servico.index') }}" class="card shadow-sm"
                             style="text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
                             <div class="card-body text-center" style="padding: 2rem;">
-                                <div style="font-size: 48px; margin-bottom: 1rem;">🔧</div>
+                                <div style="font-size: 48px; margin-bottom: 1rem;"></div>
                                 <h5 class="card-title">Ordens de Serviço</h5>
                                 <p class="card-text" style="color: #6b7280; font-size: 14px;">Gerenciar ordens de
                                     Serviço</p>
@@ -154,7 +163,7 @@
                         <a href="{{ route('ordem_compra.index') }}" class="card shadow-sm"
                             style="text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
                             <div class="card-body text-center" style="padding: 2rem;">
-                                <div style="font-size: 48px; margin-bottom: 1rem;">🔧</div>
+                                <div style="font-size: 48px; margin-bottom: 1rem;"></div>
                                 <h5 class="card-title">Ordens de Compra</h5>
                                 <p class="card-text" style="color: #6b7280; font-size: 14px;">Gerenciar ordens de
                                     Compra</p>
@@ -166,7 +175,7 @@
                         <a href="{{ route('pagamento.index') }}" class="card shadow-sm"
                             style="text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
                             <div class="card-body text-center" style="padding: 2rem;">
-                                <div style="font-size: 48px; margin-bottom: 1rem;">💳</div>
+                                <div style="font-size: 48px; margin-bottom: 1rem;"></div>
                                 <h5 class="card-title">Pagamentos de Serviços</h5>
                                 <p class="card-text" style="color: #6b7280; font-size: 14px;">Gerenciar Pagamentos de Serviços</p>
                             </div>
@@ -177,7 +186,7 @@
                         <a href="{{ route('pagamentoCompra.index') }}" class="card shadow-sm"
                             style="text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
                             <div class="card-body text-center" style="padding: 2rem;">
-                                <div style="font-size: 48px; margin-bottom: 1rem;">💳</div>
+                                <div style="font-size: 48px; margin-bottom: 1rem;"></div>
                                 <h5 class="card-title">Pagamentos de Compras</h5>
                                 <p class="card-text" style="color: #6b7280; font-size: 14px;">Gerenciar Pagamentos de Compras</p>
                             </div>
@@ -188,7 +197,7 @@
                         <a href="{{ route('ordem_servico_item.index') }}" class="card shadow-sm"
                             style="text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
                             <div class="card-body text-center" style="padding: 2rem;">
-                                <div style="font-size: 48px; margin-bottom: 1rem;">📝</div>
+                                <div style="font-size: 48px; margin-bottom: 1rem;"></div>
                                 <h5 class="card-title">Itens da OS</h5>
                                 <p class="card-text" style="color: #6b7280; font-size: 14px;">Gerenciar itens da OS
                                 </p>
@@ -200,13 +209,25 @@
                         <a href="{{ route('ordem_compra_item.index') }}" class="card shadow-sm"
                             style="text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
                             <div class="card-body text-center" style="padding: 2rem;">
-                                <div style="font-size: 48px; margin-bottom: 1rem;">📝</div>
+                                <div style="font-size: 48px; margin-bottom: 1rem;"></div>
                                 <h5 class="card-title">Itens da OC</h5>
                                 <p class="card-text" style="color: #6b7280; font-size: 14px;">Gerenciar itens da OC
                                 </p>
                             </div>
                         </a>
                     </div>
+
+                    <div class="col-md-3 mb-4">
+                        <a href="{{ route('atualizacao_servico.create') }}" class="card shadow-sm"
+                            style="text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
+                            <div class="card-body text-center" style="padding: 2rem;">
+                                <div style="font-size: 48px; margin-bottom: 1rem;"></div>
+                                <h5 class="card-title">Atualizar Serviços</h5>
+                                <p class="card-text" style="color: #6b7280; font-size: 14px;">Enviar atualizações de serviços</p>
+                            </div>
+                        </a>
+                    </div>
+
                 </div>
         @endif
     </main>
@@ -217,24 +238,24 @@
             <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
                 <div>
                     <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-                        <div
-                            style="width: 32px; height: 32px; background: #1D9E75; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white;">
-                            🚲</div>
-                        <span style="font-size: 16px; font-weight: 500;">Bici<span
-                                style="color: #1D9E75;">cleta</span></span>
+                        <div style="width: 32px; height: 32px; background: #1D9E75;
+                        border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white;">
+                        <img src="/storage/images/mainImagems/logo.png" style="width: 80px">
+                            </div>
+                        <span style="margin-left: 20px; font-size: 16px; font-weight: 500;">Garage-<span
+                                style="color: #1D9E75;">-subsolo</span></span>
                     </div>
-                    <p style="font-size: 13px; color: #6b7280; line-height: 1.6;">Aluguel de bicicletas rápido e
-                        simples. Pedale com liberdade!</p>
+
                 </div>
                 <div>
                     <h4
                         style="font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: #374151; margin-bottom: 10px;">
                         Navegação</h4>
-                    <a href="{{ route('produtos.index') }}" class="nav-link">Produtos</a>
-                    <a href="{{ route('estoque.index') }}" class="nav-link">Estoque</a>
-                    <a href="{{ route('usuarios.index') }}" class="nav-link">Usuários</a>
-                    <a href="{{ route('ordem_servico.index') }}" class="nav-link">Ordens de Serviço</a>
-                    <a href="{{ route('pagamento.index') }}" class="nav-link">Pagamentos</a>
+                    <a href="{{route('produtos.indexclientes') }}" class="nav-link">Produtos</a>
+                    <a class="dropdown-item nav-link" href="{{ route('ordem_servico.formclientes') }}">Solicitar Serviço</a>
+                    <a class="dropdown-item nav-link" href="{{ route('atualizacao_servico.listclientes') }}">Acompanhar Serviço</a>
+                    <a class="dropdown-item nav-link" href="{{ route('pagamento.index') }}">Pagamento de Serviços</a>
+                    <a class="dropdown-item nav-link" href="{{ route('pagamentoCompra.index') }}">Pagamento de Compras</a>
                 </div>
                 <div>
                     <h4

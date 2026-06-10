@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Charts\OrdensServicoStatus;
+
+use App\Models\AtualizacaoServico;
 use App\Models\OrdemServico;
 use App\Models\OrdemServicoitem;
 use App\Models\Usuario;
@@ -9,6 +12,9 @@ use App\Models\Funcionario;
 use App\Models\Produto;
 use App\Models\Estoque;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class OrdemServicoController extends Controller
 {
@@ -30,6 +36,59 @@ class OrdemServicoController extends Controller
             'usuarios' => $usuarios,
             'funcionarios' => $funcionarios
         ]);
+    }
+
+    function formclientes()
+    {
+        return view('OrdemServicos.formclientes');
+    }
+
+    function show($id)
+    {
+        $usuarioId = Session::get('usuario_id');
+
+        $ordem = OrdemServico::where('id', $id)
+            ->where('usuario_id', $usuarioId)
+            ->firstOrFail();
+
+        $atualizacoes = AtualizacaoServico::where('ordem_servico_id', $ordem->id)
+            ->with('funcionario.usuario')
+            ->orderByDesc('created_at')
+            ->get();
+
+        return view('OrdemServicos.showcliente', compact('ordem', 'atualizacoes'));
+    }
+
+    function storeClienteRequest(Request $request)
+    {
+        $request->validate([
+            'descricao' => 'required|string|min:10|max:1000',
+        ], [
+            'descricao.required' => 'Descreva o serviço que deseja solicitar.',
+            'descricao.min' => 'A descrição deve ter pelo menos 10 caracteres.',
+            'descricao.max' => 'A descrição não pode ter mais de 1000 caracteres.',
+        ]);
+
+        $usuarioId = Session::get('usuario_id');
+
+        if (! $usuarioId) {
+            return redirect()->route('login')->with('error', 'Faça login para solicitar um serviço.');
+        }
+
+        $funcionario = Funcionario::query()->first();
+
+        $ordem = OrdemServico::create([
+            'usuario_id' => $usuarioId,
+            'funcionario_id' => $funcionario?->id ?? 1,
+            'data_abertura' => now()->toDateString(),
+            'data_fechamento' => null,
+            'status' => 'aberta',
+            'valor_total' => 0,
+            'descricao' => $request->descricao,
+        ]);
+
+        return redirect()->route('ordem_servico.formclientes')
+            ->with('success', 'Solicitação de serviço criada com sucesso!');
     }
 
     function validateRequest(Request $request)
@@ -58,15 +117,11 @@ class OrdemServicoController extends Controller
         $this->validateRequest($request);
         $data = $request->all();
 
-        // garantir valor_total presente para evitar erro de inserção no banco
         if (!isset($data['valor_total']) || $data['valor_total'] === '') {
             $data['valor_total'] = 0;
         }
-
-        // criar a ordem primeiro
         $ordem = OrdemServico::create($data);
 
-        // se vierem produtos, criar os itens vinculados
         $produtos = $request->input('produto_id', []);
         $quantidades = $request->input('quantidade', []);
 
@@ -149,5 +204,24 @@ class OrdemServicoController extends Controller
         }
 
         return view('OrdemServicos.list', ['dados' => $dados]);
+    }
+
+    function reportordemservico()
+    {
+        $ordens = OrdemServico::with(['usuario'])->get();
+
+        $data = [
+            'titulo' => 'Relatório de Ordens de Servicos',
+            'ordens' => $ordens,
+        ];
+
+        $pdf = Pdf::loadView('ordemservicos.reportservicos', $data);
+
+        return $pdf->download('report_ordemServico.pdf');
+    }
+
+    function chartservicos(OrdensServicoStatus $chart)
+    {
+        return view('ordemservicos.chartservicostatus', ['chart' => $chart->build()]);
     }
 }

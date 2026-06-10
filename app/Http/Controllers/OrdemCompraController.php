@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Charts\OrdemCompraStatus;
+
 use App\Models\OrdemCompra;
 use Illuminate\Http\Request;
 use App\Models\OrdemCompraitem;
 use App\Models\Usuario;
 use App\Models\Produto;
 use App\Models\Estoque;
+
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class OrdemCompraController extends Controller
 {
@@ -137,5 +141,23 @@ class OrdemCompraController extends Controller
         }
 
         return view('OrdemCompras.list', ['dados' => $dados]);
+    }
+
+    function reportordemcompra()
+    {
+        $ordens = OrdemCompra::with(['usuario'])->get();
+
+        $data = [
+            'titulo' => 'Relatório de Ordens de Compras',
+            'ordens' => $ordens,
+        ];
+
+        $pdf = Pdf::loadView('ordemcompras.reportcompras', $data);
+
+        return $pdf->download('report_ordemCompra.pdf');
+    }
+    function chartscompras(OrdemCompraStatus $chart)
+    {
+        return view('ordemcompras.chartcomprastatus', ['chart' => $chart->build()]);
     }
 }

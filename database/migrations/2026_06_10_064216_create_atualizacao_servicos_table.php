@@ -4,7 +4,6 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-
 return new class extends Migration
 {
     /**
@@ -12,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ordem_servico', function (Blueprint $table) {
+        Schema::create('atualizacao_servicos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('usuario_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('ordem_servico_id')->constrained('ordem_servico');
+            $table->foreignId('usuario_id')->constrained();
             $table->foreignId('funcionario_id')->constrained();
-            $table->date('data_abertura');
-            $table->date('data_fechamento')->nullable();
-            $table->string('status');
-            $table->decimal('valor_total', 10, 2);
-            $table->text('descricao');
+            $table->date('data_atualizacao');
+            $table->string('comentario');
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ordem_servico');
+        Schema::dropIfExists('atualizacao_servicos');
     }
 };

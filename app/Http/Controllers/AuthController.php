@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Funcionario;
 use App\Models\Usuario;
 use Illuminate\Support\Facades\Session;
 
@@ -80,6 +81,11 @@ class AuthController extends Controller
         if (!in_array($usuario->categoria_usuario, ['funcionario', 'admin'], true)) {
             return back()->with('error', 'Acesso restrito para funcionários.')->withInput();
         }
+
+        Funcionario::firstOrCreate(
+            ['usuario_id' => $usuario->id],
+            ['nome_cargo' => 'Funcionário', 'salario' => 0]
+        );
 
         Session::put('usuario_id', $usuario->id);
         Session::put('usuario_nome', $usuario->nome);

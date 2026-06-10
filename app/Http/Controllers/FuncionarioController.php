@@ -43,7 +43,7 @@ class FuncionarioController extends Controller
             'salario.required' => 'O campo salário é obrigatório.',
         ]);
     }
-    
+
     public function store(Request $request)
     {
         $this->validateRequest($request);
@@ -80,21 +80,21 @@ class FuncionarioController extends Controller
     function search(Request $request)
     {
         $query = Funcionario::with('usuario');
-        
+
         if (!empty($request->valor)) {
             $tipo = $request->tipo ?? 'nome_cargo';
-            
+
             if ($tipo === 'nome_usuario') {
-                // Busca pelo nome do usuário através do relacionamento
+
                 $query->whereHas('usuario', function ($q) use ($request) {
                     $q->where('nome', 'like', '%' . $request->valor . '%');
                 });
             } else {
-                // Busca pelos campos diretos de funcionario
+                
                 $query->where($tipo, 'like', '%' . $request->valor . '%');
             }
         }
-        
+
         $funcionarios = $query->get();
 
         if ($funcionarios->isEmpty()) {

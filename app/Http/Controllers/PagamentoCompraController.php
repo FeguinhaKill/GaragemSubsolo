@@ -15,7 +15,7 @@ class PagamentoCompraController extends Controller
     {
         $usuarioLogado = Usuario::find(Session::get('usuario_id'));
 
-        // Se é cliente, mostra apenas seus PagamentosCompra
+
         if ($usuarioLogado && $usuarioLogado->categoria_usuario === 'cliente') {
             $dados = PagamentoCompra::with(['usuario', 'OrdemCompra', 'FormaPagamento'])
                 ->where('usuario_id', $usuarioLogado->id)
@@ -121,7 +121,6 @@ class PagamentoCompraController extends Controller
     {
         $PagamentoCompra = PagamentoCompra::with(['usuario', 'OrdemCompra', 'FormaPagamento'])->findOrFail($id);
 
-        // Verifica se usuário é cliente e se é seu próprio PagamentoCompra
         $usuarioLogado = Usuario::find(Session::get('usuario_id'));
         if ($usuarioLogado && $usuarioLogado->categoria_usuario === 'cliente' && $PagamentoCompra->usuario_id !== $usuarioLogado->id) {
             return redirect()->back()->with('error', 'Você não tem permissão para visualizar este PagamentoCompra.');
@@ -144,7 +143,6 @@ class PagamentoCompraController extends Controller
     {
         $PagamentoCompra = PagamentoCompra::findOrFail($id);
 
-        // Verifica se usuário é cliente e se é seu próprio PagamentoCompra
         $usuarioLogado = Usuario::find(Session::get('usuario_id'));
         if ($usuarioLogado && $usuarioLogado->categoria_usuario === 'cliente' && $PagamentoCompra->usuario_id !== $usuarioLogado->id) {
             return redirect()->back()->with('error', 'Você não tem permissão para pagar este PagamentoCompra.');

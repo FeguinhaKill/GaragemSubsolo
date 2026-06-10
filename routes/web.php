@@ -14,6 +14,7 @@ use App\Http\Controllers\OrdemCompraController;
 use App\Http\Controllers\OrdemCompraItemController;
 use App\Http\Controllers\EstoqueController;
 use App\Http\Controllers\ProdutoController;
+use App\Http\Controllers\AtualizacaoServicoController;
 
 
 // RotAS DE AUth
@@ -98,8 +99,16 @@ Route::middleware(['verify_login', 'restrict_client'])->group(function () {
     Route::post('/produtos/clientes/{id}/comprar', [ProdutoController::class, 'comprar'])->name('produtos.comprar');
 
 
+    // ATUALIZAÇÕES DE SERVIÇO
+    Route::get('/atualizacao_servico', [AtualizacaoServicoController::class, 'create'])->name('atualizacao_servico.create');
+    Route::post('/atualizacao_servico', [AtualizacaoServicoController::class, 'store'])->name('atualizacao_servico.store');
+    Route::get('/minhas-atualizacoes', [AtualizacaoServicoController::class, 'listarCliente'])->name('atualizacao_servico.listclientes');
+
     // ORDENS DE SERVIÇO
     Route::get('/ordem_servico', [OrdemServicoController::class, 'index'])->name('ordem_servico.index');
+    Route::get('/ordem_servico/cliente', [OrdemServicoController::class, 'formclientes'])->name('ordem_servico.formclientes');
+    Route::get('/ordem_servico/{id}', [OrdemServicoController::class, 'show'])->name('ordem_servico.show');
+    Route::post('/ordem_servico/cliente', [OrdemServicoController::class, 'storeClienteRequest'])->name('ordem_servico.storeClienteRequest');
     Route::get('/ordem_servico/create', [OrdemServicoController::class, 'create'])->name('ordem_servico.create');
     Route::post('/ordem_servico', [OrdemServicoController::class, 'store'])->name('ordem_servico.store');
     Route::delete('/ordem_servico/{id}', [OrdemServicoController::class, 'destroy'])
@@ -150,4 +159,11 @@ Route::middleware(['verify_login', 'restrict_client'])->group(function () {
     // REPORTS
     Route::get('/report/pagamento', [PagamentoController::class,  'reportpagamento'])->name('pagamentos.reportpagamento');
     Route::get('/report/pagamentocompra', [PagamentoCompraController::class,  'reportpagamentocompra'])->name('pagamentoscompra.reportpagamentocompra');
+
+    Route::get('/report/ordemservico', [OrdemServicoController::class,  'reportordemservico'])->name('ordem_servico.reportservico');
+    Route::get('/report/ordemcompra', [OrdemCompraController::class,  'reportordemcompra'])->name('ordem_compra.reportcompra');
+
+    //CHARTS
+    Route::get('/chart/ordemservico', [OrdemServicoController::class, 'chartservicos'])->name('ordem_servico.chartordem');
+    Route::get('/chart/ordemcompra', [OrdemCompraController::class, 'chartscompras'])->name('ordem_compra.chartordem');
 });

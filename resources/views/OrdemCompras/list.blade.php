@@ -170,14 +170,15 @@
 
                                         </td>
 
-                                        
+
 
 
                                         <td>
-                                            <form action="{{route('ordem_compra_item.search')}}" method="POST" style="display:inline;">
+                                            <form action="{{ route('ordem_compra_item.search') }}" method="POST"
+                                                style="display:inline;">
                                                 @csrf
                                                 <input type="hidden" name="tipo" value="ordem_compra_id">
-                                                <input type="hidden" name="valor" value="{{$item->id}}">
+                                                <input type="hidden" name="valor" value="{{ $item->id }}">
                                                 <button type="submit" class="btn btn-sm butao">
                                                     Produtos
                                                 </button>
@@ -190,24 +191,31 @@
 
                         </table>
                     </div>
-
+                    <a href="{{ route('ordem_compra.reportcompra') }}" class="btn btn-success" target="_blank">
+                        Gerar Relatório de OC
+                    </a>
+                    <a href="{{  route('ordem_compra.chartordem')  }}" class="btn btn-success">
+                        Gerar Gráfico de OC
+                    </a>
                 </div>
+
             </div>
 
         </div>
     </div>
 
-<style>
-    .butao {
-        background-color: #0dc0b7;
-    }
-    .butao:hover {
-        background-color: #4690ff;
-    }
-    .thzin {
-        width: 120px;
-    }
-</style>
+    <style>
+        .butao {
+            background-color: #0dc0b7;
+        }
+
+        .butao:hover {
+            background-color: #4690ff;
+        }
+
+        .thzin {
+            width: 120px;
+        }
+    </style>
 
 @endsection
-

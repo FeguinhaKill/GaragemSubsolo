@@ -241,7 +241,12 @@
 
                         </table>
                     </div>
-
+                    <a href="{{ route('ordem_servico.reportservico') }}" class="btn btn-success" target="_blank">
+                        Gerar Relatório de OS
+                    </a>
+                    <a href="{{  route('ordem_servico.chartordem')  }}" class="btn btn-success">
+                        Gerar Gráfico de OS
+                    </a>
                 </div>
             </div>
 
