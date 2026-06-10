@@ -4,34 +4,30 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2e18594015defd6cf894ccd66e62c1ce",
+    "content-hash": "047ac44321640df09ea3fb4cb1659803",
     "packages": [
         {
             "name": "arielmejiadev/larapex-charts",
-            "version": "9.0.1",
+            "version": "10.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ArielMejiaDev/larapex-charts.git",
-                "reference": "69f7f34311afb7cb0b0d02c9acb7422130912190"
+                "reference": "3c88dc67408b3756db075c97c1bc5fbe0d342945"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ArielMejiaDev/larapex-charts/zipball/69f7f34311afb7cb0b0d02c9acb7422130912190",
-                "reference": "69f7f34311afb7cb0b0d02c9acb7422130912190",
+                "url": "https://api.github.com/repos/ArielMejiaDev/larapex-charts/zipball/3c88dc67408b3756db075c97c1bc5fbe0d342945",
+                "reference": "3c88dc67408b3756db075c97c1bc5fbe0d342945",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "illuminate/support": "^9.0|^10.0|^11.0|^12.0",
-                "php": "^8.0|^8.2|^8.3|^8.4|^8.5"
+                "illuminate/support": "^11.0|^12.0|^13.0",
+                "php": "^8.3"
             },
             "require-dev": {
-                "nunomaduro/collision": "^7.5|^8.1",
-                "orchestra/testbench": "^7.0|^8.0|^9.0|^10.0",
-                "pestphp/pest": "^3.0",
-                "pestphp/pest-plugin-arch": "^3.0",
-                "pestphp/pest-plugin-laravel": "^3.0",
-                "phpunit/phpunit": "^9.0|^10.0|^11.0"
+                "orchestra/testbench": "^9.0|^10.0|^11.0",
+                "phpunit/phpunit": "^11.5.3|^12.0"
             },
             "type": "library",
             "extra": {
@@ -69,9 +65,9 @@
             ],
             "support": {
                 "issues": "https://github.com/ArielMejiaDev/larapex-charts/issues",
-                "source": "https://github.com/ArielMejiaDev/larapex-charts/tree/9.0.1"
+                "source": "https://github.com/ArielMejiaDev/larapex-charts/tree/10.0.0"
             },
-            "time": "2026-01-27T01:07:01+00:00"
+            "time": "2026-03-21T08:28:17+00:00"
         },
         {
             "name": "barryvdh/laravel-dompdf",
