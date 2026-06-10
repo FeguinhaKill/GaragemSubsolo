@@ -3,9 +3,11 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Models\OrdemCompra;
 use App\Models\OrdemServico;
 use App\Models\OrdemServicoitem;
 use App\Models\Usuario;
+use App\Observers\OrdemCompraObserver;
 use App\Observers\OrdemServicoObserver;
 use App\Observers\OrdemServicoItemObserver;
 use App\Observers\UsuarioObserver;
@@ -25,6 +27,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Observer para OrdemCompra - Cria PagamentoCompra automaticamente
+        OrdemCompra::observe(OrdemCompraObserver::class);
+
         // Observer para OrdemServico - Cria Pagamento automaticamente
         OrdemServico::observe(OrdemServicoObserver::class);
 

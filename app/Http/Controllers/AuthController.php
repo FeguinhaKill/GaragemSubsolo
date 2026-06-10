@@ -51,7 +51,7 @@ class AuthController extends Controller
             Session::put('usuario_nome', $usuario->nome);
             Session::put('usuario_email', $usuario->email);
 
-            return redirect()->route('inicio')->with('success', 'Bem-vindo ' . $usuario->nome . '!');
+            return redirect()->route('home')->with('success', 'Bem-vindo ' . $usuario->nome . '!');
         }
 
         return back()->with('error', 'Email ou senha inválidos.');

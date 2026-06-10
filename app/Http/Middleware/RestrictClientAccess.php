@@ -33,6 +33,10 @@ class RestrictClientAccess
                 'produtos.indexclientes',
                 'produtos.searchclientes',
                 'produtos.showcliente',
+                'produtos.comprar',
+                'pagamentoCompra.index',
+                'pagamentoCompra.show',
+                'pagamentoCompra.pagar',
             ];
 
             if (!in_array($rotaAtual, $rotasPermitidas)) {

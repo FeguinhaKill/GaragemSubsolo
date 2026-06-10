@@ -54,10 +54,13 @@
                 </div>
 
                 @if($disponivel)
-                    <a href="{{ route('ordem_servico.create') }}"
-                       style="display: block; width: 100%; background: #1D9E75; color: white; text-align: center; padding: 14px; border-radius: 10px; font-size: 15px; font-weight: 500; text-decoration: none; transition: background 0.15s;">
-                        Comprar agora
-                    </a>
+                    <form action="{{ route('produtos.comprar', $produto->id) }}" method="POST">
+                        @csrf
+                        <button type="submit"
+                            style="display: block; width: 100%; background: #1D9E75; color: white; text-align: center; padding: 14px; border-radius: 10px; font-size: 15px; font-weight: 500; border: none; cursor: pointer; transition: background 0.15s;">
+                            Comprar agora
+                        </button>
+                    </form>
                 @else
                     <button disabled
                         style="display: block; width: 100%; background: #e5e7eb; color: #9ca3af; border: none; padding: 14px; border-radius: 10px; font-size: 15px; cursor: not-allowed;">

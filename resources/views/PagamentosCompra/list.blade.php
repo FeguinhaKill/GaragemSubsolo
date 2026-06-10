@@ -1,5 +1,5 @@
 @extends('main')
-@section('titulo', 'Listagem de Pagamentos')
+@section('titulo', 'Listagem de Pagamentos das Compras')
 @section('conteudo')
 
 @php
@@ -11,8 +11,8 @@
     <div class="card shadow p-4">
 
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h3>Pagamentos Serviços</h3>
-            <a href="{{ route('pagamentos.reportpagamento') }}" class="btn btn-success" target="_blank">Gerar Relatório</a>
+            <h3>Pagamentos Compra</h3>
+            <a href="{{ route('pagamentoscompra.reportpagamentocompra') }}" class="btn btn-success" target="_blank">Gerar Relatório</a>
         </div>
 
         @if(session('error'))
@@ -38,7 +38,7 @@
             <div class="card shadow-sm mb-4">
                 <div class="card-body">
 
-                    <form action="{{ route('pagamento.search') }}" method="POST">
+                    <form action="{{ route('pagamentoCompra.search') }}" method="POST">
                         @csrf
 
                         <div class="row align-items-end">
@@ -46,7 +46,7 @@
                                 <label class="form-label">Tipo de Pesquisa</label>
 
                                 <select name="tipo" class="form-select">
-                                    <option value="ordem_servico_id">Ordem de Serviço</option>
+                                    <option value="ordem_servico_id">Ordem de Compra</option>
                                     <option value="usuario_id">Usuário</option>
                                     <option value="status">Status</option>
                                     <option value="valor_total">Valor Total</option>
@@ -89,13 +89,12 @@
                         <thead class="table-light">
                             <tr>
                                 <th>ID</th>
-                                <th>Ordem Serviço</th>
+                                <th>Ordem Compra</th>
                                 <th>Usuário</th>
                                 <th>Valor Bruto</th>
                                 <th>Valor Total</th>
                                 <th>Forma Pagamento</th>
                                 <th>Status</th>
-                                <th>Vencimento</th>
                                 <th>Pagamento</th>
                                 <th width="180">Ações</th>
                             </tr>
@@ -107,7 +106,7 @@
                                     <td>{{ $item->id }}</td>
 
                                     <td>
-                                        OS #{{ $item->ordemServico->id ?? '-' }}
+                                        OC #{{ $item->ordemCompra->id ?? '-' }}
                                     </td>
 
                                     <td>
@@ -152,14 +151,6 @@
                                     </td>
 
                                     <td>
-                                        @if($item->data_vencimento)
-                                            {{ \Carbon\Carbon::parse($item->data_vencimento)->format('d/m/Y') }}
-                                        @else
-                                            -
-                                        @endif
-                                    </td>
-
-                                    <td>
                                         @if($item->data_pago)
                                             {{ \Carbon\Carbon::parse($item->data_pago)->format('d/m/Y H:i') }}
                                         @else
@@ -171,7 +162,7 @@
                                         <div class="d-flex gap-2">
 
                                             <a
-                                                href="{{ route('pagamento.show', $item->id) }}"
+                                                href="{{ route('pagamentoCompra.show', $item->id) }}"
                                                 class="btn btn-info btn-sm"
                                             >
                                                 Visualizar Pagamento

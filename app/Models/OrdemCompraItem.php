@@ -4,17 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\OrdemServico;
+use App\Models\OrdemCompra;
 use App\Models\Produto;
 
-class OrdemServicoitem extends Model
+class OrdemCompraItem extends Model
 {
+    /** @use HasFactory<\Database\Factories\OrdemCompraItemFactory> */
     use HasFactory;
-    /** @use HasFactory<\Database\Factories\OrdemServicoFactory> */
-    protected $table = "ordem_servico_item";
+    protected $table = "ordem_compra_item";
 
     protected $fillable = [
-        'ordem_servico_id',
+        'ordem_compra_id',
         'produto_id',
         'quantidade',
         'valor_total',
@@ -24,9 +24,9 @@ class OrdemServicoitem extends Model
         'valor_total' => 'float',
     ];
 
-    public function ordem_servico()
+    public function ordem_compra()
     {
-        return $this->belongsTo(OrdemServico::class, 'ordem_servico_id');
+        return $this->belongsTo(OrdemCompra::class, 'ordem_compra_id');
     }
 
     public function produto()

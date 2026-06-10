@@ -16,6 +16,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Commissioner:wght@100..900&family=Kaushan+Script&family=Limelight&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Stack+Sans+Headline:wght@200..700&display=swap"
         rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/tudocss.css">
 </head>
 
 <body>
@@ -29,7 +31,18 @@
 
         <nav style="display: flex; align-items: center; gap: 4px;">
             <a href="{{ route('produtos.indexclientes') }}" class="nav-link">Produtos</a>
-            <a href="{{ route('ordem_servico.index') }}" class="nav-link">Ordens de Serviço</a>
+            <a href="#" class="nav-link">Serviços</a>
+
+            <div class="dropdown show">
+                <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Pagamentos
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item nav-link" href="{{ route('pagamento.index') }}">Pagamento Serviços</a>
+                    <a class="dropdown-item nav-link" href="{{ route('pagamentoCompra.index') }}">Pagamento Compras</a>
+                </div>
+            </div>
+
             <span style="color: #d1d5db;">|</span>
             @if (!empty(Session::get('usuario_nome')))
                 <a href="{{ route('inicio') }}" class="btn nav-link"
@@ -75,16 +88,11 @@
             @yield('conteudo')
         @else
             <!-- Dashboard Padrão -->
-            <div class="container mt-5">
-                <div class="row mb-5">
+            <div class="container mt-2">
+                <div class="row mb-3">
                     <div class="col-12">
                         <div style="text-align: center; padding: 3rem 2rem;">
-                            <div style="font-size: 72px; margin-bottom: 20px;">🚲</div>
-                            <h1 style="font-size: 48px; font-weight: 700; margin-bottom: 15px; color: #111;">Bem-vindo
-                                ao Sistema Bicicleta</h1>
-                            <p style="font-size: 18px; color: #6b7280; margin-bottom: 30px;">Gerenciador de ordens de
-                                serviço e estoque</p>
-
+                            <h1 style="font-size: 48px; font-weight: 700; margin-bottom: 25px; color: #111;"> Sistema Garage-Subsolo</h1>
                             <div
                                 style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: inline-block;">
                                 <p style="font-size: 16px; color: #374151; margin-bottom: 0;">
@@ -136,7 +144,20 @@
                             <div class="card-body text-center" style="padding: 2rem;">
                                 <div style="font-size: 48px; margin-bottom: 1rem;">🔧</div>
                                 <h5 class="card-title">Ordens de Serviço</h5>
-                                <p class="card-text" style="color: #6b7280; font-size: 14px;">Gerenciar ordens</p>
+                                <p class="card-text" style="color: #6b7280; font-size: 14px;">Gerenciar ordens de
+                                    Serviço</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-3 mb-4">
+                        <a href="{{ route('ordem_compra.index') }}" class="card shadow-sm"
+                            style="text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
+                            <div class="card-body text-center" style="padding: 2rem;">
+                                <div style="font-size: 48px; margin-bottom: 1rem;">🔧</div>
+                                <h5 class="card-title">Ordens de Compra</h5>
+                                <p class="card-text" style="color: #6b7280; font-size: 14px;">Gerenciar ordens de
+                                    Compra</p>
                             </div>
                         </a>
                     </div>
@@ -146,8 +167,19 @@
                             style="text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
                             <div class="card-body text-center" style="padding: 2rem;">
                                 <div style="font-size: 48px; margin-bottom: 1rem;">💳</div>
-                                <h5 class="card-title">Pagamentos</h5>
-                                <p class="card-text" style="color: #6b7280; font-size: 14px;">Gerenciar pagamentos</p>
+                                <h5 class="card-title">Pagamentos de Serviços</h5>
+                                <p class="card-text" style="color: #6b7280; font-size: 14px;">Gerenciar Pagamentos de Serviços</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-3 mb-4">
+                        <a href="{{ route('pagamentoCompra.index') }}" class="card shadow-sm"
+                            style="text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
+                            <div class="card-body text-center" style="padding: 2rem;">
+                                <div style="font-size: 48px; margin-bottom: 1rem;">💳</div>
+                                <h5 class="card-title">Pagamentos de Compras</h5>
+                                <p class="card-text" style="color: #6b7280; font-size: 14px;">Gerenciar Pagamentos de Compras</p>
                             </div>
                         </a>
                     </div>
@@ -157,13 +189,25 @@
                             style="text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
                             <div class="card-body text-center" style="padding: 2rem;">
                                 <div style="font-size: 48px; margin-bottom: 1rem;">📝</div>
-                                <h5 class="card-title">Itens</h5>
-                                <p class="card-text" style="color: #6b7280; font-size: 14px;">Gerenciar itens</p>
+                                <h5 class="card-title">Itens da OS</h5>
+                                <p class="card-text" style="color: #6b7280; font-size: 14px;">Gerenciar itens da OS
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-3 mb-4">
+                        <a href="{{ route('ordem_compra_item.index') }}" class="card shadow-sm"
+                            style="text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
+                            <div class="card-body text-center" style="padding: 2rem;">
+                                <div style="font-size: 48px; margin-bottom: 1rem;">📝</div>
+                                <h5 class="card-title">Itens da OC</h5>
+                                <p class="card-text" style="color: #6b7280; font-size: 14px;">Gerenciar itens da OC
+                                </p>
                             </div>
                         </a>
                     </div>
                 </div>
-            </div>
         @endif
     </main>
 
@@ -203,432 +247,11 @@
             </div>
         </div>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
     </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 
 </html>
-
-
-<style>
-    <style>
-    .mp-card {
-        background: white;
-        border: 3px solid #aaaaaa;
-        border-radius: 30px;
-        overflow: hidden;
-        transition: transform 0.15s, border-color 0.15s;
-    }
-
-    .mp-card:hover {
-        transform: translateY(-2px);
-        border-color: #1D9E75;
-    }
-
-    .mp-card-img {
-        border-top-left-radius: 30px;
-        border-top-right-radius: 30px;
-        height: 220px;
-        background: #ffffff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-    }
-
-    .mp-badge {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        font-size: 11px;
-        font-weight: 500;
-        padding: 3px 8px;
-        border-radius: 4px;
-    }
-
-    .badge-disp {
-        background: #E1F5EE;
-        color: #0F6E56;
-    }
-
-    .badge-ind {
-        background: #FEE2E2;
-        color: #991B1B;
-    }
-
-    .mp-card-body {
-        padding: 12px;
-        background: #FFF8DA;
-        border-bottom-left-radius: 20px;
-        border-bottom-right-radius: 20px;
-        
-    }
-
-    .mp-card-tipo {
-        font-size: 11px;
-        color: #9ca3af;
-        text-transform: uppercase;
-        letter-spacing: 0.04em;
-        margin: 0 0 4px;
-    }
-
-    .mp-card-nome {
-        font-size: 14px;
-        font-weight: 500;
-        margin: 0 0 2px;
-    }
-
-    .mp-card-marca {
-        font-size: 12px;
-        color: #6b7280;
-        margin: 0 0 8px;
-    }
-
-    .mp-card-desc {
-        font-size: 12px;
-        color: #6b7280;
-        margin: 0 0 10px;
-        line-height: 1.5;
-    }
-
-    .mp-card-footer {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding-top: 10px;
-        border-top: 1px solid #e5e7eb;
-    }
-
-    .mp-preco {
-        font-size: 16px;
-        font-weight: 600;
-        color: #0F6E56;
-        margin: 0;
-    }
-
-    .mp-preco span {
-        font-size: 11px;
-        color: #9ca3af;
-        font-weight: 400;
-    }
-
-    .mp-btn {
-        font-size: 12px;
-        background: #1D9E75;
-        color: white;
-        border: none;
-        border-radius: 6px;
-        padding: 6px 14px;
-        cursor: pointer;
-        text-decoration: none;
-    }
-
-    .filter-chip {
-        font-size: 13px;
-        padding: 5px 14px;
-        border-radius: 20px;
-        border: 1px solid #e5e7eb;
-        background: white;
-        color: #6b7280;
-        cursor: pointer;
-        transition: all 0.15s;
-    }
-
-    .filter-chip:hover {
-        background: #f3f4f6;
-    }
-
-    .filter-chip.active {
-        background: #1D9E75;
-        color: white;
-        border-color: #1D9E75;
-    }
-
-    .card {
-        border: none;
-        overflow: hidden;
-    }
-
-    .card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 8px 16px rgba(29, 158, 117, 0.15) !important;
-    }
-
-    .card-body {
-        background: white;
-    }
-
-    .card-title {
-        color: #111;
-        font-weight: 600;
-        margin-bottom: 0.5rem;
-    }
-
-    .siteheader {
-        background: white;
-        border-bottom: 1px solid #e5e7eb;
-        padding: 0.75rem 1.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        box-shadow: 0px 5px 12px rgba(0, 0, 0, 0);
-    }
-
-    .fontef {
-        font-family: "Stack Sans Headline", sans-serif;
-        font-optical-sizing: auto;
-        font-weight: 300;
-        font-style: normal;
-    }
-
-
-    body {
-        font-family: "Stack Sans Headline", sans-serif;
-        font-optical-sizing: auto;
-        font-weight: 400;
-        font-style: normal;
-        background-color: #e6e6e6;
-        color: #111;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        overflow-x: hidden;
-    }
-
-    .nav-link {
-        font-size: 14px;
-        color: #6b7280;
-        text-decoration: none;
-        padding: 6px 12px;
-        border-radius: 8px;
-        transition: background 0.15s, color 0.15s;
-    }
-
-    .nav-link:hover {
-        background: #f3f4f6;
-        color: #111;
-    }
-
-    .topcoisa .img-fluid {
-        height: 400px;
-        object-fit: cover;
-    }
-
-    .hero-img {
-        width: 1900px;
-        height: 540px;
-        object-position: center bottom;
-        border-radius: 0 0 40px 40px;
-    }
-
-    .movatxt {
-        font-family: "Stack Sans Headline", sans-serif;
-        font-optical-sizing: auto;
-        font-weight: <weight>;
-        font-style: normal;
-    }
-
-
-
-    .custom-line {
-        justify-content: center;
-        border: none;
-        height: 2px;
-        background-color: #333333;
-        width: 1000px;
-        margin-left: 500px;
-        margin-right: 500px;
-    }
-
-    .custom-line2 {
-        justify-content: center;
-        border-radius: 4px;
-        height: 6px;
-        background-color: #333333;
-        width: 1800px;
-
-    }
-
-    .bike-card {
-        background: rgb(218, 218, 218);
-        border: 1px solid #858585;
-        border-radius: 12px;
-        overflow: hidden;
-        transition: transform 0.15s, border-color 0.15s;
-    }
-
-    .bike-card:hover {
-        transform: translateY(-3px);
-        border-color: #1D9E75;
-    }
-
-    .bike-img-wrap {
-        background: #ffffff;
-        height: 200px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .bike-img-wrap img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        padding: 12px;
-    }
-
-    .bike-body {
-        padding: 12px;
-        border-top: 1px solid #e5e7eb;
-    }
-
-    .bike-badge {
-        display: inline-block;
-        font-size: 11px;
-        background: #E1F5EE;
-        color: #0F6E56;
-        border-radius: 4px;
-        padding: 2px 8px;
-        margin-bottom: 6px;
-        font-weight: 500;
-    }
-
-    .bike-name {
-        font-size: 13px;
-        font-weight: 500;
-        margin: 0 0 2px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-    .bike-marca {
-        font-size: 12px;
-        color: #6b7280;
-        margin: 0 0 8px;
-    }
-
-    .bike-preco {
-        font-size: 15px;
-        font-weight: 500;
-        color: #0F6E56;
-        margin: 0;
-    }
-
-    .bike-preco-label {
-        font-size: 11px;
-        color: #6b7280;
-        font-weight: 400;
-    }
-
-    .row12 {
-        justify-content: center;
-        align-items: center;
-        height: 200px;
-        border-radius: 12px;
-    }
-
-    .row22 {
-        justify-content: center;
-        align-items: center;
-        height: 200px;
-        border-radius: 12px;
-    }
-
-    .motivo-card {
-        display: flex;
-        align-items: flex-start;
-        gap: 14px;
-        border-radius: 12px;
-        padding: 1rem 1.25rem;
-        margin-right: 200px;
-        margin-left: 200px;
-    }
-
-    .motivo-card h5 {
-        font-size: 20px;
-        font-weight: 500;
-        margin: 0 0 4px;
-    }
-
-    .motivo-card p {
-        font-size: 16px;
-        margin: 0;
-        line-height: 1.5;
-
-    }
-
-    .motivo-icon {
-        width: 36px;
-        height: 36px;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 18px;
-        flex-shrink: 0;
-    }
-
-    .card {
-        border: none;
-        overflow: hidden;
-    }
-
-    .card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 8px 16px rgba(29, 158, 117, 0.15) !important;
-    }
-
-    .card-body {
-        background: white;
-    }
-
-    .card-title {
-        color: #111;
-        font-weight: 600;
-        margin-bottom: 0.5rem;
-    }
-
-    .
-
-    /* fundo preto em todos os estados do accordion */
-    .accordion-item {
-        background-color: #000000;
-        border-color: rgb(255, 70, 17) !important;
-    }
-
-    .accordion-button {
-        background-color: #000000 !important;
-        color: rgb(255, 70, 17) !important;
-        box-shadow: none !important;
-    }
-
-    .accordion-button:not(.collapsed) {
-        background-color: #000000 !important;
-        color: rgb(255, 70, 17) !important;
-    }
-
-    /* seta do accordion */
-    .accordion-button::after {
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23ff6600' stroke-width='2' d='M2 5l6 6 6-6'/%3E%3C/svg%3E");
-    }
-
-    .accordion-body {
-        background-color: #000000;
-        color: rgb(255, 70, 17);
-    }
-
-    /* borda laranja entre os itens */
-    .accordion-item {
-        border-left: none;
-        border-right: none;
-        border-top: 1px solid rgb(255, 70, 17);
-    }
-
-    .accordion-item:last-child {
-        border-bottom: 1px solid rgb(255, 70, 17);
-    }
-
-    .cubo {
-        padding-top: 100px;
-        padding-bottom: 100px;
-    }
-</style>

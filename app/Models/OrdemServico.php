@@ -21,7 +21,6 @@ class OrdemServico extends Model
         'status',
         'valor_total',
         'descricao',
-
     ];
 
     protected $casts = [

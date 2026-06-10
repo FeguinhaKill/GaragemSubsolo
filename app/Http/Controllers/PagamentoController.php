@@ -7,6 +7,8 @@ use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
+use Barryvdh\DomPDF\Facade\Pdf;
+
 class PagamentoController extends Controller
 {
     /**
@@ -15,7 +17,7 @@ class PagamentoController extends Controller
     public function index()
     {
         $usuarioLogado = Usuario::find(Session::get('usuario_id'));
-        
+
         // Se é cliente, mostra apenas seus pagamentos
         if ($usuarioLogado && $usuarioLogado->categoria_usuario === 'cliente') {
             $dados = Pagamento::with(['usuario', 'ordemServico', 'formaPagamento'])
@@ -123,7 +125,7 @@ class PagamentoController extends Controller
     public function show($id)
     {
         $pagamento = Pagamento::with(['usuario', 'ordemServico', 'formaPagamento'])->findOrFail($id);
-        
+
         // Verifica se usuário é cliente e se é seu próprio pagamento
         $usuarioLogado = Usuario::find(Session::get('usuario_id'));
         if ($usuarioLogado && $usuarioLogado->categoria_usuario === 'cliente' && $pagamento->usuario_id !== $usuarioLogado->id) {
@@ -146,7 +148,7 @@ class PagamentoController extends Controller
     public function pagar($id)
     {
         $pagamento = Pagamento::findOrFail($id);
-        
+
         // Verifica se usuário é cliente e se é seu próprio pagamento
         $usuarioLogado = Usuario::find(Session::get('usuario_id'));
         if ($usuarioLogado && $usuarioLogado->categoria_usuario === 'cliente' && $pagamento->usuario_id !== $usuarioLogado->id) {
@@ -170,5 +172,19 @@ class PagamentoController extends Controller
         Pagamento::destroy($id);
 
         return redirect('pagamento')->with('success', 'Pagamento removido com sucesso!');
+    }
+
+    function reportpagamento(){
+        $pagamento = Pagamento::with(['usuario', 'ordemServico', 'formaPagamento'])->get();
+
+        $data = [
+            'titulo' => 'Relatório Pagamento de Ordens de Serviço',
+            'pagamento' => $pagamento,
+        ];
+
+        $pdf = Pdf::loadView('pagamentos.reportpagamento', $data);
+
+        return $pdf->download('report_pagamentoServiços.pdf');
+
     }
 }

@@ -55,7 +55,10 @@
                     <div class="mp-card-footer">
                         <p class="mp-preco">R$ {{ number_format($produto->preco, 2, ',', '.') }}</p>
                         @if($disponivel)
-                            <a href="{{ route('ordem_servico.create') }}" class="mp-btn">Comprar</a>
+                            <form action="{{ route('produtos.comprar', $produto->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                <button type="submit" class="mp-btn">Comprar</button>
+                            </form>
                         @else
                             <button class="mp-btn" disabled style="background:#9ca3af; cursor: not-allowed;">Indisponível</button>
                         @endif

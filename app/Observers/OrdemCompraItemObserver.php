@@ -2,48 +2,48 @@
 
 namespace App\Observers;
 
-use App\Models\OrdemServicoItem;
+use App\Models\OrdemCompraItem;
 use App\Models\Produto;
 
-class OrdemServicoItemObserver
+class OrdemCompraItemObserver
 {
     /**
-     * Chamado quando um OrdemServicoItem está sendo criado
+     * Chamado quando um OrdemCompraItem está sendo criado
      */
-    public function creating(OrdemServicoItem $item)
+    public function creating(OrdemCompraItem $item)
     {
         $this->definirValorTotalDoItem($item);
     }
 
     /**
-     * Chamado quando um OrdemServicoItem é criado
+     * Chamado quando um OrdemCompraItem é criado
      */
-    public function created(OrdemServicoItem $item)
+    public function created(OrdemCompraItem $item)
     {
         $this->atualizarEstoque($item, -1);
         $this->atualizarValorTotal($item);
     }
 
     /**
-     * Chamado quando um OrdemServicoItem está sendo atualizado
+     * Chamado quando um OrdemCompraItem está sendo atualizado
      */
-    public function updating(OrdemServicoItem $item)
+    public function updating(OrdemCompraItem $item)
     {
         $this->definirValorTotalDoItem($item);
     }
 
     /**
-     * Chamado quando um OrdemServicoItem é atualizado
+     * Chamado quando um OrdemCompraItem é atualizado
      */
-    public function updated(OrdemServicoItem $item)
+    public function updated(OrdemCompraItem $item)
     {
         $this->atualizarValorTotal($item);
     }
 
     /**
-     * Chamado quando um OrdemServicoItem é deletado
+     * Chamado quando um OrdemCompraItem é deletado
      */
-    public function deleted(OrdemServicoItem $item)
+    public function deleted(OrdemCompraItem $item)
     {
         $this->atualizarEstoque($item, 1);
         $this->atualizarValorTotal($item);
@@ -52,7 +52,7 @@ class OrdemServicoItemObserver
     /**
      * Define o valor_total do item com base no preço do produto e na quantidade
      */
-    private function definirValorTotalDoItem(OrdemServicoItem $item)
+    private function definirValorTotalDoItem(OrdemCompraItem $item)
     {
         $produto = Produto::find($item->produto_id);
         $item->valor_total = $produto
@@ -63,14 +63,14 @@ class OrdemServicoItemObserver
     /**
      * Atualiza o valor total da OrdemServico
      */
-    private function atualizarValorTotal(OrdemServicoItem $item)
+    private function atualizarValorTotal(OrdemCompraItem $item)
     {
-        if ($item->ordem_servico) {
-            $item->ordem_servico->calcularValorTotal();
+        if ($item->ordem_compra) {
+            $item->ordem_compra->calcularValorTotal();
         }
     }
 
-    private function atualizarEstoque(OrdemServicoItem $item, int $sinal): void
+    private function atualizarEstoque(OrdemCompraItem $item, int $sinal): void
     {
         $produto = $item->produto()->first();
 

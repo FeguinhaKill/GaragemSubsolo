@@ -24,7 +24,6 @@
                         <p class="bike-descricao fontef">{{ Str::limit($produto->descricao, 214) }}</p>
                         <p class="bike-preco fontef">
                             R$ {{ number_format($produto->preco, 2, ',', '.') }}
-                            <span class="bike-preco-label">/dia</span>
                         </p>
                     </div>
                     </a>

@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Estoque;
+use App\Models\OrdemCompra;
+use App\Models\OrdemCompraItem;
 use App\Models\Produto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class ProdutoController extends Controller
 {
@@ -142,6 +146,42 @@ class ProdutoController extends Controller
             $produto = Produto::find($id);
 
             return view('Produtos.showcliente', ['produto' => $produto]);
+        }
+
+        function comprar($id)
+        {
+            $usuarioId = Session::get('usuario_id');
+
+            if (! $usuarioId) {
+                return redirect()->route('login')->with('error', 'Faça login para concluir a compra.');
+            }
+
+            $produto = Produto::findOrFail($id);
+            $estoque = Estoque::where('produto_id', $produto->id)->first();
+
+            if (! $estoque || $estoque->quantidade < 1) {
+                return redirect()->back()->with('error', 'Produto indisponível no momento.');
+            }
+
+            $ordemCompra = OrdemCompra::create([
+                'usuario_id' => $usuarioId,
+                'data_compra' => now()->toDateString(),
+                'status' => 'aberta',
+                'valor_total' => $produto->preco,
+            ]);
+
+            OrdemCompraItem::create([
+                'ordem_compra_id' => $ordemCompra->id,
+                'produto_id' => $produto->id,
+                'quantidade' => 1,
+                'valor_total' => $produto->preco,
+            ]);
+
+            $ordemCompra->calcularValorTotalCompra();
+            $estoque->decrement('quantidade', 1);
+
+            return redirect()->route('pagamentoCompra.show', $ordemCompra->id)
+                ->with('success', 'Pedido criado com sucesso.');
         }
 
     }
