@@ -62,9 +62,50 @@
                     <tbody>
                         @foreach($produtos as $produto)
                             @php
-                                $nome_imagem = !empty($produto->imagem)
-                                    ? asset('storage/' . $produto->imagem)
-                                    : asset('storage/images/sem_imagem.jpg');
+                                $nome_imagem = asset('storage/images/sem_imagem.jpg');
+
+                                if (!empty($produto->imagem)) {
+                                    $caminhos = [];
+                                    $valorImagem = $produto->imagem;
+
+                                    if (filter_var($valorImagem, FILTER_VALIDATE_URL)) {
+                                        $caminhos[] = $valorImagem;
+                                    }
+
+                                    $caminhos[] = $valorImagem;
+                                    $caminhos[] = ltrim($valorImagem, '/');
+                                    $caminhos[] = 'storage/' . ltrim($valorImagem, '/');
+                                    $caminhos[] = 'public/' . ltrim($valorImagem, '/');
+                                    $caminhos[] = str_replace('storage/', '', $valorImagem);
+                                    $caminhos[] = 'produtos/' . basename($valorImagem);
+                                    $caminhos[] = basename($valorImagem);
+
+                                    foreach ($caminhos as $caminho) {
+                                        if (empty($caminho)) {
+                                            continue;
+                                        }
+
+                                        if (filter_var($caminho, FILTER_VALIDATE_URL)) {
+                                            $nome_imagem = $caminho;
+                                            break;
+                                        }
+
+                                        if (\Illuminate\Support\Facades\Storage::disk('public')->exists($caminho)) {
+                                            $nome_imagem = \Illuminate\Support\Facades\Storage::url($caminho);
+                                            break;
+                                        }
+
+                                        if (file_exists(public_path($caminho))) {
+                                            $nome_imagem = asset($caminho);
+                                            break;
+                                        }
+
+                                        if (file_exists(public_path('storage/' . ltrim($caminho, '/')))) {
+                                            $nome_imagem = asset('storage/' . ltrim($caminho, '/'));
+                                            break;
+                                        }
+                                    }
+                                }
                             @endphp
                             <tr>
                                 <td>{{ $produto->id }}</td>

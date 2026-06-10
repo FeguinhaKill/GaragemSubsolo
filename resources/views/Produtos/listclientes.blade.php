@@ -35,12 +35,56 @@
         @forelse($produtos as $produto)
             @php
                 $disponivel = $produto->estoque && $produto->estoque->quantidade > 0;
+                $nome_imagem = asset('storage/images/sem_imagem.jpg');
+
+                if (!empty($produto->imagem)) {
+                    $caminhos = [];
+                    $valorImagem = $produto->imagem;
+
+                    if (filter_var($valorImagem, FILTER_VALIDATE_URL)) {
+                        $caminhos[] = $valorImagem;
+                    }
+
+                    $caminhos[] = $valorImagem;
+                    $caminhos[] = ltrim($valorImagem, '/');
+                    $caminhos[] = 'storage/' . ltrim($valorImagem, '/');
+                    $caminhos[] = 'public/' . ltrim($valorImagem, '/');
+                    $caminhos[] = str_replace('storage/', '', $valorImagem);
+                    $caminhos[] = 'produtos/' . basename($valorImagem);
+                    $caminhos[] = basename($valorImagem);
+
+                    foreach ($caminhos as $caminho) {
+                        if (empty($caminho)) {
+                            continue;
+                        }
+
+                        if (filter_var($caminho, FILTER_VALIDATE_URL)) {
+                            $nome_imagem = $caminho;
+                            break;
+                        }
+
+                        if (\Illuminate\Support\Facades\Storage::disk('public')->exists($caminho)) {
+                            $nome_imagem = \Illuminate\Support\Facades\Storage::url($caminho);
+                            break;
+                        }
+
+                        if (file_exists(public_path($caminho))) {
+                            $nome_imagem = asset($caminho);
+                            break;
+                        }
+
+                        if (file_exists(public_path('storage/' . ltrim($caminho, '/')))) {
+                            $nome_imagem = asset('storage/' . ltrim($caminho, '/'));
+                            break;
+                        }
+                    }
+                }
             @endphp
 
             <div class="mp-card">
                 <a href="{{ route('produtos.showcliente', $produto->id) }}" style="text-decoration: none; color: inherit;">
                 <div class="mp-card-img">
-                    <img src="/storage/{{ $produto->imagem }}"
+                    <img src="{{ $nome_imagem }}"
                          alt="{{ $produto->nome }}"
                          style="width: 100%; height: 100%; object-fit: contain; padding:  0px;">
                     <span class="mp-badge {{ $disponivel ? 'badge-disp' : 'badge-ind' }}">

@@ -14,8 +14,55 @@
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; max-width: 1100px; margin: 0 auto;">
 
 
+        @php
+            $nome_imagem = asset('storage/images/sem_imagem.jpg');
+
+            if (!empty($produto->imagem)) {
+                $caminhos = [];
+                $valorImagem = $produto->imagem;
+
+                if (filter_var($valorImagem, FILTER_VALIDATE_URL)) {
+                    $caminhos[] = $valorImagem;
+                }
+
+                $caminhos[] = $valorImagem;
+                $caminhos[] = ltrim($valorImagem, '/');
+                $caminhos[] = 'storage/' . ltrim($valorImagem, '/');
+                $caminhos[] = 'public/' . ltrim($valorImagem, '/');
+                $caminhos[] = str_replace('storage/', '', $valorImagem);
+                $caminhos[] = 'produtos/' . basename($valorImagem);
+                $caminhos[] = basename($valorImagem);
+
+                foreach ($caminhos as $caminho) {
+                    if (empty($caminho)) {
+                        continue;
+                    }
+
+                    if (filter_var($caminho, FILTER_VALIDATE_URL)) {
+                        $nome_imagem = $caminho;
+                        break;
+                    }
+
+                    if (\Illuminate\Support\Facades\Storage::disk('public')->exists($caminho)) {
+                        $nome_imagem = \Illuminate\Support\Facades\Storage::url($caminho);
+                        break;
+                    }
+
+                    if (file_exists(public_path($caminho))) {
+                        $nome_imagem = asset($caminho);
+                        break;
+                    }
+
+                    if (file_exists(public_path('storage/' . ltrim($caminho, '/')))) {
+                        $nome_imagem = asset('storage/' . ltrim($caminho, '/'));
+                        break;
+                    }
+                }
+            }
+        @endphp
+
         <div style="background: white; border: 1px solid #e5e7eb; border-radius: 16px; overflow: hidden; display: flex; align-items: center; justify-content: center; min-height: 420px; padding: 2rem;">
-            <img src="/storage/{{ $produto->imagem }}"
+            <img src="{{ $nome_imagem }}"
                  alt="{{ $produto->nome }}"
                  style="max-width: 100%; max-height: 380px; object-fit: contain;">
         </div>
