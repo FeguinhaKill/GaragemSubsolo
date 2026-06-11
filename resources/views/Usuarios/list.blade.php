@@ -16,7 +16,7 @@
         <form action="{{ route('usuarios.search') }}" method="POST">
 
             @csrf
-            <!-- Barra de Pesquisa -->
+
             <div class="row align-items-end">
                 <div class="col-md-4">
                     <label class="form-label">Tipo de Pesquisa</label>
@@ -45,7 +45,7 @@
             </div>
         </form>
 
-        <!-- Tabela de Usuários -->
+
         <table class="table table-hover align-middle">
             <thead class="table-light">
                 <tr>
@@ -67,7 +67,7 @@
                     @php
                         $caminho_imagem = !empty($usuario->imagem)
                             ? 'storage/' . $usuario->imagem
-                            : 'images/sem_imagem.jpg';
+                            : 'storage/imagem_usuario/sem_imagem.jpg';
                     @endphp
                     <tr>
                         <td>{{ $usuario->id }}</td>

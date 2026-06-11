@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/css/tudocss.css">
 </head>
 
-<body>
+<body class="@yield('body_class')">
 
     <header class="siteheader">
         <a href="{{ route('home') }}" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
@@ -98,176 +98,161 @@
         @else
 
             <div class="container mt-2">
-                <div class="row mb-3">
-                    <div class="col-12">
-                        <div style="text-align: center; padding: 3rem 2rem;">
-                            <h1 style="font-size: 48px; font-weight: 700; margin-bottom: 25px; color: #111;"> Sistema Garage-Subsolo</h1>
-                            <div
-                                style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: inline-block;">
-                                <p style="font-size: 16px; color: #374151; margin-bottom: 0;">
-                                    Usuário logado: <strong
-                                        style="color: #1D9E75;">{{ Session::get('usuario_nome') }}</strong>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <div style="padding: 1.5rem 0;">
 
-                <div class="row">
-                    <div class="col-md-3 mb-4">
-                        <a href="{{ route('produtos.index') }}" class="card shadow-sm"
-                            style="text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
-                            <div class="card-body text-center" style="padding: 2rem;">
-                                <div style="font-size: 48px; margin-bottom: 1rem;"></div>
-                                <h5 class="card-title">Produtos</h5>
-                                <p class="card-text" style="color: #6b7280; font-size: 14px;">Gerenciar produtos</p>
-                            </div>
-                        </a>
-                    </div>
+        {{-- boas vindas --}}
+        <div style="background: #f3f4f6; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between;">
+            <div>
+                <h2 style="font-size: 20px; font-weight: 500; margin: 0 0 4px;">Painel Administrativo</h2>
+                <p style="font-size: 13px; color: #6b7280; margin: 0;">Gerencie todos os módulos do sistema</p>
+            </div>
+            <span style="background: #E1F5EE; color: #0F6E56; font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 20px;">
+                {{ Session::get('usuario_nome') }}
+            </span>
+        </div>
 
-                    <div class="col-md-3 mb-4">
-                        <a href="{{ route('estoque.index') }}" class="card shadow-sm"
-                            style="text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
-                            <div class="card-body text-center" style="padding: 2rem;">
-                                <div style="font-size: 48px; margin-bottom: 1rem;"></div>
-                                <h5 class="card-title">Estoque</h5>
-                                <p class="card-text" style="color: #6b7280; font-size: 14px;">Controlar estoque</p>
-                            </div>
-                        </a>
-                    </div>
+        {{-- grid de cards --}}
+        <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px;">
 
-                    <div class="col-md-3 mb-4">
-                        <a href="{{ route('usuarios.index') }}" class="card shadow-sm"
-                            style="text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
-                            <div class="card-body text-center" style="padding: 2rem;">
-                                <div style="font-size: 48px; margin-bottom: 1rem;"></div>
-                                <h5 class="card-title">Usuários</h5>
-                                <p class="card-text" style="color: #6b7280; font-size: 14px;">Gerenciar usuários</p>
-                            </div>
-                        </a>
-                    </div>
+            <a href="{{ route('produtos.index') }}" class="dash-card">
+                <div class="dash-icon" style="background: #E1F5EE; color: #0F6E56;">🚲</div>
+                <p class="dash-title">Produtos</p>
+                <p class="dash-desc">Gerenciar catálogo de produtos</p>
 
-                    <div class="col-md-3 mb-4">
-                        <a href="{{ route('ordem_servico.index') }}" class="card shadow-sm"
-                            style="text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
-                            <div class="card-body text-center" style="padding: 2rem;">
-                                <div style="font-size: 48px; margin-bottom: 1rem;"></div>
-                                <h5 class="card-title">Ordens de Serviço</h5>
-                                <p class="card-text" style="color: #6b7280; font-size: 14px;">Gerenciar ordens de
-                                    Serviço</p>
-                            </div>
-                        </a>
-                    </div>
+            </a>
 
-                    <div class="col-md-3 mb-4">
-                        <a href="{{ route('ordem_compra.index') }}" class="card shadow-sm"
-                            style="text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
-                            <div class="card-body text-center" style="padding: 2rem;">
-                                <div style="font-size: 48px; margin-bottom: 1rem;"></div>
-                                <h5 class="card-title">Ordens de Compra</h5>
-                                <p class="card-text" style="color: #6b7280; font-size: 14px;">Gerenciar ordens de
-                                    Compra</p>
-                            </div>
-                        </a>
-                    </div>
+            <a href="{{ route('estoque.index') }}" class="dash-card">
+                <div class="dash-icon" style="background: #EEEDFE; color: #534AB7;">📦</div>
+                <p class="dash-title">Estoque</p>
+                <p class="dash-desc">Controlar estoque disponível</p>
 
-                    <div class="col-md-3 mb-4">
-                        <a href="{{ route('pagamento.index') }}" class="card shadow-sm"
-                            style="text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
-                            <div class="card-body text-center" style="padding: 2rem;">
-                                <div style="font-size: 48px; margin-bottom: 1rem;"></div>
-                                <h5 class="card-title">Pagamentos de Serviços</h5>
-                                <p class="card-text" style="color: #6b7280; font-size: 14px;">Gerenciar Pagamentos de Serviços</p>
-                            </div>
-                        </a>
-                    </div>
+            </a>
 
-                    <div class="col-md-3 mb-4">
-                        <a href="{{ route('pagamentoCompra.index') }}" class="card shadow-sm"
-                            style="text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
-                            <div class="card-body text-center" style="padding: 2rem;">
-                                <div style="font-size: 48px; margin-bottom: 1rem;"></div>
-                                <h5 class="card-title">Pagamentos de Compras</h5>
-                                <p class="card-text" style="color: #6b7280; font-size: 14px;">Gerenciar Pagamentos de Compras</p>
-                            </div>
-                        </a>
-                    </div>
+            <a href="{{ route('usuarios.index') }}" class="dash-card">
+                <div class="dash-icon" style="background: #E6F1FB; color: #185FA5;">👤</div>
+                <p class="dash-title">Usuários</p>
+                <p class="dash-desc">Gerenciar usuários do sistema</p>
 
-                    <div class="col-md-3 mb-4">
-                        <a href="{{ route('ordem_servico_item.index') }}" class="card shadow-sm"
-                            style="text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
-                            <div class="card-body text-center" style="padding: 2rem;">
-                                <div style="font-size: 48px; margin-bottom: 1rem;"></div>
-                                <h5 class="card-title">Itens da OS</h5>
-                                <p class="card-text" style="color: #6b7280; font-size: 14px;">Gerenciar itens da OS
-                                </p>
-                            </div>
-                        </a>
-                    </div>
+            </a>
 
-                    <div class="col-md-3 mb-4">
-                        <a href="{{ route('ordem_compra_item.index') }}" class="card shadow-sm"
-                            style="text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
-                            <div class="card-body text-center" style="padding: 2rem;">
-                                <div style="font-size: 48px; margin-bottom: 1rem;"></div>
-                                <h5 class="card-title">Itens da OC</h5>
-                                <p class="card-text" style="color: #6b7280; font-size: 14px;">Gerenciar itens da OC
-                                </p>
-                            </div>
-                        </a>
-                    </div>
+            <a href="{{ route('ordem_servico.index') }}" class="dash-card">
+                <div class="dash-icon" style="background: #FAEEDA; color: #854F0B;">🔧</div>
+                <p class="dash-title">Ordens de serviço</p>
+                <p class="dash-desc">Gerenciar ordens de serviço</p>
 
-                    <div class="col-md-3 mb-4">
-                        <a href="{{ route('atualizacao_servico.create') }}" class="card shadow-sm"
-                            style="text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
-                            <div class="card-body text-center" style="padding: 2rem;">
-                                <div style="font-size: 48px; margin-bottom: 1rem;"></div>
-                                <h5 class="card-title">Atualizar Serviços</h5>
-                                <p class="card-text" style="color: #6b7280; font-size: 14px;">Enviar atualizações de serviços</p>
-                            </div>
-                        </a>
-                    </div>
+            </a>
 
-                </div>
+            <a href="{{ route('ordem_compra.index') }}" class="dash-card">
+                <div class="dash-icon" style="background: #EAF3DE; color: #3B6D11;">🛍️</div>
+                <p class="dash-title">Ordens de compra</p>
+                <p class="dash-desc">Gerenciar ordens de compra</p>
+
+            </a>
+
+            <a href="{{ route('pagamento.index') }}" class="dash-card">
+                <div class="dash-icon" style="background: #FBEAF0; color: #993556;">💳</div>
+                <p class="dash-title">Pagamentos de serviços</p>
+                <p class="dash-desc">Gerenciar pagamentos de serviços</p>
+
+            </a>
+
+            <a href="{{ route('pagamentoCompra.index') }}" class="dash-card">
+                <div class="dash-icon" style="background: #FCEBEB; color: #A32D2D;">🧾</div>
+                <p class="dash-title">Pagamentos de compras</p>
+                <p class="dash-desc">Gerenciar pagamentos de compras</p>
+
+            </a>
+
+            <a href="{{ route('ordem_servico_item.index') }}" class="dash-card">
+                <div class="dash-icon" style="background: #F1EFE8; color: #5F5E5A;">📋</div>
+                <p class="dash-title">Itens da OS</p>
+                <p class="dash-desc">Gerenciar itens das ordens de serviço</p>
+
+            </a>
+
+            <a href="{{ route('ordem_compra_item.index') }}" class="dash-card">
+                <div class="dash-icon" style="background: #F1EFE8; color: #5F5E5A;">📝</div>
+                <p class="dash-title">Itens da OC</p>
+                <p class="dash-desc">Gerenciar itens das ordens de compra</p>
+
+            </a>
+
+            <a href="{{ route('atualizacao_servico.create') }}" class="dash-card">
+                <div class="dash-icon" style="background: #E6F1FB; color: #185FA5;">📅</div>
+                <p class="dash-title">Atualizar serviços</p>
+                <p class="dash-desc">Enviar atualizações de serviços</p>
+
+            </a>
+
+        </div>
+    </div>
+</div>
+
+<style>
+
+</style>
         @endif
     </main>
 
 
-    <footer style="background: white; border-top: 1px solid #e5e7eb; padding: 2rem 1.5rem 1.25rem; margin-top: 3rem;">
-        <div style="margin: 0 auto;">
-            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
-                <div>
-                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-                        <div style="width: 32px; height: 32px; background: #1D9E75;
-                        border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white;">
-                        <img src="/storage/images/mainImagems/logo.png" style="width: 80px">
-                            </div>
-                        <span style="margin-left: 20px; font-size: 16px; font-weight: 500;">Garage-<span
-                                style="color: #1D9E75;">-subsolo</span></span>
-                    </div>
+    <footer style="background: white; border-top: 1px solid #e5e7eb; padding: 2.5rem 1.5rem 1.25rem; margin-top: 3rem;">
+    <div style="max-width: 1200px; margin: 0 auto;">
 
+        <div style="display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+
+            {{-- marca --}}
+            <div>
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                    <img src="/storage/images/mainImagems/logo.png" style="width: 44px; height: 44px; object-fit: contain;">
+                    <span style="font-size: 16px; font-weight: 500; color: #111;">Garage-<span style="color: #1D9E75;">Subsolo</span></span>
                 </div>
-                <div>
-                    <h4
-                        style="font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: #374151; margin-bottom: 10px;">
-                        Navegação</h4>
-                    <a href="{{route('produtos.indexclientes') }}" class="nav-link">Produtos</a>
-                    <a class="dropdown-item nav-link" href="{{ route('ordem_servico.formclientes') }}">Solicitar Serviço</a>
-                    <a class="dropdown-item nav-link" href="{{ route('atualizacao_servico.listclientes') }}">Acompanhar Serviço</a>
-                    <a class="dropdown-item nav-link" href="{{ route('pagamento.index') }}">Pagamento de Serviços</a>
-                    <a class="dropdown-item nav-link" href="{{ route('pagamentoCompra.index') }}">Pagamento de Compras</a>
-                </div>
-                <div>
-                    <h4
-                        style="font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: #374151; margin-bottom: 10px;">
-                        Contato</h4>
-                    <p style="font-size: 13px; color: #6b7280; padding: 3px 0;">📧 contato@bicicleta.com</p>
-                    <p style="font-size: 13px; color: #6b7280; padding: 3px 0;">📞 (49) 99999-0000</p>
-                    <p style="font-size: 13px; color: #6b7280; padding: 3px 0;">📍 Chapecó, SC</p>
+                <p style="font-size: 13px; color: #6b7280; line-height: 1.7; max-width: 260px;">
+                    Aluguel e manutenção de bicicletas em Chapecó. Pedale com liberdade e segurança.
+                </p>
+            </div>
+
+            {{-- navegação --}}
+            <div>
+                <h4 style="font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; color: #9ca3af; margin: 0 0 12px;">
+                    Navegação
+                </h4>
+                <div style="display: flex; flex-direction: column; gap: 6px;">
+                    <a href="{{ route('produtos.indexclientes') }}" style="font-size: 13px; color: #374151; text-decoration: none;">Produtos</a>
+                    <a href="{{ route('ordem_servico.formclientes') }}" style="font-size: 13px; color: #374151; text-decoration: none;">Solicitar serviço</a>
+                    <a href="{{ route('atualizacao_servico.listclientes') }}" style="font-size: 13px; color: #374151; text-decoration: none;">Acompanhar serviço</a>
+                    <a href="{{ route('pagamento.index') }}" style="font-size: 13px; color: #374151; text-decoration: none;">Pagamentos de serviços</a>
+                    <a href="{{ route('pagamentoCompra.index') }}" style="font-size: 13px; color: #374151; text-decoration: none;">Pagamentos de compras</a>
                 </div>
             </div>
+
+            {{-- contato --}}
+            <div>
+                <h4 style="font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; color: #9ca3af; margin: 0 0 12px;">
+                    Contato
+                </h4>
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                    <a href="mailto:contato@garagesubsolo.com" style="font-size: 13px; color: #374151; text-decoration: none; display: flex; align-items: center; gap: 8px;">
+                        <span style="width: 28px; height: 28px; background: #f3f4f6; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 14px;">📧</span>
+                        contato@garagesubsolo.com
+                    </a>
+                    <a href="tel:+5549999990000" style="font-size: 13px; color: #374151; text-decoration: none; display: flex; align-items: center; gap: 8px;">
+                        <span style="width: 28px; height: 28px; background: #f3f4f6; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 14px;">📞</span>
+                        (49) 99999-0000
+                    </a>
+                    <div style="font-size: 13px; color: #374151; display: flex; align-items: center; gap: 8px;">
+                        <span style="width: 28px; height: 28px; background: #f3f4f6; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 14px;">📍</span>
+                        Chapecó, SC
+                    </div>
+                </div>
+            </div>
+
         </div>
-    </footer>
+
+        <div style="border-top: 1px solid #e5e7eb; padding-top: 1.25rem; display: flex; align-items: center; justify-content: space-between;">
+        </div>
+
+    </div>
+</footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
     </script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

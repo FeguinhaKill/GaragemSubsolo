@@ -11,7 +11,7 @@
 
 <div class="container mt-5">
     <div class="card shadow p-4">
-        
+
         <h3 class="mb-4">Cadastro de Usuário</h3>
 
         <form action="{{ $action }}" method="POST" enctype="multipart/form-data">
@@ -24,8 +24,8 @@
                 <label for="imagem" class="form-label">Imagem</label>
                     @php
                         $caminho_imagem = !empty($usuario->imagem ?? null)
-                            ? 'storage/' . $usuario->imagem
-                            : 'images/sem_imagem.jpg';
+                            ? 'imagem_usuario/' . $usuario->imagem
+                            : 'imagem_usuario/sem_imagem.jpg';
                     @endphp
                     <img src="{{ asset($caminho_imagem) }}" class="rounded-circle" width="150px" height="150px" alt="imagem">
                     <input type="file" name="imagem" class="form-control" value="{{ old('imagem', $usuario->imagem ?? '')}}">
@@ -83,7 +83,6 @@
             </div>
 
             @php
-                // Buscar o usuário logado na sessão
                 $usuarioLogado = \App\Models\Usuario::find(Session::get('usuario_id'));
             @endphp
 
@@ -92,15 +91,15 @@
                 <label class="form-label">Categoria do Usuário*</label>
                 <select name="categoria_usuario" class="form-select">
                     <option value="">Selecione</option>
-                    <option 
+                    <option
                         value="cliente"
                         {{ old('categoria_usuario', $usuario->categoria_usuario ?? '') == 'cliente' ? 'selected' : '' }}
                     >Cliente</option>
-                    <option 
+                    <option
                         value="empresa"
                         {{ old('categoria_usuario', $usuario->categoria_usuario ?? '') == 'empresa' ? 'selected' : '' }}
                     >Empresa</option>
-                    <option 
+                    <option
                         value="funcionario"
                         {{ old('categoria_usuario', $usuario->categoria_usuario ?? '') == 'funcionario' ? 'selected' : '' }}
                     >Funcionário
