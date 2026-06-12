@@ -15,7 +15,7 @@ class OrdemCompraItemController extends Controller
         $produtos = Produto::all();
         $occ = OrdemCompra::all();
 
-        return view('OSItems.list', ['dados' => $dados, 'produtos' => $produtos, 'occ' => $occ]);
+        return view('OCItems.list', ['dados' => $dados, 'produtos' => $produtos, 'occ' => $occ]);
     }
 
     function create()
@@ -24,7 +24,7 @@ class OrdemCompraItemController extends Controller
         $occ = OrdemCompra::all();
         $dado = new OrdemCompraItem();
 
-        return view('OSItems.form', [
+        return view('OCItems.form', [
             'dado' => $dado,
             'occ' => $occ,
             'produtos' => $produtos
@@ -71,7 +71,7 @@ class OrdemCompraItemController extends Controller
         $produtos = Produto::all();
 
 
-        return view('OSItems.form', [
+        return view('OCItems.form', [
             'dado' => $dado,
             'occ' => $occ,
             'produtos' => $produtos

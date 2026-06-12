@@ -67,7 +67,6 @@
     <main>
         <div class="container ">
             <div class="row">
-                {{-- alertas de session --}}
                 @if (session('success'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         {{ session('success') }}
