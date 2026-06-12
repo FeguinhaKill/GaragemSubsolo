@@ -42,7 +42,7 @@ class ProdutoController extends Controller
             'preco' => 'required|numeric|min:0',
             'descricao' => 'nullable|string|max:1000',
             'tipo' => 'required|string|max:255',
-            'imagem' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'imagem' => 'nullable|image|mimes:jpeg,png,jpg,gif'
         ], [
             'nome.required' => "O campo :attribute é obrigatório",
             'marca.required' => "O campo :attribute é obrigatório",

@@ -1,97 +1,98 @@
 @extends('main')
 @section('titulo', 'Início - Cliente')
 @section('conteudo')
+@section('body_class', 'sticky-footer')
 
-<div class="container mt-2">
-                <div class="row mb-3">
-                    <div class="col-12">
-                        <div style="text-align: center; padding: 3rem 2rem;">
-                            <h1 style="font-size: 48px; font-weight: 700; margin-bottom: 25px; color: #111;"> Sistema Garage-Subsolo</h1>
-                            <div
-                                style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: inline-block;">
-                                <p style="font-size: 16px; color: #374151; margin-bottom: 0;">
-                                    Usuário logado: <strong
-                                        style="color: #1D9E75;">{{ Session::get('usuario_nome') }}</strong>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<div style="padding: 1.5rem 60px;">
 
-    <div class="row">
-        <div class="col-12" style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
-
-            <a href="{{ route('ordem_servico.formclientes') }}" class="card shadow-sm" style="text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s; width: 300px;">
-                <div class="card-body text-center" style="padding: 3rem 2rem;">
-                    <div style="font-size: 64px; margin-bottom: 1rem;"></div>
-                    <h5 class="card-title" style="font-size: 24px;">Solicitar Serviço</h5>
-                    <p class="card-text" style="color: #6b7280; font-size: 16px; margin-top: 1rem;">Solicite uma manutenção ou serviço para suas bicicletas</p>
-                </div>
-            </a>
-
-            <a href="{{ route('ordem_servico.index') }}" class="card shadow-sm" style="text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s; width: 300px;">
-                <div class="card-body text-center" style="padding: 3rem 2rem;">
-                    <div style="font-size: 64px; margin-bottom: 1rem;"></div>
-                    <h5 class="card-title" style="font-size: 24px;">Visualizar Ordens de Serviços</h5>
-                    <p class="card-text" style="color: #6b7280; font-size: 16px; margin-top: 1rem;">Acompanhe suas Ordens de Serviços</p>
-                </div>
-            </a>
-
-            <a href="{{ route('atualizacao_servico.listclientes') }}" class="card shadow-sm" style="text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s; width: 300px;">
-                <div class="card-body text-center" style="padding: 3rem 2rem;">
-                    <div style="font-size: 64px; margin-bottom: 1rem;"></div>
-                    <h5 class="card-title" style="font-size: 24px;">Atualizações da minha OS</h5>
-                    <p class="card-text" style="color: #6b7280; font-size: 16px; margin-top: 1rem;">Veja o histórico de atualizações das suas ordens de serviço</p>
-                </div>
-            </a>
-
-            <a href="{{ route('ordem_compra.index') }}" class="card shadow-sm" style="text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s; width: 300px;">
-                <div class="card-body text-center" style="padding: 3rem 2rem;">
-                    <div style="font-size: 64px; margin-bottom: 1rem;"></div>
-                    <h5 class="card-title" style="font-size: 24px;">Visualizar Compras</h5>
-                    <p class="card-text" style="color: #6b7280; font-size: 16px; margin-top: 1rem;">Acompanhe suas Ordens de Compras</p>
-                </div>
-            </a>
-
-            <a href="{{ route('pagamento.index') }}" class="card shadow-sm" style="text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s; width: 300px;">
-                <div class="card-body text-center" style="padding: 3rem 2rem;">
-                    <div style="font-size: 64px; margin-bottom: 1rem;"></div>
-                    <h5 class="card-title" style="font-size: 24px;">Visualizar Pagamentos de Serviços</h5>
-                    <p class="card-text" style="color: #6b7280; font-size: 16px; margin-top: 1rem;">Acompanhe seus pagamentos de Serviços</p>
-                </div>
-            </a>
-
-            <a href="{{ route('pagamentoCompra.index') }}" class="card shadow-sm" style="text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s; width: 300px;">
-                <div class="card-body text-center" style="padding: 3rem 2rem;">
-                    <div style="font-size: 64px; margin-bottom: 1rem;"></div>
-                    <h5 class="card-title" style="font-size: 24px;">Visualizar Pagamentos de Compras</h5>
-                    <p class="card-text" style="color: #6b7280; font-size: 16px; margin-top: 1rem;">Acompanhe seus pagamentos de Compras</p>
-                </div>
-            </a>
-
+    {{-- boas vindas --}}
+    <div style="background: var(--color-background-secondary, #f3f4f6); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between;">
+        <div>
+            <h2 style="font-size: 20px; font-weight: 500; margin: 0 0 4px;">Bem-vindo de volta</h2>
+            <p style="font-size: 13px; color: #6b7280; margin: 0;">O que você precisa hoje?</p>
         </div>
+        <span style="background: #E1F5EE; color: #0F6E56; font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 20px;">
+            {{ Session::get('usuario_nome') }}
+        </span>
+    </div>
+
+    {{-- grid de cards --}}
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px;">
+
+        <a href="{{ route('ordem_servico.formclientes') }}" class="dash-card">
+            <div class="dash-icon" style="background: #E1F5EE; color: #0F6E56;">🔧</div>
+            <p class="dash-title">Solicitar serviço</p>
+            <p class="dash-desc">Solicite manutenção ou serviço para suas bicicletas</p>
+
+        </a>
+
+        <a href="{{ route('atualizacao_servico.listclientes') }}" class="dash-card">
+            <div class="dash-icon" style="background: #E6F1FB; color: #185FA5;">📅</div>
+            <p class="dash-title">Atualizações da OS</p>
+            <p class="dash-desc">Veja o histórico de atualizações das suas ordens</p>
+
+        </a>
+
+        <a href="{{ route('pagamento.index') }}" class="dash-card">
+            <div class="dash-icon" style="background: #EAF3DE; color: #3B6D11;">🧾</div>
+            <p class="dash-title">Pagamentos de serviços</p>
+            <p class="dash-desc">Acompanhe seus pagamentos de serviços</p>
+
+        </a>
+
+        <a href="{{ route('pagamentoCompra.index') }}" class="dash-card">
+            <div class="dash-icon" style="background: #FBEAF0; color: #993556;">💳</div>
+            <p class="dash-title">Pagamentos de compras</p>
+            <p class="dash-desc">Acompanhe seus pagamentos de compras</p>
+
+        </a>
+
     </div>
 </div>
 
 <style>
-    .card {
-        border: none;
-        overflow: hidden;
-    }
-
-    .card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 8px 16px rgba(29, 158, 117, 0.15) !important;
-    }
-
-    .card-body {
+    .dash-card {
         background: white;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 1.25rem;
+        text-decoration: none;
+        color: inherit;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        transition: border-color 0.15s, transform 0.15s;
     }
-
-    .card-title {
+    .dash-card:hover {
+        border-color: #1D9E75;
+        transform: translateY(-2px);
+        color: inherit;
+    }
+    .dash-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+    }
+    .dash-title {
+        font-size: 14px;
+        font-weight: 500;
+        margin: 0;
         color: #111;
-        font-weight: 600;
-        margin-bottom: 0.5rem;
+    }
+    .dash-desc {
+        font-size: 12px;
+        color: #6b7280;
+        margin: 0;
+        line-height: 1.5;
+    }
+    .dash-arrow {
+        font-size: 14px;
+        color: #9ca3af;
+        margin-top: auto;
     }
 </style>
 

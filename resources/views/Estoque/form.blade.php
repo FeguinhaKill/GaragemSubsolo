@@ -56,6 +56,36 @@
                 @enderror
             </div>
 
+            <div class="mb-4">
+                <label class="form-label">Unidade de medida*</label>
+                <select name="unidade_medida" class="form-select @error('unidade_medida') is-invalid @enderror" required>
+                    <option value="">Selecione uma unidade</option>
+                    @foreach($unidadesMedida as $unidade)
+                        <option value="{{ $unidade }}" {{ old('unidade_medida', $estoque->unidade_medida ?? '') == $unidade ? 'selected' : '' }}>
+                            {{ $unidade }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('unidade_medida')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label">Localização*</label>
+                <select name="localizacao" class="form-select @error('localizacao') is-invalid @enderror" required>
+                    <option value="">Selecione uma localização</option>
+                    @foreach($localizacoes as $local)
+                        <option value="{{ $local }}" {{ old('localizacao', $estoque->localizacao ?? '') == $local ? 'selected' : '' }}>
+                            {{ $local }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('localizacao')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+
             <button type="submit" class="btn btn-primary">Salvar</button>
 
             <a href="#" onclick="history.back(); return false;" class="btn btn-secondary">Voltar</a>

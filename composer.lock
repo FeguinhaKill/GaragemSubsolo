@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2e18594015defd6cf894ccd66e62c1ce",
+    "content-hash": "ee7c824aa7fe8213913040faec30e50c",
     "packages": [
         {
             "name": "arielmejiadev/larapex-charts",
-            "version": "9.0.1",
+            "version": "9.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ArielMejiaDev/larapex-charts.git",
-                "reference": "69f7f34311afb7cb0b0d02c9acb7422130912190"
+                "reference": "b5ead4841a0d75da53a48a8f82102d188333271a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ArielMejiaDev/larapex-charts/zipball/69f7f34311afb7cb0b0d02c9acb7422130912190",
-                "reference": "69f7f34311afb7cb0b0d02c9acb7422130912190",
+                "url": "https://api.github.com/repos/ArielMejiaDev/larapex-charts/zipball/b5ead4841a0d75da53a48a8f82102d188333271a",
+                "reference": "b5ead4841a0d75da53a48a8f82102d188333271a",
                 "shasum": ""
             },
             "require": {
@@ -69,9 +69,9 @@
             ],
             "support": {
                 "issues": "https://github.com/ArielMejiaDev/larapex-charts/issues",
-                "source": "https://github.com/ArielMejiaDev/larapex-charts/tree/9.0.1"
+                "source": "https://github.com/ArielMejiaDev/larapex-charts/tree/9.0.0"
             },
-            "time": "2026-01-27T01:07:01+00:00"
+            "time": "2026-01-24T06:37:05+00:00"
         },
         {
             "name": "barryvdh/laravel-dompdf",

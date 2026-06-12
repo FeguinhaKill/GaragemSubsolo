@@ -6,7 +6,10 @@
     <div class="card shadow p-4">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h3>Estoque</h3>
-            <a href="{{ route('estoque.create') }}" class="btn btn-primary">Novo Registro</a>
+            <div class="d-flex gap-2">
+                <a href="{{ route('estoque.chart') }}" class="btn btn-success">Ver gráfico</a>
+                <a href="{{ route('estoque.create') }}" class="btn btn-primary">Novo Registro</a>
+            </div>
         </div>
 
         <div class="card shadow-sm mb-4">
@@ -51,6 +54,8 @@
                             <th>Marca</th>
                             <th>Preço</th>
                             <th>Quantidade</th>
+                            <th>Unidade</th>
+                            <th>Localização</th>
                             <th width="180">Ações</th>
                         </tr>
                     </thead>
@@ -67,6 +72,8 @@
                                         {{ $item->quantidade }}
                                     </span>
                                 </td>
+                                <td>{{ $item->unidade_medida ?? '-' }}</td>
+                                <td>{{ $item->localizacao ?? '-' }}</td>
                                 
                                 <td>
                                     <div class="d-flex gap-2">

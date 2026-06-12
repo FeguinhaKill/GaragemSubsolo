@@ -155,6 +155,7 @@ Route::middleware(['verify_login', 'restrict_client'])->group(function () {
     Route::get('/estoque/edit/{id}', [EstoqueController::class, 'edit'])->name('estoque.edit');
     Route::put('/estoque/update/{id}', [EstoqueController::class, 'update'])->name('estoque.update');
     Route::post('/estoque/search', [EstoqueController::class, 'search'])->name('estoque.search');
+    Route::get('/chart/estoque', [EstoqueController::class, 'chartestoque'])->name('estoque.chart');
 
     // REPORTS
     Route::get('/report/pagamento', [PagamentoController::class,  'reportpagamento'])->name('pagamentos.reportpagamento');
