@@ -76,7 +76,43 @@ class ProdutoSeeder extends Seeder
             'imagem' => 'images/produtos/bike7.jpeg',
         ])->save();
 
+        
+        Produto::make([
+            'nome' => 'Luvinha rosinah uuuu',
+            'marca' => 'Luvinha',
+            'preco' => 150.00,
+            'descricao' => 'luva luuAva pra mao luva',
+            'tipo' => 'Acessório',
+            'imagem' => 'images/produtos/equipamento1.jpeg',
+        ])->save();
+        
+        Produto::make([
+            'nome' => 'Bomba de pneu',
+            'marca' => 'Bomba',
+            'preco' => 180.00,
+            'descricao' => 'bomba bomba bamo',
+            'tipo' => 'Acessório',
+            'imagem' => 'images/produtos/equipamento2.jpeg',
+        ])->save();
 
-        Produto::factory()->count(10)->create();
+        Produto::make([
+            'nome' => 'Garrafa de beber',
+            'marca' => 'Garrafa',
+            'preco' => 165.00,
+            'descricao' => 'garrafa de garrafinha',
+            'tipo' => 'Acessório',
+            'imagem' => 'images/produtos/equipamento3.jpeg',
+        ])->save();
+
+        Produto::make([
+            'nome' => 'Bolsa Bolsinha',
+            'marca' => 'Bolsa',
+            'preco' => 200.00,
+            'descricao' => 'Bolsa bolsinha bolsa de bolsar',
+            'tipo' => 'Acessório',
+            'imagem' => 'images/produtos/equipamento4.jpeg',
+        ])->save();
+
+        Produto::factory()->count(6)->create();
     }
 }
