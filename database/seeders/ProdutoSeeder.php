@@ -94,6 +94,7 @@ class ProdutoSeeder extends Seeder
             'tipo' => 'Acessório',
             'imagem' => 'images/produtos/equipamento2.jpeg',
         ])->save();
+        
 
         Produto::make([
             'nome' => 'Garrafa de beber',
